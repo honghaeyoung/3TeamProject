@@ -10,5 +10,6 @@ import springboot.project.dto.MemberDto;
 public interface MemberDao {
 	
 	MemberDto login(Map<String, Object> map);//로그인
+	int updateMember(MemberDto dto); //회원 정보 수정
 
 }

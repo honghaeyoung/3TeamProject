@@ -20,5 +20,9 @@ public class MemberService {
 		map.put("memberpw", memberpw);
 		return dao.login(map);
 	}
+	
+	public int updateMember(MemberDto dto) {
+		return dao.updateMember(dto);
+	}
 
 }

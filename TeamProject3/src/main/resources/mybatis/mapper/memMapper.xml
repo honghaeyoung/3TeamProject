@@ -8,9 +8,9 @@ PUBLIC "-//mybatis.org//DTD Mapper3.0//EN"
      select * from member where memberid=#{memberid} and memberpw=#{memberpw}
     </select>
    
-   <update id="updateMem" parameterType="springboot.project.dto.MemberDto">
-   update member set memberpw=#{memberpw}, name=#{name}, birth=#{birthday},address=#{address}
-   where id=#{memberid}
+   <update id="updateMember" parameterType="springboot.project.dto.MemberDto">
+   update member set memberpw=#{memberpw}, name=#{name},phone=#{phone},address=#{address},birthday=#{birthday},pet=#{pet}
+   where memberid=#{memberid}
    </update>
    
    

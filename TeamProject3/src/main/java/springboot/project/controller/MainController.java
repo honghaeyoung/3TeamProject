@@ -54,6 +54,21 @@ public class MainController {
 		m.addAttribute("user", dto);
 		return "member/mypage";
 	}
+	
+	@GetMapping("/updateform")
+	public String updateForm(@ModelAttribute("user") MemberDto dto) {
+		return "member/updateform";
+	}
+	@PostMapping("/update")
+	public String update(@ModelAttribute("user") MemberDto dto) {
+		service.updateMember(dto);
+		return "member/mypage";
+	}
+	
+	@GetMapping("/roomshare")
+	public String roomshare() {
+		return "room/roomshare";
+	}
 
 
 }

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,9 +39,10 @@ body{text-align: center;}
 <p>전화번호    : ${user.phone }</p>
 <p>주소       : ${user.address }</p>
 <p>성별       : ${user.gender }</p>
-<p>생년월일    : ${user.birthday }</p>
+<p>생년월일    : <fmt:formatDate value="${user.birthday }" pattern="yyyy-MM-dd"/></p>
 <p>메일       : ${user.email }</p>
 <p>반려동물여부 : ${user.pet }</p>
+<button type="button" onclick="location.href='updateform'">회원 정보 수정</button>
 </div>
 </div>
 <!-- id는 고유한 이름으로 설정하고 tab의 href와 연결되어야 한다. -->
