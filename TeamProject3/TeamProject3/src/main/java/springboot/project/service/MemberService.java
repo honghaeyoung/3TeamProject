@@ -67,8 +67,16 @@ public class MemberService {
 		return dao.login(map);
 	}
 	
-	public String findId(String name, String email) {
-		return dao.findId(name, email);
+	public MemberDto findId(MemberDto dto) {
+		return dao.findId(dto);
+	}
+	
+	public MemberDto findPw(MemberDto dto) {
+		return dao.findPw(dto);
+	}
+	
+	public void updatePw(MemberDto dto) {
+		dao.updatePw(dto);
 	}
 	
 	public int updateMember(MemberDto dto) {

@@ -82,6 +82,15 @@ label.required::after {
   content: "(필수)";
 }
 
+label.select::after {
+  margin-left: 4px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #0086ff;
+  content: "(선택)";
+}
+
 .terms__list .terms__content {
   height: 88px;
   overflow: auto;
@@ -184,7 +193,7 @@ label.required::after {
                   id="allowPromotions"
                   value="allowPromotions"
                 />
-                <label for="allowPromotions">위치 정보이용 동의</label>
+                <label for="allowPromotions" class="select">위치 정보이용 동의</label>
               </div>
               <div class="terms__content">
                 룸쉐어 사용하실분은 동의하세요

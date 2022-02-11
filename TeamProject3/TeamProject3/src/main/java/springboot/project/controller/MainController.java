@@ -1,6 +1,7 @@
 package springboot.project.controller;
 
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -83,11 +85,66 @@ public class MainController {
 		return "member/loginComplete";
 	}
 	
-	//아이디찾기 페이지
-	@GetMapping("/findid")
+	//아이디 찾기 페이지
+	@GetMapping("/findidform")
 	public String findIdForm() {
-		return "member/findid";
+		return "member/findidform";
 	}
+	
+	//아이디 찾기
+	@PostMapping("/findid")
+	public String findId(MemberDto dto, Model model) {
+		MemberDto user = service.findId(dto);
+		
+		if(user == null) {
+			model.addAttribute("check", 1);
+		}else {
+			model.addAttribute("check", 0);
+			model.addAttribute("memberid", user.getMemberid());
+		}
+		return "member/findidform";
+	}
+	
+	//비밀번호 찾기 페이지
+	@GetMapping("/findpwform")
+	public String findPw() {
+		return "member/findpwform";
+	}
+	
+	//비밀번호 찾기
+	@PostMapping("/findpw")
+	public String findPw(MemberDto dto, Model model) {
+		MemberDto user = service.findPw(dto);
+		
+		if(user == null) {
+			model.addAttribute("check", 1);
+		}else {
+			model.addAttribute("check", 0);
+			model.addAttribute("updateid", user.getMemberid());
+		}
+		return "member/findpwform";
+	}
+	
+	@PostMapping("/updatepw")
+	public String updatePw(@RequestParam(value="updateid", defaultValue="", required=false) String id, MemberDto dto) {
+		dto.setMemberid(id);
+		
+		service.updatePw(dto);
+		return "member/updatepw";
+	}
+	
+    // 비밀번호 바꾸기할 경우 성공 페이지 이동
+	@GetMapping(value="check_password_view")
+	public String checkPasswordForModify(HttpSession session, Model model) {
+		MemberDto loginUser = (MemberDto) session.getAttribute("loginUser");
+		
+		if(loginUser == null) {
+			return "member/loginform";
+		} else {
+			return "mypage/checkformodify";
+		}
+	}
+
 	
 	//로그아웃
 	@GetMapping("/logout")

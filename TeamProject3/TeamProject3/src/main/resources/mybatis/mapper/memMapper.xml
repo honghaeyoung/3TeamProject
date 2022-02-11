@@ -17,9 +17,17 @@ PUBLIC "-//mybatis.org//DTD Mapper3.0//EN"
 	select memberid from member where memberid =#{memberid}
 </select>
 
-	<select id="findId" parameterType="String" resultType="String">
-		select memberid from member where name=#{name} and email={email}
+	<select id="findId" parameterType="springboot.project.dto.MemberDto" resultType="springboot.project.dto.MemberDto">
+		select memberid from member where name=#{name} and email=#{email}
 	</select>
+	
+	<select id="findPw" parameterType="springboot.project.dto.MemberDto" resultType="springboot.project.dto.MemberDto">
+		select memberpw from member where memberid=#{memberid} and name=#{name} and email=#{email}
+	</select>
+	
+	<update id="updatePw" parameterType="springboot.project.dto.MemberDto">
+		update member set memberpw=#{memberpw} where memberid = #{memberid}
+	</update>
    
    <update id="updateMember" parameterType="springboot.project.dto.MemberDto">
    update member set memberpw=#{memberpw}, name=#{name},phone=#{phone},address=#{address},birthday=#{birthday},pet=#{pet}
