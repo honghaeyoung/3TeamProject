@@ -3,40 +3,223 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Insert title here</title>
+<title>회원 정보 수정</title>
 <style>
-body{text-align: center;}
+@import
+	url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap')
+	;
+</style>
+<style>
+hr {
+	width: 30%;
+}
+
+h1 {
+	font-family: 'Dongle', sans-serif;
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+.input {
+	width: 10%;
+	height: 15%;
+	font-family: 'Dongle', sans-serif;
+	font-size: 1em;
+	margin: auto;
+}
+
+.input1 {
+	width: 7%;
+	height: 15%;
+	font-family: 'Dongle', sans-serif;
+	font-size: 1em;
+	margin: auto;
+}
+
+.button_class {
+	margin: auto;
+	text-align: center;
+}
+
+.button_class>button {
+	font-family: 'Dongle', sans-serif;
+	font-size: 1em;
+}
+
+.input_field {
+	margin-top: 20px;
+	text-align: center;
+}
+
+#message {
+	font-family: 'Dongle', sans-serif;
+	font-size: 1em;
+}
+
+#id_msg {
+	font-family: 'Dongle', sans-serif;
+	font-size: 1em;
+}
+
+.radio_obj input[type="radio"] {
+        display: none;
+}
+ 
+.radio_obj input[type="radio"] + span {
+    display: inline-block;
+    padding: 5px 5px;
+    border: 1px solid #dfdfdf;
+    background-color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+}
+ 
+.radio_obj input[type="radio"]:checked + span {
+    background-color: #113a6b;
+    color: #ffffff;
+}
+
+.btn {
+  background: #120112;
+  background-image: -webkit-linear-gradient(top, #120112, #0a1b26);
+  background-image: -moz-linear-gradient(top, #120112, #0a1b26);
+  background-image: -ms-linear-gradient(top, #120112, #0a1b26);
+  background-image: -o-linear-gradient(top, #120112, #0a1b26);
+  background-image: linear-gradient(to bottom, #120112, #0a1b26);
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 10px;
+  padding: 5px 7px 8px 7px;
+  text-decoration: none;
+  text-align: right;
+  
+}
+
+.btn:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+
+
+
 </style>
 </head>
 <body>
-<h3>${user.memberid}님의 정보를 수정합니다.</h3>
+<h1>${user.memberid}님의 정보를 수정합니다.</h1>
 <form action="update" method="post" id="updateform" class="updateform">
-	<table class="table" style="margin:auto;text-align: center;">
-		<tr><td>아이디</td><td>${user.memberid}
-				</td></tr>
+	<div class=input_field>
+			<label for="memberid" class="input">아이디</label>
+			<input type="text" name="memberid" id="memberid" class="input1"
+				placeholder="${user.memberid }" disabled> 
+				
+				
+			<br>
+			<hr>
+		</div>
 		
-		<tr><td>비밀번호</td><td><input name="memberpw" type="password" id="memberpw" value="${user.memberpw}"></td></tr>
 		
-		<tr><td>이름</td><td><input name="name" id="name" value="${user.name}"></td></tr>
+		<div class=input_field>
+			<label for="memberpw" class="input">비밀번호</label>
+			<input type="password" name="memberpw" id="password" class="input"
+				placeholder="${user.memberpw }"><br> <br>
+			<hr>
+			<br> 
+				<label for="memberpw1" class="input">비밀번호확인</label>
+			<input type="password" name="password1" id="password1" class="input"
+				placeholder="${user.memberpw }"><br> <span id='message'></span><br>
+			<hr>
+		</div>
 		
-		<tr><td>전화번호</td><td><input name="phone" id="phone" value="${user.phone}"></td></tr>
 		
-		<tr><td>주소</td><td><input name="address" id="address" value="${user.address}">
-					<input type="button" id="addbtn" value="우편번호 검색" onclick="addPost()"></td></tr>
+		<div class=input_field>
+			<label for="name" class="input">이름</label>
+			<input type="text" name="name" id="name" class="input"
+				placeholder="${user.name }"><br> <br>
+			<hr>
+		</div>
 		
-		<tr><td>생년월일</td><td><input name="birthday" 
-			value='<fmt:formatDate value="${user.birthday}" pattern="yyyy-MM-dd"/>'
-		></td></tr>
+		<div class=input_field>
+			<label for="phone" class="input">전화번호</label>
+			<input type="tel" name="phone" class="input" oninput="autoHyphen(this)" maxlength="13" placeholder="${user.phone}"><br> <br>
+			<hr>
+		</div>
 		
-		<tr><td>반려동물여부</td><td><select name="pet" form="updateform">
-			<option value="O">O</option>
-			<option value="X">X</option>
-		</select></td></tr>
+		<div class=input_field>
+		<label for="gender" class="input">성별</label>
+		<label class="radio_obj">
+    <input type="radio" name="gender" value="남자" class="input">
+    <span>남자</span>
+	</label>
+ 
+	<label class="radio_obj">
+    <input type="radio" name="gender" value="여자" class="input">
+    <span>여자</span>
+</label>
+	<hr>
+	<br>
+</div>		
 		
-	
-		<tr><td colspan="2"><input type="submit" value="변경"></td></tr>
-	</table>
-</form>
+		<div class=input_field>
+		<label for="address" class="input">주소</label>
+			<input type="text" name="address" id="address" placeholder="${user.address }" class="input">
+			<input type="button" value="주소 찾기" class="btn"
+				name="addresscheck" id="addresscheck"> 
+				<br>
+				<input type="text" name="address" id="address1" class="input"
+				placeholder="나머지 주소입력"> <br>
+			<hr>
+			<br>
+		</div>
+		
+		<div class=input_field>
+			<label for="email" class="input">이메일</label>
+			<input type="email" name="email" id="email" class="input"
+				placeholder="${user.email } ">
+		<input type="button" id="mail_ck" value="메일 인증" class="btn">
+		<br>
+		<div id="input"><input id="ck_num" class="input" placeholder="인증번호"> <input type="button" id="ck_b" value="인증 확인" class="btn"></div>
+		<div id="result"></div>
+				<br> 
+			<hr>
+		</div>
+		
+		
+		<div class=input_field>
+		<label for="birthday" class="input">생년월일</label>
+			<input type="date" name="birthday" id="birthday" placeholder="생년월일" class="input"><br>
+			<br>
+			<hr>
+		</div>
+		
+		<div class=input_field>
+		<label for="pet" class="input">반려동물</label>
+		<label class="radio_obj">
+    <input type="radio" name="pet" value="유" class="input" placeholder="${user.pet }">
+    <span>유</span>
+	</label>
+ 
+	<label class="radio_obj">
+    	<input type="radio" name="pet" value="무" class="input" placeholder="${user.pet }">
+    	<span>무</span>
+	</label>
+	<hr>
+	<br>
+</div>
+		
+		
+		
+		<div class="button_class">
+			<button type="submit" name="button" class="btn">완료</button>
+			<button type="reset" name="button" class="btn" onclick="history.back()">취소</button>
+		</div>
+		
+		
+	</form>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -58,6 +241,27 @@ $(function(){
 	});
 })//ready
 
+const autoHyphen = (target) => {
+	 target.value = target.value
+	   .replace(/[^0-9]/, '')
+	   .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+	}
+</script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+	//주소 api
+	$(function() {
+		$("#addresscheck").click(function searchaddress() {
+			new daum.Postcode({
+				oncomplete : function(data) {
+					document.querySelector("#address").value = data.address;
+					alert("상세주소도 입력하세요.");
+				}
+			}).open();
+		})
+
+	})
 </script>
 </body>
 </html>

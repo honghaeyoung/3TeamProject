@@ -6,107 +6,85 @@
 <meta charset="UTF-8">
 <title>Find Password</title>
 <style>
-:root { -
-	-input-padding-x: 1.5rem; -
-	-input-padding-y: .75rem;
+@import
+	url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap')
+	;
+</style>
+<style>
+hr {
+	width: 30%;
 }
 
-body {
-	background-color: white;
+h1 {
+	font-family: 'Dongle', sans-serif;
+	text-align: center;
+	margin-bottom: 40px;
 }
 
-.card-signin {
-	border: 0;
-	border-radius: 1rem;
-	box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
-	overflow: hidden;
+h3 {
+	font-family: 'Dongle', sans-serif;
+	text-align: center;
+	margin-bottom: 40px;
 }
 
-.card-signin .card-title {
-	margin-bottom: 2rem;
-	font-weight: 300;
-	font-size: 1.5rem;
+.input {
+	width: 10%;
+	height: 15%;
+	font-family: 'Dongle', sans-serif;
+	font-size: 1em;
+	margin: auto;
 }
 
-.card-signin .card-body {
-	padding: 2rem;
+.input1 {
+	width: 7%;
+	height: 15%;
+	font-family: 'Dongle', sans-serif;
+	font-size: 1em;
+	margin: auto;
 }
 
-.form-signin {
-	width: 100%;
+.button_class {
+	margin: auto;
+	text-align: center;
 }
 
-.form-signin .btn {
-	font-size: 80%;
-	border-radius: 5rem;
-	letter-spacing: .1rem;
-	font-weight: bold;
-	padding: 1rem;
-	transition: all 0.2s;
+.button_class>button {
+	font-family: 'Dongle', sans-serif;
+	font-size: 1em;
 }
 
-.form-label-group {
-	position: relative;
-	margin-bottom: 1rem;
+.input_field {
+	margin-top: 20px;
+	text-align: center;
 }
 
-.form-label-group input {
-	height: auto;
-	border-radius: 2rem;
+
+.btn {
+  background: #120112;
+  background-image: -webkit-linear-gradient(top, #120112, #0a1b26);
+  background-image: -moz-linear-gradient(top, #120112, #0a1b26);
+  background-image: -ms-linear-gradient(top, #120112, #0a1b26);
+  background-image: -o-linear-gradient(top, #120112, #0a1b26);
+  background-image: linear-gradient(to bottom, #120112, #0a1b26);
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 10px;
+  padding: 5px 7px 8px 7px;
+  text-decoration: none;
+  text-align: right;
+  
 }
 
-.form-label-group>input, .form-label-group>label {
-	padding: var(- -input-padding-y) var(- -input-padding-x);
-}
-
-.form-label-group>label {
-	position: absolute;
-	top: 0;
-	left: 0;
-	display: inline_block;
-	width: 100%;
-	margin-bottom: 0;
-	/* Override default `<label>` margin */
-	line-height: 1.5;
-	color: #495057;
-	border: 1px solid transparent;
-	border-radius: .25rem;
-	transition: all .1s ease-in-out;
-}
-
-.form-label-group input::-webkit-input-placeholder {
-	color: transparent;
-}
-
-.form-label-group input:-ms-input-placeholder {
-	color: transparent;
-}
-
-.form-label-group input::-ms-input-placeholder {
-	color: transparent;
-}
-
-.form-label-group input::-moz-placeholder {
-	color: transparent;
-}
-
-.form-label-group input::placeholder {
-	color: transparent;
-}
-
-.form-label-group input:not(:placeholder-shown) {
-	padding-top: calc(var(- -input-padding-y)+ var(- -input-padding-y)* (2/3));
-	padding-bottom: calc(var(- -input-padding-y)/3);
-}
-
-.form-label-group input:not(:placeholder-shown) ~label {
-	padding-top: calc(var(- -input-padding-y)/3);
-	padding-bottom: calc(var(- -input-padding-y)/3);
-	font-size: 12px;
-	color: #777;
+.btn:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
 }
 </style>
-
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -119,23 +97,23 @@ body {
 </head>
 <body>
 <form method="post" class="form-signin" action="findpw" name="findform">
-<div class="form-label-group">
-			<input type="text" id="memberid" name="memberid" class="form-control"/>
-			<label for="memberid">ID</label>
+		<h1>비밀번호 찾기</h1>
+<div class="input_field">
+			<input type="text" id="memberid" name="memberid" class="input" placeholder="아이디" required="required"/>
+			<label for="memberid"></label>
 		</div>
 		
-		<div class="form-label-group">
-			<input type="text" id="name" name="name" class="form-control"/>
-			<label for="name">name</label>
+		<div class="input_field">
+			<input type="text" id="name" name="name" class="input" placeholder="이름" required="required"/>
+			<label for="name"></label>
 		</div>
 		
-		<div class="form-label-group">
-			<input type="email" id="email" name="email" class="form-control"/>
-			<label for="email">email</label>
+		<div class="input_field">
+			<input type="email" id="email" name="email" class="input" placeholder="이메일" required="required"><label for="email"></label>
 		</div>
 
-		<div class="form-label-group">
-			<input class="btn btn-lg btn-secondary btn-block text-uppercase"
+		<div class="input_field">
+			<input class="btn"
 				type="submit" value="check">
 		</div>
 
@@ -149,26 +127,26 @@ body {
 			<label>일치하는 정보가 존재하지 않습니다.</label>
 		</c:if>
 
-		<!-- 이름과 비밀번호가 일치하지 않을 때 -->
+		<!-- 이름과 비밀번호가 일치 할 떄 -->
 		<c:if test="${check == 0 }">
-		<div>
-			<label>비밀번호를 변경해주세요.</label>
+		<div class="input_field">
+			<h3>비밀번호를 변경해주세요.</h3>
 		</div>
-		<div class="form-label-group">
+		<div class="input_field">
 		<input type="hidden" id="id" name="updateid" value="${updateid }">
 		
-			<input type="password" id="password" name="memberpw" class="form-control"/>
-			<label for="password">password</label>
+			<input type="password" id="password" name="memberpw" class="input" placeholder="비밀번호"/>
+			<label for="password"></label>
 		</div>
 		
-		<div class="form-label-group">
-			<input type="password" id="confirmpassword" name="confirmpwd" class="form-control"/>
-			<label for="confirmpassword">confirm password</label>
+		<div class="input_field">
+			<input type="password" id="confirmpassword" name="confirmpwd" class="input" placeholder="비밀번호 확인"/>
+			<label for="confirmpassword"></label>
 		</div>
 		
-		<div class="form-label-group">
-				<input class="btn btn-lg btn-secondary btn-block text-uppercase"
-					type="button" value="update password" onclick="updatePassword()">
+		<div class="input_field">
+				<input class="btn"
+					type="button" value="비밀번호 변경" onclick="updatePassword()">
 			</div>
 		</c:if>
 

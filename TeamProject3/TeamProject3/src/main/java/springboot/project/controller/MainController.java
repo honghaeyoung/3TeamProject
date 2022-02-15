@@ -1,7 +1,7 @@
 package springboot.project.controller;
 
 
-import javax.servlet.http.HttpSession;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -124,7 +124,7 @@ public class MainController {
 		}
 		return "member/findpwform";
 	}
-	
+	//비밀번호 변경 성공시 성공페이지로 이동
 	@PostMapping("/updatepw")
 	public String updatePw(@RequestParam(value="updateid", defaultValue="", required=false) String id, MemberDto dto) {
 		dto.setMemberid(id);
@@ -132,19 +132,6 @@ public class MainController {
 		service.updatePw(dto);
 		return "member/updatepw";
 	}
-	
-    // 비밀번호 바꾸기할 경우 성공 페이지 이동
-	@GetMapping(value="check_password_view")
-	public String checkPasswordForModify(HttpSession session, Model model) {
-		MemberDto loginUser = (MemberDto) session.getAttribute("loginUser");
-		
-		if(loginUser == null) {
-			return "member/loginform";
-		} else {
-			return "mypage/checkformodify";
-		}
-	}
-
 	
 	//로그아웃
 	@GetMapping("/logout")
@@ -171,6 +158,36 @@ public class MainController {
 	public String update(@ModelAttribute("user") MemberDto dto) {
 		service.updateMember(dto);
 		return "member/mypage";
+	}
+	
+	//회원탈퇴 성공
+	@GetMapping("/deletecomplate")
+	public String deleteComplate() {
+		return "member/deletecomplate";
+	}
+	
+	//회원 탈퇴 페이지
+	@GetMapping("deleteform")
+	public String deleteForm() {
+		return "member/deleteform";
+	}
+	
+	//회원탈퇴
+	@PostMapping("/deletemember")
+	public String deleteMember(String memberpw, @ModelAttribute("user") @Valid MemberDto dto, BindingResult error, SessionStatus status) {
+		int i = service.deleteMember(memberpw, dto);
+		if(i == 0) {
+			error.reject("nocode","비밀번호가 틀립니다.");
+			return "member/deleteform";
+		}else {
+			status.setComplete();
+		return "member/deletecomplate";
+		}
+	}
+	
+	@GetMapping("/main")
+	public String main() {
+		return "/main";
 	}
 	
 	

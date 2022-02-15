@@ -82,5 +82,14 @@ public class MemberService {
 	public int updateMember(MemberDto dto) {
 		return dao.updateMember(dto);
 	}
+	
+	public int deleteMember(String memberpw, MemberDto dto) {
+		String pw = dto.getMemberpw();
+		if(pw.equals(memberpw)) {
+			return dao.deleteMember(dto.getMemberid());
+		}else {
+			return 0;
+		}
+	}
 
 }

@@ -6,127 +6,77 @@
 <meta charset="UTF-8">
 <title>Find ID</title>
 <style>
-.wrap {
-  margin: auto;
+@import
+	url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap')
+	;
+</style>
+<style>
+hr {
+	width: 30%;
 }
 
-.wrap .logo {
-  text-align: center;
-  margin-bottom: 10px;
+h1 {
+	font-family: 'Dongle', sans-serif;
+	text-align: center;
+	margin-bottom: 40px;
 }
 
-.wrap .logo h1 {
-  margin: 0;
-  font-size: 50px;
+.input {
+	width: 10%;
+	height: 15%;
+	font-family: 'Dongle', sans-serif;
+	font-size: 1em;
+	margin: auto;
 }
 
-.wrap .contents {
-  padding: 50px;
-  background-color: #ffffff;
-  border: 1px solid #dadada;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+.input1 {
+	width: 7%;
+	height: 15%;
+	font-family: 'Dongle', sans-serif;
+	font-size: 2em;
+	margin: auto;
 }
 
-:root { -
-	-input-padding-x: 1.5rem; -
-	-input-padding-y: .75rem;
-}
-
-body {
-	background-color: white;
+.button_class {
+	margin: auto;
 	text-align: center;
 }
 
-.card-signin {
-	border: 0;
-	border-radius: 1rem;
-	box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
-	overflow: hidden;
+.button_class>button {
+	font-family: 'Dongle', sans-serif;
+	font-size: 1em;
 }
 
-.card-signin .card-title {
-	margin-bottom: 2rem;
-	font-weight: 300;
-	font-size: 1.5rem;
+.input_field {
+	margin-top: 20px;
+	text-align: center;
 }
 
-.card-signin .card-body {
-	padding: 2rem;
+
+.btn {
+  background: #120112;
+  background-image: -webkit-linear-gradient(top, #120112, #0a1b26);
+  background-image: -moz-linear-gradient(top, #120112, #0a1b26);
+  background-image: -ms-linear-gradient(top, #120112, #0a1b26);
+  background-image: -o-linear-gradient(top, #120112, #0a1b26);
+  background-image: linear-gradient(to bottom, #120112, #0a1b26);
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 10px;
+  padding: 5px 7px 8px 7px;
+  text-decoration: none;
+  text-align: right;
+  
 }
 
-.form-signin {
-	width: 100%;
-}
-
-.form-signin .btn {
-	font-size: 80%;
-	border-radius: 5rem;
-	letter-spacing: .1rem;
-	font-weight: bold;
-	padding: 1rem;
-	transition: all 0.2s;
-}
-
-.form-label-group {
-	position: relative;
-	margin-bottom: 1rem;
-}
-
-.form-label-group input {
-	height: auto;
-	border-radius: 2rem;
-}
-
-.form-label-group>input, .form-label-group>label {
-	padding: var(- -input-padding-y) var(- -input-padding-x);
-}
-
-.form-label-group>label {
-	position: absolute;
-	top: 0;
-	left: 0;
-	display: inline_block;
-	width: 100%;
-	margin-bottom: 0;
-	/* Override default `<label>` margin */
-	line-height: 1.5;
-	color: #495057;
-	border: 1px solid transparent;
-	border-radius: .25rem;
-	transition: all .1s ease-in-out;
-}
-
-.form-label-group input::-webkit-input-placeholder {
-	color: transparent;
-}
-
-.form-label-group input:-ms-input-placeholder {
-	color: transparent;
-}
-
-.form-label-group input::-ms-input-placeholder {
-	color: transparent;
-}
-
-.form-label-group input::-moz-placeholder {
-	color: transparent;
-}
-
-.form-label-group input::placeholder {
-	color: transparent;
-}
-
-.form-label-group input:not(:placeholder-shown) {
-	padding-top: calc(var(- -input-padding-y)+ var(- -input-padding-y)* (2/3));
-	padding-bottom: calc(var(- -input-padding-y)/3);
-}
-
-.form-label-group input:not(:placeholder-shown) ~label {
-	padding-top: calc(var(- -input-padding-y)/3);
-	padding-bottom: calc(var(- -input-padding-y)/3);
-	font-size: 12px;
-	color: #777;
+.btn:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
 }
 </style>
 <!-- Bootstrap core CSS -->
@@ -140,21 +90,21 @@ body {
 <script src="js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<div class="wrap">
-      <div class="logo"><h2>아이디찾기</h2></div>
+<div class="input_field">
+      <div class="logo"><h1>아이디찾기</h1></div>
 <form method="post" class="form-signin" action="findid" name="findform">
-		<div class="form-label-group">
-			<input type="text" id="name" name="name" class="form-control"/>
-			<label for="name">name</label>
+		<div class="input_field">
+			<input type="text" id="name" name="name" class="input" placeholder="이름" required="required"/>
+			<label for="name"></label>
 		</div>
-		
-		<div class="form-label-group">
-			<input type="email" id="email" name="email" class="form-control"/>
-			<label for="email">email</label>
+		<hr>
+		<div class="input_field">
+			<input type="email" id="email" name="email" class="input" placeholder="이메일" required="required"/>
+			<label for="email"></label>
 		</div>
 
-		<div class="form-label-group">
-			<input class="btn btn-lg btn-secondary btn-block text-uppercase"
+		<div class="input_field">
+			<input class="btn"
 				type="submit" value="아이디 찾기">
 		</div>
 
@@ -169,7 +119,7 @@ body {
 
 		<!-- 이름과 이메일이 일치할 때 -->
 		<c:if test="${check == 0 }">
-		<label><strong>찾으시는 아이디는' ${memberid} ' 입니다.</strong></label>
+		<label class="input1">찾으시는 아이디는' <strong>${memberid}</strong> ' 입니다.</label>
 		<div class="form-label-group">
 				<button class="btn btn-lg btn-secondary btn-block text-uppercase"
 					type="button" onclick="location.href='loginform'">로그인 하러 가기</button>

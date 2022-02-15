@@ -43,6 +43,7 @@ body{text-align: center;}
 <p>메일       : ${user.email }</p>
 <p>반려동물여부 : ${user.pet }</p>
 <button type="button" onclick="location.href='updateform'">회원 정보 수정</button>
+<button type="button" onclick="location.href='deleteform'">회원 탈퇴</button>
 </div>
 </div>
 <!-- id는 고유한 이름으로 설정하고 tab의 href와 연결되어야 한다. -->
@@ -50,6 +51,9 @@ body{text-align: center;}
 <!-- fade 클래스는 선택적인 사항으로 트랜지션(transition)효과가 있다.
 <!-- in 클래스는 fade 클래스를 선언하여 트랜지션효과를 사용할 때 in은 active와 선택되어 있는 탭 영역의 설정이다. -->
 <div class="tab-pane fade" id="commlist">댓글 목록</div>
+
+
+
 </div>
 </div>
 </body>
