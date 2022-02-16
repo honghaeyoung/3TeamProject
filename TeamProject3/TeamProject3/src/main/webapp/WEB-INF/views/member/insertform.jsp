@@ -193,6 +193,11 @@ $(function(){
 		})
 	})
 })
+const autoHyphen = (target) => {
+	 target.value = target.value
+	   .replace(/[^0-9]/, '')
+	   .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+	}
 </script>
 <script>
 	//주소 api
@@ -213,8 +218,8 @@ $(function(){
 	<h1>회원가입을 환영합니다.</h1>
 	<form action="insert" method="post">
 		<div class=input_field>
-		
-			<input type="text" name="memberid" id="memberid" class="input1"
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="memberid" class="input">아이디</label>&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="text" name="memberid" id="memberid" class="input"
 				placeholder="id를 입력해주세요."> <input type="button" class="btn"
 				id="id_check" value="중복검사"> <br> <span id="id_msg"></span>
 				
@@ -224,93 +229,100 @@ $(function(){
 		
 		
 		<div class=input_field>
+			<label for="memberpw" class="input">비밀번호</label>&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="password" name="memberpw" id="password" class="input"
 				placeholder="password를 입력해주세요."><br> <br>
 			<hr>
-			<br> <input type="password" name="password1" id="password1" class="input"
+			<br> 
+				<label for="password1" class="input">비밀번호확인</label>&nbsp;
+				<input type="password" name="password1" id="password1" class="input"
 				placeholder="password확인"><br> <span id='message'></span><br>
 			<hr>
 		</div>
 		
 		
 		<div class=input_field>
+			&nbsp;<label for="name" class="input">이름 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="text" name="name" id="name" class="input"
 				placeholder="이름 "><br> <br>
 			<hr>
 		</div>
 		
 		<div class=input_field>
-			<select name="phone" class="input1">
-                <option value="010" selected="selected">010</option>
-                <option value="011">011</option>
-                <option value="016">016</option>
-                <option value="017">017</option>
-              </select> - <input type="text" name="phone" class="input" style="width: 70px"placeholder="전화번호">
-               - <input type="text" name="phone" class="input" style="width: 70px" placeholder="전화번호"><br> <br>
+			<label for="phone" class="input">전화번호</label>&nbsp;&nbsp;&nbsp;
+			<input type="tel" name="phone" class="input" oninput="autoHyphen(this)" maxlength="13" placeholder="전화번호"><br> <br>
 			<hr>
 		</div>
 		
 		<div class=input_field>
+		<label for="gender" class="input">성별</label>&nbsp;&nbsp;&nbsp;&nbsp;
 		<label class="radio_obj">
     <input type="radio" name="gender" value="남자" class="input">
     <span>남자</span>
 	</label>
- 
+ 	&nbsp;
 	<label class="radio_obj">
     <input type="radio" name="gender" value="여자" class="input">
     <span>여자</span>
 </label>
 	<hr>
-	<br>
 </div>		
 		
 		<div class=input_field>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="address" class="input">주소</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="text" name="address" id="address" placeholder="주소입력" class="input">
 			<input type="button" value="주소 찾기" class="btn"
 				name="addresscheck" id="addresscheck"> 
 				<br>
+				<label for="address1" class="input">상세주소</label>&nbsp;&nbsp;&nbsp;
 				<input type="text" name="address" id="address1" class="input"
 				placeholder="나머지 주소입력"> <br>
 			<hr>
-			<br>
+			
 		</div>
 		
 		<div class=input_field>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="email" class="input">이메일</label>&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="email" name="email" id="email" class="input"
 				placeholder="이메일 ex xxxxx@xxxxx.com ">
 		<input type="button" id="mail_ck" value="메일 인증" class="btn">
 		<br>
-		<div id="input"><input id="ck_num" class="input" placeholder="인증번호"> <input type="button" id="ck_b" value="인증 확인" class="btn"></div>
+		<div id="input">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="ck_num" class="input">인증번호</label>&nbsp;&nbsp;&nbsp;
+		<input id="ck_num" class="input" placeholder="인증번호"> <input type="button" id="ck_b" value="인증 확인" class="btn"></div>
 		<div id="result"></div>
-				<br> <br>
+				<br>
 			<hr>
 		</div>
 		
 		
-		<div class=input_field>
-			<input type="date" name="birthday" id="birthday" placeholder="생년월일" class="input"><br>
+		<div class=input_field style="text-indent:-27px;">
+			&nbsp;&nbsp;&nbsp;<label for="birthday" class="input" style="text-indent:-40px;">생년월일</label>&nbsp;&nbsp;
+			<input type="date" name="birthday" id="birthday" placeholder="생년월일" class="input" ><br>
 			<br>
 			<hr>
 		</div>
 		
 		<div class=input_field>
+		<label for="pet" class="input">반려동물</label>&nbsp;&nbsp;
 		<label class="radio_obj">
     <input type="radio" name="pet" value="유" class="input">
-    <span>반려동물 유</span>
+    <span>유</span>
 	</label>
- 
+ 	&nbsp;&nbsp;
 	<label class="radio_obj">
     	<input type="radio" name="pet" value="무" class="input">
-    	<span>반려동물 무</span>
-	</label>
+    	<span>무</span>
+	</label>&nbsp;&nbsp;&nbsp;&nbsp;
 	<hr>
 	<br>
 </div>
 		
 		
 		
-		<div class="button_class">
+		<div class="button_class">&nbsp;&nbsp;
 			<button type="submit" name="button" class="btn">회원가입</button>
+			&nbsp;
 			<button type="reset" name="button" class="btn">초기화</button>
 		</div>
 		

@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper3.0//EN"
 	</select>
 	
 	<select id="findPw" parameterType="springboot.project.dto.MemberDto" resultType="springboot.project.dto.MemberDto">
-		select memberpw from member where memberid=#{memberid} and name=#{name} and email=#{email}
+		select * from member where memberid=#{memberid} and name=#{name} and email=#{email}
 	</select>
 	
 	<update id="updatePw" parameterType="springboot.project.dto.MemberDto">

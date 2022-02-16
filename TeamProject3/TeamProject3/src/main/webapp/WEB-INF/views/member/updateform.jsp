@@ -113,8 +113,8 @@ h1 {
 <h1>${user.memberid}님의 정보를 수정합니다.</h1>
 <form action="update" method="post" id="updateform" class="updateform">
 	<div class=input_field>
-			<label for="memberid" class="input">아이디</label>
-			<input type="text" name="memberid" id="memberid" class="input1"
+			<label for="memberid" class="input">아이디</label>&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="text" name="memberid" id="memberid" class="input"
 				placeholder="${user.memberid }" disabled> 
 				
 				
@@ -124,12 +124,12 @@ h1 {
 		
 		
 		<div class=input_field>
-			<label for="memberpw" class="input">비밀번호</label>
-			<input type="password" name="memberpw" id="password" class="input"
+			<label for="memberpw" class="input">비밀번호</label>&nbsp;&nbsp;&nbsp;
+			<input type="password" name="memberpw" id="memberpw" class="input"
 				placeholder="${user.memberpw }"><br> <br>
 			<hr>
 			<br> 
-				<label for="memberpw1" class="input">비밀번호확인</label>
+				<label for="password1" class="input">비밀번호확인</label>
 			<input type="password" name="password1" id="password1" class="input"
 				placeholder="${user.memberpw }"><br> <span id='message'></span><br>
 			<hr>
@@ -137,20 +137,20 @@ h1 {
 		
 		
 		<div class=input_field>
-			<label for="name" class="input">이름</label>
+			<label for="name" class="input">이름 </label>&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="text" name="name" id="name" class="input"
-				placeholder="${user.name }"><br> <br>
+				placeholder="${user.name }"><br> 
 			<hr>
 		</div>
 		
 		<div class=input_field>
-			<label for="phone" class="input">전화번호</label>
-			<input type="tel" name="phone" class="input" oninput="autoHyphen(this)" maxlength="13" placeholder="${user.phone}"><br> <br>
+			<label for="phone" class="input">전화번호 </label>&nbsp;
+			<input type="tel" name="phone" class="input" oninput="autoHyphen(this)" maxlength="13" placeholder="${user.phone}"><br>
 			<hr>
 		</div>
 		
 		<div class=input_field>
-		<label for="gender" class="input">성별</label>
+		<label for="gender" class="input">성별</label>&nbsp;&nbsp;
 		<label class="radio_obj">
     <input type="radio" name="gender" value="남자" class="input">
     <span>남자</span>
@@ -161,51 +161,49 @@ h1 {
     <span>여자</span>
 </label>
 	<hr>
-	<br>
+	
 </div>		
 		
 		<div class=input_field>
-		<label for="address" class="input">주소</label>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="address" class="input">주소</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="text" name="address" id="address" placeholder="${user.address }" class="input">
 			<input type="button" value="주소 찾기" class="btn"
 				name="addresscheck" id="addresscheck"> 
 				<br>
+				<label for="address1" class="input">상세주소</label>&nbsp;&nbsp;
 				<input type="text" name="address" id="address1" class="input"
 				placeholder="나머지 주소입력"> <br>
 			<hr>
-			<br>
+			
 		</div>
 		
 		<div class=input_field>
-			<label for="email" class="input">이메일</label>
+			<label for="email" class="input">이메일</label>&nbsp;&nbsp;&nbsp;
 			<input type="email" name="email" id="email" class="input"
-				placeholder="${user.email } ">
-		<input type="button" id="mail_ck" value="메일 인증" class="btn">
-		<br>
-		<div id="input"><input id="ck_num" class="input" placeholder="인증번호"> <input type="button" id="ck_b" value="인증 확인" class="btn"></div>
-		<div id="result"></div>
-				<br> 
+				placeholder="${user.email } "disabled>
+	
+				 
 			<hr>
 		</div>
 		
 		
 		<div class=input_field>
-		<label for="birthday" class="input">생년월일</label>
-			<input type="date" name="birthday" id="birthday" placeholder="생년월일" class="input"><br>
+		<label for="birthday" class="input">생년월일</label>&nbsp;&nbsp;
+			<input type="date" name="birthday" id="birthday" placeholder="생년월일" class="input">&nbsp;<br>
 			<br>
 			<hr>
 		</div>
 		
 		<div class=input_field>
-		<label for="pet" class="input">반려동물</label>
+		<label for="pet" class="input" style="text-indent:-30px;">반려동물</label>&nbsp;&nbsp;&nbsp;
 		<label class="radio_obj">
     <input type="radio" name="pet" value="유" class="input" placeholder="${user.pet }">
     <span>유</span>
 	</label>
- 
+ 	&nbsp;
 	<label class="radio_obj">
     	<input type="radio" name="pet" value="무" class="input" placeholder="${user.pet }">
-    	<span>무</span>
+    	<span>무</span>&nbsp;&nbsp;&nbsp;&nbsp;
 	</label>
 	<hr>
 	<br>
@@ -213,8 +211,8 @@ h1 {
 		
 		
 		
-		<div class="button_class">
-			<button type="submit" name="button" class="btn">완료</button>
+		<div class="button_class">&nbsp;
+			<button type="submit" name="button" class="btn">완료</button>&nbsp;&nbsp;
 			<button type="reset" name="button" class="btn" onclick="history.back()">취소</button>
 		</div>
 		

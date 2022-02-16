@@ -99,16 +99,19 @@ h3 {
 <form method="post" class="form-signin" action="findpw" name="findform">
 		<h1>비밀번호 찾기</h1>
 <div class="input_field">
+			<label for="memberid" class="input">아이디</label>
 			<input type="text" id="memberid" name="memberid" class="input" placeholder="아이디" required="required"/>
 			<label for="memberid"></label>
 		</div>
 		
 		<div class="input_field">
+			<label for="name" class="input">이름</label>&nbsp;&nbsp;
 			<input type="text" id="name" name="name" class="input" placeholder="이름" required="required"/>
 			<label for="name"></label>
 		</div>
 		
 		<div class="input_field">
+			<label for="email" class="input">이메일</label>
 			<input type="email" id="email" name="email" class="input" placeholder="이메일" required="required"><label for="email"></label>
 		</div>
 
@@ -133,15 +136,16 @@ h3 {
 			<h3>비밀번호를 변경해주세요.</h3>
 		</div>
 		<div class="input_field">
-		<input type="hidden" id="id" name="updateid" value="${updateid }">
-		
+		<input type="hidden" id="id" name="updateid" value="${updateid}">
+			&nbsp;&nbsp;<label for="password" class="input">비밀번호</label>
 			<input type="password" id="password" name="memberpw" class="input" placeholder="비밀번호"/>
-			<label for="password"></label>
+			<label for="password"></label>&nbsp;&nbsp;
 		</div>
 		
 		<div class="input_field">
+			&nbsp;<label for="confirmpassword" class="input">비밀번호확인</label>
 			<input type="password" id="confirmpassword" name="confirmpwd" class="input" placeholder="비밀번호 확인"/>
-			<label for="confirmpassword"></label>
+			<label for="confirmpassword"></label>&nbsp;&nbsp;&nbsp;&nbsp;
 		</div>
 		
 		<div class="input_field">

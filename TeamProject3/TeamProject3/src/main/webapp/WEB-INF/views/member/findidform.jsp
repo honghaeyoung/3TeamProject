@@ -94,11 +94,13 @@ h1 {
       <div class="logo"><h1>아이디찾기</h1></div>
 <form method="post" class="form-signin" action="findid" name="findform">
 		<div class="input_field">
+			<label for="name" class="input">이름 </label>&nbsp;&nbsp;
 			<input type="text" id="name" name="name" class="input" placeholder="이름" required="required"/>
 			<label for="name"></label>
 		</div>
 		<hr>
 		<div class="input_field">
+			<label for="email" class="input">이메일</label>&nbsp;
 			<input type="email" id="email" name="email" class="input" placeholder="이메일" required="required"/>
 			<label for="email"></label>
 		</div>
