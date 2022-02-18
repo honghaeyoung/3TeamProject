@@ -26,7 +26,7 @@ width : 100%;
 <body>
 
 <h1>${user.memberid}님이 로그인 되어있습니다.</h1>
- 
+ <input class="button" type="button" value="로그아웃" onclick="location.href='/logout'"/> 
  <a href="mypage">마이페이지</a>
 </body>
 </html>

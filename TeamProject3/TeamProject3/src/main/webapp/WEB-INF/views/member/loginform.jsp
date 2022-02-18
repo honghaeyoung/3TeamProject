@@ -20,23 +20,78 @@ function check(){
 
 }
 </script>
+<style>
+@import
+	url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap')
+	;
+</style>
 <style type="text/css">
-h1{
-text-align:center;
+hr {
+	width: 30%;
 }
-.input_field{
-	margin-top: 20px; 
-	text-align:center;
+
+h1 {
+	font-family: 'Dongle', sans-serif;
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+.input {
+	width: 10%;
+	height: 15%;
+	font-family: 'Dongle', sans-serif;
+	font-size: 1em;
+	margin: auto;
+}
+
+.input1 {
+	width: 300px;
 	
+	font-family: 'Dongle', sans-serif;
+	font-size: 2em;
+	margin: auto;
 }
-.button{
-	margin-top:20px;
-	 height: 35px;
-  line-height: 35px;
- 	margin-left : 40%
+
+.button_class {
+	margin: auto;
+	text-align: center;
 }
-input{
-width : 300px;
+
+.button_class>button {
+	font-family: 'Dongle', sans-serif;
+	font-size: 1em;
+}
+
+.input_field {
+	margin-top: 20px;
+	text-align: center;
+}
+
+
+.btn {
+  background: #120112;
+  background-image: -webkit-linear-gradient(top, #120112, #0a1b26);
+  background-image: -moz-linear-gradient(top, #120112, #0a1b26);
+  background-image: -ms-linear-gradient(top, #120112, #0a1b26);
+  background-image: -o-linear-gradient(top, #120112, #0a1b26);
+  background-image: linear-gradient(to bottom, #120112, #0a1b26);
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 10px;
+  padding: 5px 7px 8px 7px;
+  text-decoration: none;
+  text-align: right;
+  
+}
+
+.btn:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
 }
 .errors{
 text-align:center;
@@ -44,23 +99,27 @@ text-align:center;
 </style>
 </head>
 <body>
-<h1>로그인</h1>
-<div class="Login">
+<div class="logo"><h1>로그인</h1></div>
+<div class="input_field">
         <form:form action = "login" method ="post" modelAttribute ="command">
         <div class="errors">
         <form:errors element="div"/>
         </div>
         <div class="input_field"> 
-        <input type="text" name="memberid" id ="id" placeholder="id" />
+        <label for="id" class="input">아이디</label>
+        <input type="text" name="memberid" id ="id" placeholder="id" class="input1"/>
         </div>
-         <div class="input_field"> 
-         <input type="password" name="memberpw" id = "pwd" placeholder="password"  />
+         <div class="input_field">
+         <label for="pwd" class="input">비밀번호</label> 
+         <input type="password" name="memberpw" id = "pwd" placeholder="password"  class="input1"/>&nbsp;
          </div>
           
           
-              <input class="button" type="submit" value="Login" />
-                <input class="button" type="button" value="회원가입" onclick="location.href='/JoinForm'"/>
+              <input class="btn" type="submit" value="로그인" />&nbsp;
+                <input class="btn" type="button" value="회원가입" onclick="location.href='/JoinForm'"/>
               </form:form>
+              <a href=findidform>아이디 찾기</a>&nbsp;
+              <a href=findpwform>비밀번호 찾기</a>
           </div>
 </body>
 
