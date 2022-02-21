@@ -7,8 +7,9 @@
 </head>
 <body>	
 <div>오늘 뭐 먹지?</div>
-<div id="show"></div>
+<div id="show" class="js-odoo"></div>
 <button type="button" id="food" onclick="foodclick()">오늘의 음식은?</button>
+
 </body>
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -64,9 +65,10 @@ let i = Math.floor(Math.random() * food.length)
 function foodclick(){	
 	let taget = document.getElementById("show");
 	for(let j=0; j < i; j++){
-		$('#show').empty();
+		
 		taget.innerHTML = food[i];
 	}
+	
 	}
 
 

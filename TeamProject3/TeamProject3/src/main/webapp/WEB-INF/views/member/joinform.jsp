@@ -164,7 +164,7 @@ label.select::after {
               </div>
               <div class="terms__content">
                 여러분을 환영합니다. 혼사모 서비스를 이용해
-                주셔서 감사합니다. 그냥 동의하세요
+                주셔서 감사합니다. 
                 
               </div>
             </li>
@@ -182,7 +182,7 @@ label.select::after {
                 >
               </div>
               <div class="terms__content">
-                개인정보 안전해요 동의하세요
+                개인정보 
               </div>
             </li>
             <li class="terms__box">
@@ -196,7 +196,7 @@ label.select::after {
                 <label for="allowPromotions" class="select">위치 정보이용 동의</label>
               </div>
               <div class="terms__content">
-                룸쉐어 사용하실분은 동의하세요
+                위치정보
               </div>
             </li>
           </ul>
