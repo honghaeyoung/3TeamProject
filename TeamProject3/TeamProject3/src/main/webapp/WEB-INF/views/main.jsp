@@ -6,10 +6,12 @@
 
 </head>
 <body>	
-<div>오늘 뭐 먹지?</div>
-<div id="show" class="js-odoo"></div>
-<button type="button" id="food" onclick="foodclick()">오늘의 음식은?</button>
 
+<aside style="float: right;">
+<div>오늘 뭐 먹지?</div>
+<div id="show"></div>
+<button type="button" id="food" onclick="foodclick()">오늘의 음식은?</button>
+</aside>
 </body>
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -66,7 +68,7 @@ function foodclick(){
 	let taget = document.getElementById("show");
 	for(let j=0; j < i; j++){
 		
-		taget.innerHTML = food[i];
+		taget.innerHTML = food[i]+"!";
 	}
 	
 	}
