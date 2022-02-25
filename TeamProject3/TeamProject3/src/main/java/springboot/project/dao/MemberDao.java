@@ -16,6 +16,6 @@ public interface MemberDao {
 	MemberDto findPw(MemberDto dto);//비밀번호찾기
 	void updatePw(MemberDto dto);//비밀번호 변경
 	int updateMember(MemberDto dto); //회원 정보 수정
-	int deleteMember(String memberid);//회원 탈퇴
+	int deleteMember(Map<String, Object> map);//회원 탈퇴
 
 }

@@ -85,11 +85,11 @@ public class MemberService {
 	
 	public int deleteMember(String memberpw, MemberDto dto) {
 		String pw = dto.getMemberpw();
-		if(pw.equals(memberpw)) {
-			return dao.deleteMember(dto.getMemberid());
-		}else {
-			return 0;
-		}
+		String memberid = dto.getMemberid();
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("memberid",memberid);
+		map.put("memberpw", pw);
+		return dao.deleteMember(map);
 	}
 
 }

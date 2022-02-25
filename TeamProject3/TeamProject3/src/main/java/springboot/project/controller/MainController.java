@@ -31,6 +31,12 @@ public class MainController {
 		return new MemberDto();
 	}
 	
+	//메인페이지
+	@GetMapping("/")
+	public String main(@ModelAttribute("user") MemberDto dto) {
+		return "index";
+	}
+	
 	//회원가입 약관동의 페이지
 	@GetMapping("/joinform")
 	public String joinForm() {
@@ -65,7 +71,7 @@ public class MainController {
 	@GetMapping("/loginform")
 	public String loginForm(@ModelAttribute("user") MemberDto dto) {
 		if(dto.getMemberid() != null) {
-			return "member/checklogin";
+			return "index";
 		}
 		return "member/loginform";		
 	}
@@ -82,7 +88,7 @@ public class MainController {
 		}else {
 			m.addAttribute("user", resultDto);
 		}
-		return "member/loginComplete";
+		return "index";
 	}
 	
 	//아이디 찾기 페이지
@@ -185,10 +191,6 @@ public class MainController {
 		}
 	}
 	
-	@GetMapping("/main")
-	public String main() {
-		return "/main";
-	}
 	
 	@GetMapping("/test")
 	public String test() {

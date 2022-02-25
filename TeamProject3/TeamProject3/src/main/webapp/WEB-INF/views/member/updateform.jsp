@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -126,12 +127,12 @@ h1 {
 		<div class=input_field>
 			<label for="memberpw" class="input">비밀번호</label>&nbsp;&nbsp;&nbsp;
 			<input type="password" name="memberpw" id="memberpw" class="input"
-				placeholder="${user.memberpw }"><br> <br>
+				placeholder="${user.memberpw }" required><br> <br>
 			<hr>
 			<br> 
 				<label for="password1" class="input">비밀번호확인</label>
 			<input type="password" name="password1" id="password1" class="input"
-				placeholder="${user.memberpw }"><br> <span id='message'></span><br>
+				placeholder="${user.memberpw }" required><br> <span id='message'></span><br>
 			<hr>
 		</div>
 		
@@ -139,13 +140,13 @@ h1 {
 		<div class=input_field>
 			<label for="name" class="input">이름 </label>&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="text" name="name" id="name" class="input"
-				placeholder="${user.name }"><br> 
+				placeholder="${user.name }" required><br> 
 			<hr>
 		</div>
 		
 		<div class=input_field>
 			<label for="phone" class="input">전화번호 </label>&nbsp;
-			<input type="tel" name="phone" class="input" oninput="autoHyphen(this)" maxlength="13" placeholder="${user.phone}"><br>
+			<input type="tel" name="phone" class="input" oninput="autoHyphen(this)" maxlength="13" placeholder="${user.phone}" required><br>
 			<hr>
 		</div>
 		
@@ -172,7 +173,7 @@ h1 {
 				<br>
 				<label for="address1" class="input">상세주소</label>&nbsp;&nbsp;
 				<input type="text" name="address" id="address1" class="input"
-				placeholder="나머지 주소입력"> <br>
+				placeholder="나머지 주소입력" required> <br>
 			<hr>
 			
 		</div>
@@ -180,7 +181,7 @@ h1 {
 		<div class=input_field>
 			<label for="email" class="input">이메일</label>&nbsp;&nbsp;&nbsp;
 			<input type="email" name="email" id="email" class="input"
-				placeholder="${user.email } "disabled>
+				value="${user.email } "disabled>
 	
 				 
 			<hr>
@@ -189,7 +190,7 @@ h1 {
 		
 		<div class=input_field>
 		<label for="birthday" class="input">생년월일</label>&nbsp;&nbsp;
-			<input type="date" name="birthday" id="birthday" placeholder="생년월일" class="input">&nbsp;<br>
+			<input type="date" name="birthday" id="birthday" placeholder="생년월일" class="input" required>&nbsp;<br>
 			<br>
 			<hr>
 		</div>
@@ -197,12 +198,12 @@ h1 {
 		<div class=input_field>
 		<label for="pet" class="input" style="text-indent:-30px;">반려동물</label>&nbsp;&nbsp;&nbsp;
 		<label class="radio_obj">
-    <input type="radio" name="pet" value="유" class="input" placeholder="${user.pet }">
+    <input type="radio" name="pet" value="유" class="input" checked="checked" <c:if test="${user.pet eq '유'}">checked</c:if>>
     <span>유</span>
 	</label>
  	&nbsp;
 	<label class="radio_obj">
-    	<input type="radio" name="pet" value="무" class="input" placeholder="${user.pet }">
+    	<input type="radio" name="pet" value="무" class="input" <c:if test="${user.pet eq '무' }">checked</c:if>>
     	<span>무</span>&nbsp;&nbsp;&nbsp;&nbsp;
 	</label>
 	<hr>

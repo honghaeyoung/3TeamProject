@@ -7,7 +7,7 @@
 <body>
 <script>
  alert("회원 탈퇴 완료 \n 이용해주셔서 감사합니다^^");
- window.location.href = 'main';
+ window.location.href = '/';
 
  </script>
 </body>

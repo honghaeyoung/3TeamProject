@@ -12,6 +12,29 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style type="text/css">
 body{text-align: center;}
+table.type04 {
+  border-collapse: separate;
+  border-spacing: 1px;
+  text-align: center;
+  line-height: 1.5;
+  border-top: 1px solid #ccc;
+  margin : 20px 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+table.type04 th {
+  width: 150px;
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+}
+table.type04 td {
+width: 350px;
+  padding: 10px;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+}
 </style>
 </head>
 <body>
@@ -33,15 +56,26 @@ body{text-align: center;}
 <!-- active 클래스는 현재 선택되어 있는 탭 영역이다. -->
 <div class="tab-pane fade in active" id="home">
 <div class="body">
-<h3>${user.memberid}님의 정보 조회</h3>
-<p>비밀번호    : ${user.memberpw}<p>
-<p>이름       : ${user.name }<p>
-<p>전화번호    : ${user.phone }</p>
-<p>주소       : ${user.address }</p>
-<p>성별       : ${user.gender }</p>
-<p>생년월일    : <fmt:formatDate value="${user.birthday }" pattern="yyyy-MM-dd"/></p>
-<p>메일       : ${user.email }</p>
-<p>반려동물여부 : ${user.pet }</p>
+<table class="type04">
+<tr>
+<th scope="row">아이디</th> <td>${user.memberid}</td></tr>
+<tr>
+<th scope="row">비밀번호</th> <td>${user.memberpw}</td></tr>
+<tr>
+<th scope="row">이름</th> <td>${user.name }</td></tr>
+<tr>
+<th scope="row">전화번호 </th><td>${user.phone }</td></tr>
+<tr>
+<th scope="row">주소     </th><td> ${user.address }</td></tr>
+<tr>
+<th scope="row">성별 </th><td>${user.gender }</td></tr>
+<tr>
+<th scope="row">생년월일 </th><td><fmt:formatDate value="${user.birthday }" pattern="yyyy-MM-dd"/></td></tr>
+<tr>
+<th scope="row">메일  </th><td>${user.email }</td></tr>
+<tr>
+<th scope="row">반려동물여부</th><td>${user.pet }</td></tr>
+</table>
 <button type="button" onclick="location.href='updateform'">회원 정보 수정</button>
 <button type="button" onclick="location.href='deleteform'">회원 탈퇴</button>
 </div>
