@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springboot.project.dao.FoodboardDao">
+
+<select id="FoodList" parameterType="map" resultType="springboot.project.dto.FoodboardDto">
+<![CDATA[
+select * from
+ (select storeid, storename, storeaddress, storephone, storecontent, storeprice, storefilename, storefilepath, storefilesize, Storecomm, rownum r
+ from (select * from foodstore order by storeid desc)order by storeid desc)where r >= #{start} AND r <= #{end}
+]]>
+</select>
+
+<select id="count" resultType="int">
+select count(*) from foodstore
+</select>
+
+
+<select id="foodlistone" parameterType="int" resultType="springboot.project.dto.FoodboardDto">
+select * from foodstore where storeid = #{storeid}
+</select>
+
+<select id="countSearch" resultType="int" parameterType="map">
+		select count(*) from foodstore 
+		<where>
+			<choose>
+				<when test="searchn == 0">storename like '%'||#{search}||'%'</when>
+				<when test="searchn == 1">storeaddress like '%'||#{search}||'%' </when>
+			</choose>
+		</where> 
+</select>
+
+<select id="foodstoresearch" parameterType="map" resultType="springboot.project.dto.FoodboardDto">
+		
+		select * from
+ (select storeid, storename, storeaddress, storephone, storecontent, storeprice, Storecomm, rownum r
+		from (select * from foodstore order by storeid desc) 
+		<where>
+			<choose>
+				<when test="searchn == 0">storename like '%'||#{search}||'%'</when>
+				<when test="searchn == 1">storeaddress like '%'||#{search}||'%' </when>
+			</choose>
+		</where> 
+		order by storeid desc 
+		) where r &gt;= #{start} AND r &lt;= #{end}
+ 		
+</select>
+
+
+</mapper>

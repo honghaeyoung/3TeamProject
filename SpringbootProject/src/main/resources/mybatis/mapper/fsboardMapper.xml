@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springboot.project.dao.FsboardDao">
+
+	<insert id="insert" parameterType="springboot.project.dto.FsboardDto">
+		insert into fsboard(fsno,
+		memberid, fstitle, fscontent, regdate)
+		values(b_seq.nextval, #{memberid}, #{fstitle},
+		#{fscontent},sysdate)
+	</insert>
+
+	<update id="updateBoard" parameterType="springboot.project.dto.FsboardDto">
+		update fsboard set fstitle=#{fstitle} , fscontent=#{fscontent}
+		where fsno=#{fsno}
+	</update>
+
+	<delete id="deleteBoard" parameterType="int">
+		delete from fsboard where fsno = #{fsno}
+	</delete>
+
+	<select id="boardList" parameterType="map" resultType="springboot.project.dto.FsboardDto">
+		<![CDATA[
+		select * from
+		(select fsno, memberid, fstitle, fscontent, regdate, fsreadcount, rownum r
+		from (select * from fsboard order by regdate desc)
+		order by regdate desc)where r >= #{start} AND r <= #{end}
+ 		]]>
+	</select>
+	<select id="count" resultType="int">
+		select count(*) from fsboard
+	</select>
+
+	<select id="boardOne" parameterType="int" 
+					resultType="springboot.project.dto.FsboardDto">
+		select * from fsboard where fsno = #{fsno}
+	</select>
+
+	<select id="countSearch" resultType="int" parameterType="map">
+		select count(*) from fsboard 
+		<where>
+			<choose>
+				<when test="searchn == 0">
+				fstitle  like '%'||#{search}||'%' </when>
+				<when test="searchn == 1"> fscontent  like '%'||#{search}||'%'</when>
+				<when test="searchn == 2"> memberid  like '%'||#{search}||'%' </when>
+			</choose>
+		</where> 
+</select>
+
+<select id="boardListSearch" parameterType="map" resultType="springboot.project.dto.FsboardDto">
+		
+		select * from
+		(select fsno, memberid,fstitle, fscontent, regdate, fsreadcount, rownum r
+		from (select * from fsboard order by regdate desc) 
+		<where>
+			<choose>
+				<when test="searchn == 0">
+				fstitle like '%'||#{search}||'%'</when>
+				<when test="searchn == 1"> fscontent like '%'||#{search}||'%' </when>
+				<when test="searchn == 2"> memberid like '%'||#{search}||'%' </when>
+				<when test="searchn == 3"> fstitle or fscontent like '%'||#{search}||'%'</when>
+			</choose>
+		</where> 
+		order by regdate desc) where r >= #{start} AND r &lt;= #{end}
+ 		
+	</select>
+
+	<update id="addReadcount" parameterType="int">
+		update fsboard set fsreadcount = fsreadcount+1 where fsno = #{fsno}
+	</update>
+	
+	<update id="addRecommend" parameterType="int">
+		update fsboard set fsrecommend = fsrecommend+1 where fsno = #{fsno}
+	</update>
+
+</mapper>

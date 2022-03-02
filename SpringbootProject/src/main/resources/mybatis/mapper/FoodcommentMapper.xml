@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springboot.project.dao.FoodcommentDao">
+
+
+	<select id="fviewcomment" parameterType="int"
+		resultType="springboot.project.dto.FoodcommentDto">
+		select * from foodcomment where storeid =#{storeid} order
+		by fcregdate desc
+	</select>
+
+	<insert id="fcommentInsert"
+		parameterType="springboot.project.dto.FoodcommentDto">
+		INSERT INTO foodcomment
+		VALUES(#{storeid},#{memberid},sysdate,FOODCOMMENT_SEQ.nextval,#{fccontent},#{fcscore})
+	</insert>
+
+	<delete id="fcdelete" parameterType="int">
+		delete from foodcomment
+		where fcno = #{fcno}
+	</delete>
+
+	<select id="avgscore" parameterType="int">
+		SELECT ROUND(avg(fcscore))FROM FOODCOMMENT WHERE storeid=#{storeid};
+	</select>
+
+	<update id="updatefcomm" parameterType="map">
+		update foodcomment set fccontent=#{fccontent} , fcscore=#{fcscore} where fcno=#{fcno}
+	</update>
+
+	<select id="fcommone" parameterType="int"
+		resultType="springboot.project.dto.FoodcommentDto">
+		select * from foodcomment where fcno = #{fcno}
+	</select>
+</mapper>

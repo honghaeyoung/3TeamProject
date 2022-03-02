@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springboot.project.dao.CSBoardDao">
+
+	<insert id="insert" parameterType="springboot.project.dto.CSBoardDto">
+		insert into CSBoard values (csb_seq.nextval, #{memberid}, #{cspw},
+		#{cstitle},#{cscontent},sysdate,#{csfilename},#{csfilepath},#{csfilesize})
+	</insert>
+	
+	<select id="boardList" parameterType="map"
+		resultType="springboot.project.dto.CSBoardDto">
+		<![CDATA[
+		select * from
+		(select csno, memberid, cstitle, cscontent, csregdate, rownum r
+		from (select * from CSBoard order by csregdate desc)
+		order by csregdate desc)where r >= #{start} AND r <= #{end}
+ 		]]>
+ 		
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(*) from CSBoard
+	</select>
+	
+	<select id="CSBoardOne" parameterType="int" resultType="springboot.project.dto.CSBoardDto">
+		select * from CSBoard where csno = #{csno}
+	</select>
+	
+	<update id="updateCSBoard" parameterType="springboot.project.dto.CSBoardDto">
+		update CSBoard set
+		cstitle=#{cstitle}, cscontent=#{cscontent}
+		where csno=#{csno}
+	</update>
+
+	<delete id="deleteCSBoard" parameterType="int">
+		delete from CSBoard where csno = #{csno}
+	</delete>
+	
+	<select id="countSearch" resultType="int" parameterType="map">
+			select count(*) from CSBoard 
+			<where>
+				<choose>
+					<when test="searchn == 0"> cstitle  like '%'||#{search}||'%' </when>
+					<when test="searchn == 1"> cscontent  like '%'||#{search}||'%'</when>
+					<when test="searchn == 2"> memberid  like '%'||#{search}||'%' </when>
+				</choose>
+			</where> 
+	</select>
+
+	<select id="boardListSearch" parameterType="map" resultType="springboot.project.dto.CSBoardDto">
+			select * from (select csno, memberid, cstitle, cscontent, csregdate, rownum r from (select * from CSBoard order by csregdate desc) 
+		<where>
+			<choose>
+				<when test="searchn == 0"> cstitle like '%'||#{search}||'%'</when>
+				<when test="searchn == 1"> cscontent like '%'||#{search}||'%' </when>
+				<when test="searchn == 2"> memberid like '%'||#{search}||'%' </when>
+			</choose>
+		</where> 
+		order by csregdate desc) where r &gt;= #{start} AND r &lt;= #{end}
+	</select>
+	
+	<insert id="insertComm" parameterType="springboot.project.dto.CSCommDto">
+		insert into CSComment values (#{csno}, csc_seq.nextval, #{masterid}, #{csccontent}, sysdate)
+	</insert>
+	<delete id="deleteComm" parameterType="int">
+		delete from CSComment where cscno = #{cscno}
+	</delete>
+	<select id="showComm" parameterType="int" resultType="springboot.project.dto.CSCommDto">
+		select * from CSComment where csno = #{csno} order by cscregdate
+	</select>
+	<select id="countComm" parameterType="int" resultType="int">
+		select count(*) from CSComment where csno = #{csno}
+	</select>
+	
+	<select id="commentOne" parameterType="int" resultType="springboot.project.dto.CSCommDto">
+		select * from CSComment where cscno = #{cscno}
+	</select>
+	
+	<update id="updateComm" parameterType="map">
+		update CSComment set csccontent=#{csccontent} where cscno=#{cscno}
+	</update>
+</mapper>

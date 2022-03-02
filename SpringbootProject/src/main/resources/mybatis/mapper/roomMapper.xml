@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springboot.project.dao.RoomDao">
+	<insert id="roomshareWrite" parameterType="springboot.project.dto.RoomDto">
+		insert into roomshare values(roomshare_seq.nextval, #{roomtitle}, #{roomaddress}, #{roomcontent}, #{memberid}, sysdate, #{roomperiod}, #{roomphone}, 0, #{roomdate}, 0)
+	</insert>
+	
+	<insert id="uploadimg" parameterType="springboot.project.dto.RoomFileDto">
+		insert into roomfile values(roomfile_seq.nextval, roomshare_seq.currval, #{rimgoriname}, #{rimgpath}, #{rimgsize})
+	</insert>
+	
+	<select id="roomcount" resultType="int">
+		select count(*) from roomshare
+	</select>
+	
+	<select id="roomList" parameterType="map" resultType="springboot.project.dto.RoomDto">
+	<![CDATA[
+		select * from (select roomno, memberid, roomtitle, roomaddress, roomcontent, roomregdate, roomperiod, roomphone, roomdate, roomcno, roomstate,rownum r from (select * from roomshare order by roomregdate desc) order by roomregdate desc) where r >= #{start} AND r <= #{end}
+	]]>
+	</select>
+	
+	<select id="roomListDate" parameterType="map" resultType="springboot.project.dto.RoomDto">
+	<![CDATA[
+		select * from (select roomno, memberid, roomtitle, roomaddress, roomcontent, roomregdate, roomperiod, roomphone, roomdate, roomcno, roomstate,rownum r from (select * from roomshare order by roomdate desc) order by roomdate desc) where r >= #{start} AND r <= #{end}
+	]]>
+	</select>
+	
+	<select id="roomdata" parameterType="int" resultType="springboot.project.dto.RoomFileDto">
+		select * from roomfile where roomno = #{roomno}
+	</select>
+	
+	<select id="roomdetail" parameterType="int" resultType="springboot.project.dto.RoomDto">
+		select * from roomshare where roomno = #{roomno}
+	</select>
+	
+	<update id="countingRoom" parameterType="int">
+		update roomshare set roomcno = roomcno+1 where roomno= #{roomno}
+	</update>
+	
+	<update id="quitRoomshare" parameterType="int">
+		update roomshare set roomstate = 1 where roomno = #{roomno}
+	</update>
+	
+	<delete id="deleteRoomshare" parameterType="int">
+		delete from roomshare where roomno = #{roomno}
+	</delete>
+	
+	<update id="updateRoomshare" parameterType="springboot.project.dto.RoomDto">
+		update roomshare set roomtitle=#{roomtitle} , roomaddress=#{roomaddress}, roomcontent=#{roomcontent}, roomperiod=#{roomperiod}, roomphone=#{roomphone}, roomdate=#{roomdate} where roomno = #{roomno}
+	</update>
+	
+	<delete id="deleteRoomFile" parameterType="int">
+		delete from roomfile where roomno = #{roomno}
+	</delete>
+	
+	<insert id="updatefile" parameterType="springboot.project.dto.RoomFileDto">
+		insert into roomfile values(roomfile_seq.nextval, #{roomno}, #{rimgoriname}, #{rimgpath}, #{rimgsize})
+	</insert>
+	
+	<select id="countSearch" resultType="int" parameterType="map">
+			select count(*) from roomshare 
+			<where>
+				<choose>
+					<when test="searchn == 0"> roomtitle  like '%'||#{search}||'%' </when>
+					<when test="searchn == 1"> roomcontent  like '%'||#{search}||'%'</when>
+					<when test="searchn == 2"> memberid  like '%'||#{search}||'%' </when>
+					<when test="searchn == 3"> roomaddress  like '%'||#{search}||'%' </when>
+				</choose>
+			</where> 
+	</select>
+	
+	<select id="roomSearch" parameterType="map" resultType="springboot.project.dto.RoomDto">
+			select * from (select roomno, memberid, roomtitle, roomaddress, roomcontent, roomregdate, roomperiod, roomphone, roomdate, roomcno, roomstate, rownum r from (select * from roomshare order by roomregdate desc) 
+		<where>
+			<choose>
+					<when test="searchn == 0"> roomtitle  like '%'||#{search}||'%' </when>
+					<when test="searchn == 1"> roomcontent  like '%'||#{search}||'%'</when>
+					<when test="searchn == 2"> memberid  like '%'||#{search}||'%' </when>
+					<when test="searchn == 3"> roomaddress  like '%'||#{search}||'%' </when>
+			</choose>
+		</where> 
+		order by roomregdate desc) where r &gt;= #{start} AND r &lt;= #{end}
+	</select>
+	
+	<insert id="rcommWrite" parameterType="springboot.project.dto.RoomCommentDto">
+		insert into roomsharecomment values(#{roomno}, #{memberid}, #{rscontent}, roomsharecomment_seq.nextval, sysdate, #{rersno})
+	</insert>
+	
+	<select id="rcommlist" parameterType="int" resultType="springboot.project.dto.RoomCommentDto">
+		select * from roomsharecomment where roomno = #{roomno} and rersno = 0 order by rsdate asc
+	</select>
+	
+	<delete id="rcommdelete" parameterType="int">
+		delete from roomsharecomment where rsno = #{rsno}
+	</delete>
+	
+	<update id="rcommupdate" parameterType="map">
+		update roomsharecomment set rscontent=#{rscontent}, rsdate=sysdate where rsno = #{rsno}
+	</update>
+	
+	<select id="commentOne" parameterType="int" resultType="springboot.project.dto.RoomCommentDto">
+		select * from roomsharecomment where rsno = #{rsno}
+	</select>
+	
+	<select id="recommlist" parameterType="int" resultType="springboot.project.dto.RoomCommentDto">
+		select * from roomsharecomment where roomno = #{roomno} and rersno != 0 order by rsdate asc
+	</select>
+	
+	
+</mapper>

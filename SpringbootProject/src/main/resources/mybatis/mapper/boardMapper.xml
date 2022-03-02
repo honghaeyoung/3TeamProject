@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springboot.project.dao.BoardDao">
+
+	<insert id="insert" parameterType="springboot.project.dto.BoardDto">
+		insert into communityboard(no,
+		memberid, title, content, regdate)
+		values(b_seq.nextval, #{memberid}, #{title},
+		#{content},sysdate)
+	</insert>
+
+	<update id="updateBoard" parameterType="springboot.project.dto.BoardDto">
+		update communityboard set title=#{title} , content=#{content}
+		where no=#{no}
+	</update>
+
+	<delete id="deleteBoard" parameterType="int">
+		delete from communityboard where no = #{no}
+	</delete>
+
+	<select id="boardList" parameterType="map" resultType="springboot.project.dto.BoardDto">
+		<![CDATA[
+		select * from
+		(select no, memberid, title, content, regdate, readcount, recommend, rownum r
+		from (select * from communityboard order by regdate desc)
+		order by regdate desc)where r >= #{start} AND r <= #{end}
+ 		]]>
+	</select>
+	<select id="count" resultType="int">
+		select count(*) from communityboard
+	</select>
+
+	<select id="boardOne" parameterType="int" 
+					resultType="springboot.project.dto.BoardDto">
+		select * from communityboard where no = #{no}
+	</select>
+
+	<select id="countSearch" resultType="int" parameterType="map">
+		select count(*) from communityboard 
+		<where>
+			<choose>
+				<when test="searchn == 0">
+				title  like '%'||#{search}||'%' </when>
+				<when test="searchn == 1"> content  like '%'||#{search}||'%'</when>
+				<when test="searchn == 2"> memberid  like '%'||#{search}||'%' </when>
+				<when test="searchn == 3"> title or content like '%'||#{search}||'%'</when>
+			</choose>
+		</where> 
+</select>
+
+<select id="boardListSearch" parameterType="map" resultType="springboot.project.dto.BoardDto">
+		
+		select * from
+		(select no, memberid,title, content, regdate, readcount, recommend, rownum r
+		from (select * from communityboard order by regdate desc) 
+		<where>
+			<choose>
+				<when test="searchn == 0">
+				title like '%'||#{search}||'%'</when>
+				<when test="searchn == 1"> content like '%'||#{search}||'%' </when>
+				<when test="searchn == 2"> memberid like '%'||#{search}||'%' </when>
+				<when test="searchn == 3"> title or content like '%'||#{search}||'%'</when>
+			</choose>
+		</where> 
+		order by regdate desc) where r >= #{start} AND r &lt;= #{end}
+ 		
+	</select>
+
+	<update id="addReadcount" parameterType="int">
+		update communityboard set readcount = readcount+1 where no = #{no}
+	</update>
+	
+	<update id="addRecommend" parameterType="int">
+		update communityboard set recommend = recommend+1, readcount = readcount-1 where no = #{no}
+	</update>
+	
+	<select id="bBList" parameterType="map" resultType="springboot.project.dto.BoardDto">
+		<![CDATA[
+		select * from
+		(select no, memberid, title, content, regdate, readcount, recommend, rownum r
+		from (select * from communityboard where recommend >= 10 order by regdate desc)
+		order by regdate desc)where r >= #{start} AND r <= #{end}
+ 		]]>
+	</select>
+	
+	<select id="bBListSearch" parameterType="map" resultType="springboot.project.dto.BoardDto">
+		
+		select * from
+		(select no, memberid,title, content, regdate, readcount, recommend, rownum r
+		from (select * from communityboard where recommend >= 10 order by regdate desc) 
+		<where>
+			<choose>
+				<when test="searchn == 0">
+				title like '%'||#{search}||'%'</when>
+				<when test="searchn == 1"> content like '%'||#{search}||'%' </when>
+				<when test="searchn == 2"> memberid like '%'||#{search}||'%' </when>
+				<when test="searchn == 3"> title or content like '%'||#{search}||'%'</when>
+			</choose>
+		</where> 
+		order by regdate desc) where r >= #{start} AND r &lt;= #{end}
+ 		
+	</select>
+	
+	<select id="bBcount" resultType="int">
+		select count(*) from communityboard where recommend >= 10
+	</select>
+	
+	
+	<select id="bBcountSearch" resultType="int" parameterType="map">
+		select count(*) from communityboard where recommend >= 10
+		<where>
+			<choose>
+				<when test="searchn == 0">
+				title  like '%'||#{search}||'%' </when>
+				<when test="searchn == 1"> content  like '%'||#{search}||'%'</when>
+				<when test="searchn == 2"> memberid  like '%'||#{search}||'%' </when>
+				<when test="searchn == 3"> title or content like '%'||#{search}||'%'</when>
+			</choose>
+		</where> 
+</select>
+	
+</mapper>

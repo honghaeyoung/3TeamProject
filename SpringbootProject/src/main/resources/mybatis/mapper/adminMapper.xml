@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springboot.project.dao.AdminDao">
+
+<select id="count" resultType="int">
+		select count(*) from Member
+	</select>
+
+	<select id="memberAll" parameterType="springboot.project.dto.AdminDto" resultType="springboot.project.dto.AdminDto">
+		<![CDATA[    
+		select *	
+		from (select memberid, memberpw, name, phone, address, gender,birthday,email,pet,rownum r 
+		from (select * from Member order by name desc) order by name desc)
+		where r >=#{start} AND r <=#{end}]]> 
+	</select>
+	
+	<select  id="membersearch" parameterType="map" resultType="springboot.project.dto.AdminDto">
+		select * from
+		(select memberid, memberpw,name, phone, address, gender,birthday,email,pet,rownum r
+		from (select * from Member order by name desc) 
+		<where>
+			<choose>
+				<when test="msearchn == 0">
+				memberid like '%'||#{msearch}||'%'</when>
+				<when test="msearchn == 1"> name like '%'||#{msearch}||'%' </when>
+				<when test="msearchn == 2"> phone like '%'||#{msearch}||'%' </when>
+			</choose>
+		</where> 
+		order by name desc )
+		 where r >= #{start} AND r &lt;= #{end}
+ 		
+</select> 
+
+<!-- 그래프 -->  
+
+<select id="selectgender" resultType="map">
+	select count(*),gender from Member group by gender
+</select>
+
+</mapper>

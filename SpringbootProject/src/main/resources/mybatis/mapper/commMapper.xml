@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springboot.project.dao.CommDao">
+	
+	<insert id="insertComm" parameterType="springboot.project.dto.CommDto">
+		insert into communitycomment(cno, memberid, ccontent, regdate, no)
+		values(c_seq.nextval, #{memberid}, #{ccontent},sysdate, #{no})
+	</insert>
+	
+	<update id="updateComm" parameterType="springboot.project.dto.CommDto">
+		update communitycomment set ccontent = #{ccontent} where cno = #{cno}
+	</update>
+	
+	<delete id="deleteComm" parameterType="int">
+		delete from communitycomment where cno = #{cno}
+	</delete>
+	
+	<select id="selectComm" parameterType="int" 
+	resultType="springboot.project.dto.CommDto">
+		select * from communitycomment where no = #{no} order by regdate desc
+	</select>
+	
+</mapper>

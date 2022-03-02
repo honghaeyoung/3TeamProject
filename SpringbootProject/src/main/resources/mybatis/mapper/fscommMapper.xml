@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springboot.project.dao.FscommDao">
+	
+	<insert id="insertComm" parameterType="springboot.project.dto.FscommDto">
+		insert into communitycomment(fscno, memberid, fsccontent, regdate, fsno)
+		values(c_seq.nextval, #{memberid}, #{fsccontent},sysdate, #{fsno})
+	</insert>
+	
+	<update id="updateComm" parameterType="map">
+		update fscomment set fsccontent = #{fsccontent} where fscno = #{fscno}
+	</update>
+	
+	<delete id="deleteComm" parameterType="int">
+		delete from fscomment where fscno = #{fscno}
+	</delete>
+	
+	<select id="selectComm" parameterType="int" 
+	resultType="springboot.project.dto.FscommDto">
+		select * from fscomment where fsno = #{fsno} order by regdate desc
+	</select>
+	
+</mapper>

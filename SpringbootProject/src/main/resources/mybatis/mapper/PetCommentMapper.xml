@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springboot.project.dao.PetcommentDao">
+
+<select id="pviewcomment" parameterType="int" resultType="springboot.project.dto.PetcommentDto">
+		select * from PETCARECOMMENT where pno =#{pno} order by pcregdate desc 
+	</select>
+
+<insert id="pcommentInsert" parameterType="springboot.project.dto.PetcommentDto">
+		INSERT INTO PETCARECOMMENT
+		VALUES(#{pno},PetcareComment_SEQ.NEXTVAL,#{memberid},#{pccontent},sysdate)
+	</insert>
+	
+	<update id="updatepcomm" parameterType="map">
+		update PETCARECOMMENT set pccontent=#{pccontent} where pcno=#{pcno}
+	</update>
+	
+	<select id="pcone" parameterType="int" resultType="springboot.project.dto.PetcommentDto">
+		select * from PETCARECOMMENT where pcno = #{pcno}
+	</select>
+	
+	<delete id="pcdelete" parameterType="int">
+		delete from petcarecomment where pcno = #{pcno}
+	</delete>
+	<select id="">
+	select avg(pcscore) from petcarecomment where pno=#{pno}
+	</select>
+</mapper>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springboot.project.dao.PetcareDao">
+
+<select id="PetList" parameterType="map" resultType="springboot.project.dto.PetcareDto">
+<![CDATA[
+select * from
+ (select pno, memberid, pkind, pperiod, pprice, pcontent, pregdate, paddress, pcount, pphone, ptitle, pfilename, pfilepath, pfilesize, rownum r
+ from (select * from petcareboard order by pno desc)
+ order by pno desc)where r >= #{start} AND r <= #{end}
+]]>
+</select>
+
+<select id="count" resultType="int">
+select count(*) from petcareboard
+</select>
+
+<select id="petlistone" parameterType="int" resultType="springboot.project.dto.PetcareDto">
+select * from petcareboard where pno = #{pno}
+</select>
+
+<select id="countSearch" resultType="int" parameterType="map">
+		select count(*) from petcareboard 
+		<where>
+			<choose>
+				<when test="searchn == 0">ptitle like '%'||#{search}||'%'</when>
+				<when test="searchn == 1">paddress like '%'||#{search}||'%' </when>
+			</choose>
+		</where> 
+</select>
+
+<select id="petsearch" parameterType="map" resultType="springboot.project.dto.PetcareDto">
+		
+		select * from
+ (select pno, memberid, pkind, pperiod, pprice, pcontent, pregdate, paddress, pcount, pphone, ptitle, pfilename, pfilepath, pfilesize, rownum r
+		from (select * from petcareboard order by pno desc) 
+		<where>
+			<choose>
+				<when test="searchn == 0">ptitle like '%'||#{search}||'%'</when>
+				<when test="searchn == 1">paddress like '%'||#{search}||'%' </when>
+			</choose>
+		</where> 
+		order by pno desc 
+		) where r &gt;= #{start} AND r &lt;= #{end}
+</select>
+
+<insert id="pinsert" parameterType="springboot.project.dto.PetcareDto">
+insert into petcareboard(pno, memberid, pkind, pperiod, pprice, pcontent, pregdate, paddress, pphone, ptitle, pfilename , pfilepath, pfilesize) 
+values(PETCAREBOARD_SEQ.nextval,#{memberid}, #{pkind}, #{pperiod}, #{pprice}, #{pcontent}, sysdate, #{paddress}, #{pphone}, #{ptitle}, #{pfilename} , #{pfilepath}, #{pfilesize})
+</insert>
+
+<update id="updatepboard" parameterType="springboot.project.dto.PetcareDto">
+update petcareboard set pkind=#{pkind}, pperiod=#{pperiod}, pprice=#{pprice}, pcontent=#{pcontent}, paddress=#{paddress},pphone=#{pphone}, ptitle=#{ptitle}, pfilename=#{pfilename},pfilepath=#{pfilepath}, pfilesize=#{pfilesize} where pno=#{pno}
+</update>
+
+<delete id="deletepboard" parameterType="int">
+delete from petcareboard where pno = #{pno}
+</delete>
+
+</mapper>
