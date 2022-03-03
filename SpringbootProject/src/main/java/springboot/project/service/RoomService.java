@@ -115,5 +115,9 @@ public class RoomService {
 		return dao.recommlist(roomno);
 	}
 	
+	public List<RoomDto> mainRomm(){
+		return dao.mainRomm();
+	}
+	
 	
 }

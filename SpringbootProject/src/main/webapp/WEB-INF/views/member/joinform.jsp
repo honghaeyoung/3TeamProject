@@ -138,6 +138,7 @@ label.select::after {
   </head>
 
   <body>
+
   <c:import url="/WEB-INF/views/include/top.jsp" />
     <div class="wrap">
       <div class="logo"><h1>혼사모</h1></div>

@@ -33,4 +33,5 @@ public interface RoomDao {
 	public RoomCommentDto commentOne(int rsno);
 	public int rcommupdate(Map<String,Object> map);
 	public List<RoomCommentDto> recommlist(int roomno);
+	public List<RoomDto> mainRomm();
 }

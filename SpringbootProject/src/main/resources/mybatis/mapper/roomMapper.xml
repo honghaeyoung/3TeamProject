@@ -108,5 +108,9 @@
 		select * from roomsharecomment where roomno = #{roomno} and rersno != 0 order by rsdate asc
 	</select>
 	
+	<select id="mainRomm" resultType="springboot.project.dto.RoomDto">
+		select * from roomshare where <![CDATA[rownum <= 3]]> order by roomno desc
+	</select>
+	
 	
 </mapper>

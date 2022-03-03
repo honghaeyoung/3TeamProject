@@ -2,6 +2,8 @@ package springboot.project.controller;
 
 
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +18,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-
 import springboot.project.dto.MemberDto;
+import springboot.project.dto.RoomDto;
 import springboot.project.service.MemberService;
+import springboot.project.service.RoomService;
 
 @Controller
 @SessionAttributes("user")
 public class MainController {
 	@Autowired
 	MemberService service;
+	@Autowired
+	RoomService rs;
 	
 	@ModelAttribute("user")
 	public MemberDto getMemberDto() {
@@ -33,7 +38,9 @@ public class MainController {
 	
 	//메인페이지 
 	@GetMapping("/")
-	public String main(@ModelAttribute("user") MemberDto dto) {
+	public String main(@ModelAttribute("user") MemberDto dto, Model m) {
+		m.addAttribute("roomlist", rs.mainRomm());
+		
 		return "index";
 	}
 	
@@ -190,11 +197,6 @@ public class MainController {
 			status.setComplete();
 		return "member/deletecomplate";
 		}
-	}
-	
-	@GetMapping("/test")
-	public String test() {
-		return "/test";
 	}
 	
 	
