@@ -118,7 +118,14 @@ width: 350px;
 </div>
 </div>
   </div>
-  <div class="tab-pane fade" id="boardlist" role="tabpanel" aria-labelledby="boardlist-tab">게시글 목록</div>
+  <div class="tab-pane fade" id="boardlist" role="tabpanel" aria-labelledby="boardlist-tab">
+ 	<c:if test="${user.memberid eq rlist.memberid  }">
+ 		${rlist.title }
+ 	</c:if>
+ 	<c:if test="${user.memberid ne rlist.memberid }">
+ 	작성하신 게시글이 없습니다.
+ 	</c:if>
+  </div>
   <div class="tab-pane fade" id="commlist" role="tabpanel" aria-labelledby="commlist-tab">댓글 목록</div>
 </div>
 

@@ -1,10 +1,13 @@
 package springboot.project.dao;
 
+
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import springboot.project.dto.MemberDto;
+
 
 @Mapper
 public interface MemberDao {
@@ -16,4 +19,11 @@ public interface MemberDao {
 		void updatePw(MemberDto dto);//비밀번호 변경
 		int updateMember(MemberDto dto); //회원 정보 수정
 		int deleteMember(Map<String, Object> map);//회원 탈퇴
+		
+		List<BoardDao> cBoard(String memberid);
+		List<FsboardDao> fBoard(String memberid);
+		List<PetcareDao> pBoard(String memberid);
+		List<RoomDao> rBoard(String memberid);
+		
+		
 }

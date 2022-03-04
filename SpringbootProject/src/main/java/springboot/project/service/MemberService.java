@@ -1,6 +1,7 @@
 package springboot.project.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.InternetAddress;
@@ -11,9 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import springboot.project.dao.BoardDao;
+import springboot.project.dao.FsboardDao;
 import springboot.project.dao.MemberDao;
+import springboot.project.dao.PetcareDao;
+import springboot.project.dao.RoomDao;
 import springboot.project.dto.EmailVO;
 import springboot.project.dto.MemberDto;
+import springboot.project.dto.RoomDto;
 
 @Service
 public class MemberService {
@@ -90,6 +96,19 @@ public class MemberService {
 		map.put("memberid",memberid);
 		map.put("memberpw",pw);
 		return dao.deleteMember(map);
+	}
+	
+	public List<BoardDao> cBoard(String memberid){
+		return dao.cBoard(memberid);
+	}
+	public List<FsboardDao> fBoard(String memberid){
+		return dao.fBoard(memberid);
+	}
+	public List<PetcareDao> pBoard(String memberid){
+		return dao.pBoard(memberid);
+	}
+	public List<RoomDao> rBoard(String memberid){
+		return dao.rBoard(memberid);
 	}
 
 }
