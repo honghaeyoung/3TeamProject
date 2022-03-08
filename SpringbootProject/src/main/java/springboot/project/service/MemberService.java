@@ -1,7 +1,7 @@
 package springboot.project.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.InternetAddress;
@@ -12,14 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import springboot.project.dao.BoardDao;
-import springboot.project.dao.FsboardDao;
 import springboot.project.dao.MemberDao;
-import springboot.project.dao.PetcareDao;
-import springboot.project.dao.RoomDao;
 import springboot.project.dto.EmailVO;
 import springboot.project.dto.MemberDto;
-import springboot.project.dto.RoomDto;
+import springboot.project.dto.MypageCommDto;
+import springboot.project.dto.MypageDto;
 
 @Service
 public class MemberService {
@@ -98,17 +95,13 @@ public class MemberService {
 		return dao.deleteMember(map);
 	}
 	
-	public List<BoardDao> cBoard(String memberid){
-		return dao.cBoard(memberid);
+	public ArrayList<MypageDto> getBoardList(String memberid) {
+		return dao.myBoard(memberid);
 	}
-	public List<FsboardDao> fBoard(String memberid){
-		return dao.fBoard(memberid);
+	
+	public ArrayList<MypageCommDto> getCommList(String memberid){
+		return dao.myComm(memberid);
 	}
-	public List<PetcareDao> pBoard(String memberid){
-		return dao.pBoard(memberid);
-	}
-	public List<RoomDao> rBoard(String memberid){
-		return dao.rBoard(memberid);
-	}
-
+	
+	
 }

@@ -119,14 +119,58 @@ width: 350px;
 </div>
   </div>
   <div class="tab-pane fade" id="boardlist" role="tabpanel" aria-labelledby="boardlist-tab">
- 	<c:if test="${user.memberid eq rlist.memberid  }">
- 		${rlist.title }
- 	</c:if>
- 	<c:if test="${user.memberid ne rlist.memberid }">
- 	작성하신 게시글이 없습니다.
+ 	<c:if test="${check == 0}">
+ 	<table>
+ 		<thead>
+ 			<tr><th>글번호</th><th>제목</th><th>작성일</th></tr>
+ 		</thead>
+ 		<tbody>
+ 		
+ 		<c:forEach var="list" items="${list }">
+ 			<tr>
+ 				<td><a href="/room/list/${list.no}"><c:out value="${list.no }"/></a></td>
+ 				<td><c:out value="${list.title}"/></td>
+ 				<td><fmt:formatDate value="${list.regdate }" dateStyle="short"/>
+ 				</tr>
+ 				</c:forEach>
+ 				
+ 		</tbody>	
+ 	</table>
+ 		</c:if>
+ 	<c:if test="${check == 1}">
+ 	<table>
+ 		<thead>
+ 			<tr><th>글번호</th><th>제목</th><th>작성일</th></tr>
+ 		</thead>
+ 		<tbody>
+ 		
+ 		<c:forEach var="list" items="${list }">
+ 			<tr>
+ 				<td>작성하신 게시글이없습니다</td>
+ 				</tr>
+ 				</c:forEach>
+ 				
+ 		</tbody>	
+ 	</table>
  	</c:if>
   </div>
-  <div class="tab-pane fade" id="commlist" role="tabpanel" aria-labelledby="commlist-tab">댓글 목록</div>
+  <div class="tab-pane fade" id="commlist" role="tabpanel" aria-labelledby="commlist-tab">
+  			<table>
+ 		<thead>
+ 			<tr><th>글번호</th><th>내용</th><th>작성일</th></tr>
+ 		</thead>
+ 		<tbody>
+ 		<c:forEach var="comm" items="${comm }">
+ 			<tr>
+ 				<td><a href=""><c:out value="${comm.no }"/></a></td>
+ 				<td><c:out value="${comm.ccontent}"/></td>
+ 				<td><fmt:formatDate value="${comm.regdate }" dateStyle="short"/>
+ 				</tr>
+ 				</c:forEach>
+ 				
+ 		</tbody>	
+ 	</table>
+  </div>
 </div>
 
 

@@ -2,8 +2,9 @@ package springboot.project.controller;
 
 
 
-import java.util.List;
+import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import springboot.project.dao.BoardDao;
-import springboot.project.dao.FsboardDao;
-import springboot.project.dao.PetcareDao;
-import springboot.project.dao.RoomDao;
 import springboot.project.dto.MemberDto;
-import springboot.project.dto.RoomDto;
+import springboot.project.dto.MypageCommDto;
+import springboot.project.dto.MypageDto;
 import springboot.project.service.MemberService;
 import springboot.project.service.RoomService;
 
@@ -160,18 +158,26 @@ public class MainController {
 	
 	//마이페이지
 	@GetMapping("/mypage")
-	public String myPage(@ModelAttribute("user") MemberDto dto, Model m,String memberid) {
-		m.addAttribute("user", dto);
-		List<BoardDao> cboard = service.cBoard(dto.getMemberid());
-		List<FsboardDao> fboard = service.fBoard(dto.getMemberid());
-		List<PetcareDao> pboard = service.pBoard(dto.getMemberid());
-		List<RoomDao> rboard = service.rBoard(dto.getMemberid());
-		if(dto.getMemberid().equals(memberid)) {
-			m.addAttribute("clist", cboard);
-			m.addAttribute("flist", fboard);
-			m.addAttribute("plist", pboard);
-			m.addAttribute("rlist", rboard);
+	public String myPage(@ModelAttribute("user") MemberDto dto, Model m,HttpSession session) {
+		String id = (String)dto.getMemberid();
+		
+		ArrayList<MypageDto> list = service.getBoardList(id);
+		if(list != null) {
+			m.addAttribute("check", 0);
+			m.addAttribute("list", list);
+		}else{
+			m.addAttribute("check", 1);
 		}
+		
+		ArrayList<MypageCommDto> clist = service.getCommList(id);
+		if(clist != null) {
+			m.addAttribute("check", 0);
+			m.addAttribute("comm", clist);
+		}else {
+			m.addAttribute("check", 1);
+		}
+		
+		m.addAttribute("user", dto);
 		return "member/mypage";
 	}
 	

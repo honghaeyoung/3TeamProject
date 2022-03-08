@@ -1,12 +1,14 @@
 package springboot.project.dao;
 
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import springboot.project.dto.MemberDto;
+import springboot.project.dto.MypageCommDto;
+import springboot.project.dto.MypageDto;
 
 
 @Mapper
@@ -20,10 +22,8 @@ public interface MemberDao {
 		int updateMember(MemberDto dto); //È¸¿ø Á¤º¸ ¼öÁ¤
 		int deleteMember(Map<String, Object> map);//È¸¿ø Å»Åð
 		
-		List<BoardDao> cBoard(String memberid);
-		List<FsboardDao> fBoard(String memberid);
-		List<PetcareDao> pBoard(String memberid);
-		List<RoomDao> rBoard(String memberid);
+		ArrayList<MypageDto> myBoard(String memberid);
+		ArrayList<MypageCommDto> myComm(String memberid);
 		
 		
 }

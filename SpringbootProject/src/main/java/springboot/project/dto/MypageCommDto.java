@@ -3,11 +3,11 @@ package springboot.project.dto;
 import java.util.Date;
 
 import lombok.Data;
+
 @Data
-public class MypageDto {
+public class MypageCommDto {
 	private int no;
-	private String title;
+	private String ccontent;
 	private Date regdate;
-	private String memberid;
 
 }

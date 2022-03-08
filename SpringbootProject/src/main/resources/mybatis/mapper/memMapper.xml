@@ -29,28 +29,28 @@ PUBLIC "-//mybatis.org//DTD Mapper3.0//EN"
 		select * from member where memberid=#{memberid} and name=#{name} and email=#{email}
 	</select>
 	
-	<select id="cBoard" parameterType="String" resultType="springboot.project.dto.BoardDto">
-		select * from communityboard where memberid = #{memberid};
+	<select id="myBoard" parameterType="String" resultType="springboot.project.dto.MypageDto">
+		select * from (
+    		select no as no, title as title, regdate as regdate from communityboard where memberid = #{memberid}
+    		union all
+    		select fsno as no, fstitle as title, regdate as regdate from fsboard where memberid = #{memberid}
+    		union all
+    		select pno as no, ptitle as title, pregdate as regdate from petcareboard where memberid = #{memberid}
+    		union all
+   			select roomno as no, roomtitle as title, roomregdate as regdate from roomshare where memberid = #{memberid}
+    		) order by regdate desc
 	</select>
 	
-	<select id="fBoard" parameterType="String" resultType="springboot.project.dto.FoodboardDto">
-		select * from fsboard where memberid = #{memberid};
-	</select>
-	
-	<select id="pBoard" parameterType="String" resultType="springboot.project.dto.PetcareDto">
-		select * from petcareboard where memberid = #{memberid};
-	</select>
-	
-	<select id="rBoard" parameterType="String" resultType="springboot.project.dto.RoomDto">
-		select * from roomshare where memberid = #{memberid};
-	</select>
-	
-	<select id="mypageBoard" parameterType="map" resultType="springboot.project.dto.MypageDto">
-		select m.*, c.*, f.*, p.*, r.* from member m left OUTER join
-		communityboard c on m.memberid=c.memberid
-		left outer join fsboard f  on m.memberid = f.memberid
-		left outer join petcareboard p on m.memberid=p.memberid
-		left outer join roomshare r on m.memberid=r.memberid 
+	<select id="myComm" parameterType="String" resultType="springboot.project.dto.MypageCommDto">
+		select * from (
+    		select no as no, ccontent as ccontent, regdate as regdate from communitycomment where memberid = #{memberid}
+    		union all
+    		select fsno as no, FSCCONTENT as ccontent, regdate as regdate from fscomment where memberid = #{memberid}
+    		union all
+    		select pno as no, PCCONTENT as ccontent, PCREGDATE as regdate from petcarecomment where memberid = #{memberid}
+    		union all
+    		select ROOMNO as no, RSCONTENT as ccontent, RSDATE as regdate from roomsharecomment where memberid = #{memberid}
+    		) order by regdate desc
 	</select>
 	
 	<update id="updatePw" parameterType="springboot.project.dto.MemberDto">
