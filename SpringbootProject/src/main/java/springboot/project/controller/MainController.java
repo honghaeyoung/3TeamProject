@@ -3,6 +3,7 @@ package springboot.project.controller;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -13,16 +14,30 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import springboot.project.dto.BoardDto;
+import springboot.project.dto.CommDto;
+import springboot.project.dto.FoodboardDto;
+import springboot.project.dto.FsboardDto;
 import springboot.project.dto.MemberDto;
 import springboot.project.dto.MypageCommDto;
 import springboot.project.dto.MypageDto;
+import springboot.project.dto.PetcareDto;
+import springboot.project.dto.RoomCommentDto;
+import springboot.project.dto.RoomDto;
+import springboot.project.dto.RoomFileDto;
+import springboot.project.service.BoardService;
+import springboot.project.service.CommService;
+import springboot.project.service.FsboardService;
 import springboot.project.service.MemberService;
+import springboot.project.service.Petcareservice;
 import springboot.project.service.RoomService;
 
 @Controller
@@ -31,41 +46,52 @@ public class MainController {
 	@Autowired
 	MemberService service;
 	@Autowired
-	RoomService rs;
+	RoomService rservice;
+	@Autowired
+	BoardService cservice;
+	@Autowired
+	CommService c_service;
+	@Autowired
+	FsboardService fservice;
+	@Autowired
+	CommService f_service;
+	@Autowired
+	Petcareservice pservice;
+	
 	
 	@ModelAttribute("user")
 	public MemberDto getMemberDto() {
 		return new MemberDto();
 	}
 	
-	//¸ŞÀÎÆäÀÌÁö 
+	//ë©”ì¸í˜ì´ì§€ 
 	@GetMapping("/")
 	public String main(@ModelAttribute("user") MemberDto dto, Model m) {
-		m.addAttribute("roomlist", rs.mainRomm());
+		m.addAttribute("roomlist", rservice.mainRomm());
 		
 		return "index";
 	}
 	
-	//È¸¿ø°¡ÀÔ ¾à°üµ¿ÀÇ ÆäÀÌÁö
+	//íšŒì›ê°€ì… ì•½ê´€ë™ì˜ í˜ì´ì§€
 	@GetMapping("/joinform")
 	public String joinForm() {
 		return "member/joinform";
 	}
 	
-	//È¸¿ø°¡ÀÔ ÆäÀÌÁö
+	//íšŒì›ê°€ì… í˜ì´ì§€
 	@GetMapping("/insertform")
 	public String insertForm() {
 		return "member/insertform";
 	}
 	
-	//È¸¿ø°¡ÀÔ 
+	//íšŒì›ê°€ì… 
 	@PostMapping("/insert")
 	public String insertMember(MemberDto dto) {
 		service.insertMember(dto);
 		return "redirect:/loginform";
 	}
 	
-	//idÁßº¹Ã¼Å©
+	//idì¤‘ë³µì²´í¬
 	@GetMapping("/idchk")
 	@ResponseBody
 	public String idChk(String memberid) {
@@ -76,7 +102,7 @@ public class MainController {
 		}
 	
 	
-	//·Î±×ÀÎÆäÀÌÁö
+	//ë¡œê·¸ì¸í˜ì´ì§€
 	@GetMapping("/loginform")
 	public String loginForm(@ModelAttribute("user") MemberDto dto) {
 		if(dto.getMemberid() != null) {
@@ -84,7 +110,7 @@ public class MainController {
 		}
 		return "member/loginform";		
 	}
-	//·Î±×ÀÎ
+	//ë¡œê·¸ì¸
 	@PostMapping("/login")
 	public String login(@ModelAttribute("user") @Valid MemberDto dto, BindingResult error, Model m) {
 		String memberid = dto.getMemberid();
@@ -92,7 +118,7 @@ public class MainController {
 		
 		MemberDto resultDto = service.login(memberid,memberpw);
 		if(resultDto == null) {
-			error.reject("nocode", "·Î±×ÀÎ ½ÇÆĞ: ¾ÆÀÌµğ³ª ºñ¹Ğ¹øÈ£°¡ Æ²¸³´Ï´Ù");	
+			error.reject("nocode", "ë¡œê·¸ì¸ ì‹¤íŒ¨: ì•„ì´ë””ë‚˜ ë¹„ë°€ë²ˆí˜¸ê°€ í‹€ë¦½ë‹ˆë‹¤");	
 			return "member/loginform";
 		}else {
 			m.addAttribute("user", resultDto);
@@ -101,13 +127,13 @@ public class MainController {
 		//return "member/loginComplete";
 	}
 	
-	//¾ÆÀÌµğ Ã£±â ÆäÀÌÁö
+	//ì•„ì´ë”” ì°¾ê¸° í˜ì´ì§€
 	@GetMapping("/findidform")
 	public String findIdForm() {
 		return "member/findidform";
 	}
 	
-	//¾ÆÀÌµğ Ã£±â
+	//ì•„ì´ë”” ì°¾ê¸°
 	@PostMapping("/findid")
 	public String findId(MemberDto dto, Model model) {
 		MemberDto user = service.findId(dto);
@@ -121,13 +147,13 @@ public class MainController {
 		return "member/findidform";
 	}
 	
-	//ºñ¹Ğ¹øÈ£ Ã£±â ÆäÀÌÁö
+	//ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° í˜ì´ì§€
 	@GetMapping("/findpwform")
 	public String findPw() {
 		return "member/findpwform";
 	}
 	
-	//ºñ¹Ğ¹øÈ£ Ã£±â
+	//ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°
 	@PostMapping("/findpw")
 	public String findPw(MemberDto dto, Model model) {
 		MemberDto user = service.findPw(dto);
@@ -140,7 +166,7 @@ public class MainController {
 		}
 		return "member/findpwform";
 	}
-	//ºñ¹Ğ¹øÈ£ º¯°æ ¼º°ø½Ã ¼º°øÆäÀÌÁö·Î ÀÌµ¿
+	//ë¹„ë°€ë²ˆí˜¸ ë³€ê²½ ì„±ê³µì‹œ ì„±ê³µí˜ì´ì§€ë¡œ ì´ë™
 	@PostMapping("/updatepw")
 	public String updatePw(@RequestParam(value="updateid", defaultValue="", required=false) String id, MemberDto dto) {
 		dto.setMemberid(id);
@@ -149,18 +175,122 @@ public class MainController {
 		return "member/updatepw";
 	}
 	
-	//·Î±×¾Æ¿ô
+	//ë¡œê·¸ì•„ì›ƒ
 	@GetMapping("/logout")
 	public String logout(SessionStatus status) {
 		status.setComplete();
 		return "redirect:/";
 	}
 	
-	//¸¶ÀÌÆäÀÌÁö
+	//ë§ˆì´í˜ì´ì§€
 	@GetMapping("/mypage")
-	public String myPage(@ModelAttribute("user") MemberDto dto, Model m,HttpSession session) {
-		String id = (String)dto.getMemberid();
+	public String myPage(@ModelAttribute("user") MemberDto dto, Model m,HttpSession session, @RequestParam(name="p",defaultValue ="1") int page) {
+		String id = dto.getMemberid();
 		
+		int count = rservice.roomcount();
+		if(count > 0) {
+			int perPage = 5; //í•œ í˜ì´ì§€ì— ë³´ì¼ ê¸€ì˜ ê°¯ìˆ˜
+			int startRow = (page-1) * perPage +1;
+			int endRow = page * perPage;
+	
+			List<RoomDto> roomList = service.myRoomList(id,startRow, endRow);
+			
+			m.addAttribute("rList",roomList);
+		
+			int pageNum = 5; //í•œë²ˆì— ë³´ì¼ í˜ì´ì§€ ìˆ˜
+			int totalPages = count/perPage + (count%perPage > 0 ? 1:0); //ì „ì²´ í˜ì´ì§€ ìˆ˜
+			
+			int begin = (page -1) / pageNum * pageNum +1;
+			int end = begin + pageNum -1;
+			if(end > totalPages) {
+				end = totalPages;
+			}
+			m.addAttribute("begin", begin);
+			m.addAttribute("end", end);	
+			m.addAttribute("pageNum", pageNum);
+			m.addAttribute("totalPages", totalPages);
+		}
+		
+		m.addAttribute("count", count);
+		
+		int count1 = cservice.count();
+		if(count1 > 0) {
+		
+		int perPage = 5; // å ìˆë¦½ å ìˆì‚å ìŒëµ ç­Œìš‘ì˜™å ìˆí“  ç™°ê·£ë˜»ï¿½ëµ¬ ç–«ë€ì˜™å ìŒë²¥ æ¶ì‰ì˜™å ìˆë•¾
+		int startRow = (page - 1) * perPage + 1;
+		int endRow = page * perPage;
+		
+		List<BoardDto> boardList = service.myBoardList(id,startRow, endRow);
+		m.addAttribute("bList", boardList);
+
+		int pageNum = 5;
+		int totalPages = count1 / perPage + (count1 % perPage > 0 ? 1 : 0); //å ìŒìˆç­Œï½ì˜™ å ìˆì‚å ìŒëµ ç­Œìš‘ì˜™ å ìˆë•¾
+		
+		int begin = (page - 1) / pageNum * pageNum + 1;
+		int end = begin + pageNum -1;
+		if(end > totalPages) {
+			end = totalPages;
+		}
+		 m.addAttribute("begin", begin);
+		 m.addAttribute("end", end);
+		 m.addAttribute("pageNum", pageNum);
+		 m.addAttribute("totalPages", totalPages);
+		
+		}
+		m.addAttribute("count1", count1);
+		
+		int count2 = fservice.count();
+		if(count2 > 0) {
+		
+		int perPage = 5; // å ìˆë¦½ å ìˆì‚å ìŒëµ ç­Œìš‘ì˜™å ìˆí“  ç™°ê·£ë˜»ï¿½ëµ¬ ç–«ë€ì˜™å ìŒë²¥ æ¶ì‰ì˜™å ìˆë•¾
+		int startRow = (page - 1) * perPage + 1;
+		int endRow = page * perPage;
+		
+		List<FoodboardDto> boardList1 = service.myFsboardList(id,startRow, endRow);
+		m.addAttribute("fList", boardList1);
+
+		int pageNum = 5;
+		int totalPages = count2 / perPage + (count2 % perPage > 0 ? 1 : 0); //å ìŒìˆç­Œï½ì˜™ å ìˆì‚å ìŒëµ ç­Œìš‘ì˜™ å ìˆë•¾
+		
+		int begin = (page - 1) / pageNum * pageNum + 1;
+		int end = begin + pageNum -1;
+		if(end > totalPages) {
+			end = totalPages;
+		}
+		 m.addAttribute("begin", begin);
+		 m.addAttribute("end", end);
+		 m.addAttribute("pageNum", pageNum);
+		 m.addAttribute("totalPages", totalPages);
+		
+		}
+		m.addAttribute("count2", count2);
+		
+		int count3 = pservice.count();
+		if (count3 > 0) { // å¯ƒëš¯ë–†è‡¾ì‡±ì”  ï¿½ì—³ï¿½ë–ï§ï¿½
+
+			int perPage = 5; // ï¿½ë¸³ ï¿½ëŸ¹ï¿½ì” ï§ï¿½ï¿½ë¿‰ è¹‚ëŒì”ª æ¹²ï¿½ï¿½ì“½ åª›ï¿½ï¿½ë‹”
+			int startRow = (page - 1) * perPage + 1; // ï¿½ë–†ï¿½ì˜‰ä»¥ï¿½.
+			int endRow = page * perPage; // ï¿½ê±¹ ä»¥ï¿½.
+
+			List<PetcareDto> P_list = service.myPetList(id,startRow, endRow);// ï¿½ë–†ï¿½ì˜‰éºï¿½ï¿½ê½£ ï¿½ê±¹æºëš¯ï¿½ï¿½ì“½ list.
+			m.addAttribute("P_list", P_list);
+
+			int pageNum = 5;
+			int totalPages = count3 / perPage + (count3 % perPage > 0 ? 1 : 0); // ï¿½ìŸ¾ï§£ï¿½ ï¿½ëŸ¹ï¿½ì” ï§ï¿½ ï¿½ë‹”
+
+			int begin = (page - 1) / pageNum * pageNum + 1;
+			int end = begin + pageNum - 1;
+			if (end > totalPages) {
+				end = totalPages;
+			}
+			m.addAttribute("begin", begin);
+			m.addAttribute("end", end);
+			m.addAttribute("pageNum", pageNum);
+			m.addAttribute("totalPages", totalPages);
+
+		}
+		m.addAttribute("count3", count3);
+		/*
 		ArrayList<MypageDto> list = service.getBoardList(id);
 		if(list != null) {
 			m.addAttribute("check", 0);
@@ -175,43 +305,76 @@ public class MainController {
 			m.addAttribute("comm", clist);
 		}else {
 			m.addAttribute("check", 1);
-		}
+		}*/
 		
 		m.addAttribute("user", dto);
 		return "member/mypage";
 	}
 	
-	//È¸¿øÁ¤º¸º¯°æ ÆäÀÌÁö
+	/*@getMapping("/list/{no}")
+	public String roomdetail(@PathVariable int roomno,Model m,@ModelAttribute("user") MemberDto user, @PathVariable int no, @PathVariable int fsno) {
+		int a = rservice.countingRoom(roomno);
+		RoomDto dto = rservice.roomdetail(roomno);
+		if(dto.getRoomno() == roomno) {
+			List<RoomFileDto> images = rservice.roomdata(roomno);
+			List<RoomCommentDto> comment = rservice.rcommlist(roomno);
+			List<RoomCommentDto> recomment = rservice.recommlist(roomno);
+			m.addAttribute("room",dto);
+			m.addAttribute("images",images);
+			m.addAttribute("comments",comment);
+			m.addAttribute("recomments",recomment);
+			return "room/detail";
+		}
+		BoardDto bdto = cservice.boardOne(no);
+		if(bdto.getNo() == no) {
+			m.addAttribute("dto", bdto);
+			List<CommDto> cList = c_service.selectComm(no);
+			m.addAttribute("cList", cList);
+			return "board/content";
+		}
+		FsboardDto fdto = fservice.boardOne(fsno);
+		if(bdto.getNo() == fsno) {
+			m.addAttribute("dto", fdto);
+			List<CommDto> cList = f_service.selectComm(fsno);
+			m.addAttribute("cList", cList);
+			return "fsboard/content";
+		}
+		return "mypage";
+	}*/
+	
+	
+	
+	//íšŒì›ì •ë³´ë³€ê²½ í˜ì´ì§€
 	@GetMapping("/updateform")
 	public String updateForm(@ModelAttribute("user") MemberDto dto) {
 		return "member/updateform";
 	}
 	
-	//È¸¿øÁ¤º¸¼öÁ¤
+	//íšŒì›ì •ë³´ìˆ˜ì •
 	@PostMapping("/update")
 	public String update(@ModelAttribute("user") MemberDto dto) {
 		service.updateMember(dto);
 		return "member/mypage";
 	}
 	
-	//È¸¿øÅ»Åğ ¼º°ø
+	//íšŒì›íƒˆí‡´ ì„±ê³µ
 	@GetMapping("/deletecomplate")
 	public String deleteComplate() {
 		return "member/deletecomplate";
 	}
 	
-	//È¸¿ø Å»Åğ ÆäÀÌÁö
+	//íšŒì› íƒˆí‡´ í˜ì´ì§€
 	@GetMapping("deleteform")
 	public String deleteForm(@ModelAttribute("user") MemberDto dto) {
 		return "member/deleteform";
 	}
 	
-	//È¸¿øÅ»Åğ
+	//íšŒì›íƒˆí‡´
 	@PostMapping("/deletemember")
 	public String deleteMember(String memberpw, @ModelAttribute("user") @Valid MemberDto dto, BindingResult error, SessionStatus status) {
 		int i = service.deleteMember(memberpw, dto);
 		if(i == 0) {
-			error.reject("nocode","ºñ¹Ğ¹øÈ£°¡ Æ²¸³´Ï´Ù.");
+			error.reject("nocode","ë¹„ë°€ë²ˆí˜¸ê°€ í‹€ë¦½ë‹ˆë‹¤.");
 			return "member/deleteform";
 		}else {
 			status.setComplete();

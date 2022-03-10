@@ -53,6 +53,39 @@ PUBLIC "-//mybatis.org//DTD Mapper3.0//EN"
     		) order by regdate desc
 	</select>
 	
+	<select id="myRoomList" parameterType="map" resultType="springboot.project.dto.RoomDto">
+		<![CDATA[
+		select * from (select roomno, memberid, roomtitle, roomaddress, roomcontent, roomregdate, roomperiod, roomphone, roomdate, roomcno, roomstate,rownum r from (select * from roomshare where memberid = #{memberid} order by roomregdate desc) order by roomregdate desc) where r >= #{start} AND r <= #{end}
+		]]>
+	</select>
+	
+	<select id="myBoardList" parameterType="map" resultType="springboot.project.dto.BoardDto">
+		<![CDATA[
+		select * from
+		(select no, memberid, title, content, regdate, readcount, recommend, rownum r
+		from (select * from communityboard where memberid =#{memberid} order by regdate desc)
+		order by regdate desc)where r >= #{start} AND r <= #{end}
+ 		]]>
+	</select>
+	
+	<select id="myPetList" parameterType="map" resultType="springboot.project.dto.PetcareDto">
+		<![CDATA[
+		select * from
+ 		(select pno, memberid, pkind, pperiod, pprice, pcontent, pregdate, paddress, pcount, pphone, ptitle, pfilename, pfilepath, pfilesize, rownum r
+		 from (select * from petcareboard where memberid = #{memberid} order by pno desc)
+		 order by pno desc)where r >= #{start} AND r <= #{end}
+		]]>
+	</select>
+	
+	<select id="myFsboardList" parameterType="map" resultType="springboot.project.dto.FsboardDto">
+		<![CDATA[
+		select * from
+		(select fsno, memberid, fstitle, fscontent, regdate, fsreadcount, rownum r
+		from (select * from fsboard where memberid = #{memberid} order by regdate desc)
+		order by regdate desc)where r >= #{start} AND r <= #{end}
+ 		]]>
+	</select>
+	
 	<update id="updatePw" parameterType="springboot.project.dto.MemberDto">
 		update member set memberpw=#{memberpw} where memberid = #{memberid}
 	</update>

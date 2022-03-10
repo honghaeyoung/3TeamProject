@@ -2,6 +2,7 @@ package springboot.project.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.InternetAddress;
@@ -13,10 +14,14 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import springboot.project.dao.MemberDao;
+import springboot.project.dto.BoardDto;
 import springboot.project.dto.EmailVO;
+import springboot.project.dto.FoodboardDto;
 import springboot.project.dto.MemberDto;
 import springboot.project.dto.MypageCommDto;
 import springboot.project.dto.MypageDto;
+import springboot.project.dto.PetcareDto;
+import springboot.project.dto.RoomDto;
 
 @Service
 public class MemberService {
@@ -103,5 +108,33 @@ public class MemberService {
 		return dao.myComm(memberid);
 	}
 	
+	public List<RoomDto> myRoomList(String memberid ,int start, int end ){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("memberid", memberid);
+		map.put("start", start);
+		map.put("end", end);
+		return dao.myRoomList(map);
+	}
+	public List<BoardDto> myBoardList(String memberid ,int start, int end){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("memberid", memberid);
+		map.put("start", start);
+		map.put("end", end);
+		return dao.myBoardList(map);
+	}
+	public List<FoodboardDto> myFsboardList(String memberid ,int start, int end){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("memberid", memberid);
+		map.put("start", start);
+		map.put("end", end);
+		return dao.myFsboardList(map);
+	}
+	public List<PetcareDto> myPetList(String memberid ,int start, int end){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("memberid", memberid);
+		map.put("start", start);
+		map.put("end", end);
+		return dao.myPetList(map);
+	}
 	
 }

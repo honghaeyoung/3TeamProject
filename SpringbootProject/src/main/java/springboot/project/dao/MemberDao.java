@@ -2,13 +2,18 @@ package springboot.project.dao;
 
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import springboot.project.dto.BoardDto;
+import springboot.project.dto.FoodboardDto;
 import springboot.project.dto.MemberDto;
 import springboot.project.dto.MypageCommDto;
 import springboot.project.dto.MypageDto;
+import springboot.project.dto.PetcareDto;
+import springboot.project.dto.RoomDto;
 
 
 @Mapper
@@ -25,5 +30,9 @@ public interface MemberDao {
 		ArrayList<MypageDto> myBoard(String memberid);
 		ArrayList<MypageCommDto> myComm(String memberid);
 		
+		List<RoomDto> myRoomList(Map<String, Object> map);
+		List<BoardDto> myBoardList(Map<String, Object> map);
+		List<FoodboardDto> myFsboardList(Map<String, Object> map);
+		List<PetcareDto> myPetList(Map<String, Object> map);
 		
 }
