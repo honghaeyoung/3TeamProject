@@ -86,6 +86,22 @@ PUBLIC "-//mybatis.org//DTD Mapper3.0//EN"
  		]]>
 	</select>
 	
+	<select id="myRoomComm" parameterType="String" resultType="springboot.project.dto.RoomCommentDto">
+		select * from roomsharecomment  NATURAL JOIN roomshare where memberid = #{memberid}
+	</select>
+	
+	<select id="myBoardComm" parameterType="String" resultType="springboot.project.dto.CommDto">
+		select * from communitycomment NATURAL JOIN communityboard where memberid =#{memberid}
+	</select>
+	
+	<select id="myFsComm" parameterType="String" resultType="springboot.project.dto.FscommDto">
+		select * from fscomment NATURAL JOIN fsboard where memberid = #{memberid}
+	</select>
+	
+	<select id="myPetComm" parameterType="String" resultType="springboot.project.dto.PetcommentDto">
+		select * from fscomment NATURAL JOIN fsboard where memberid = #{memberid}
+	</select>
+	
 	<update id="updatePw" parameterType="springboot.project.dto.MemberDto">
 		update member set memberpw=#{memberpw} where memberid = #{memberid}
 	</update>

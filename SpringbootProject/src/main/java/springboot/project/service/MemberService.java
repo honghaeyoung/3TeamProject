@@ -15,12 +15,16 @@ import org.springframework.stereotype.Service;
 
 import springboot.project.dao.MemberDao;
 import springboot.project.dto.BoardDto;
+import springboot.project.dto.CommDto;
 import springboot.project.dto.EmailVO;
 import springboot.project.dto.FoodboardDto;
+import springboot.project.dto.FscommDto;
 import springboot.project.dto.MemberDto;
 import springboot.project.dto.MypageCommDto;
 import springboot.project.dto.MypageDto;
 import springboot.project.dto.PetcareDto;
+import springboot.project.dto.PetcommentDto;
+import springboot.project.dto.RoomCommentDto;
 import springboot.project.dto.RoomDto;
 
 @Service
@@ -135,6 +139,19 @@ public class MemberService {
 		map.put("start", start);
 		map.put("end", end);
 		return dao.myPetList(map);
+	}
+	
+	public List<RoomCommentDto> myRoomComm(String memberid){
+		return dao.myRoomComm(memberid);
+	}
+	public List<CommDto> myBoardComm(String memberid){
+		return dao.myBoardComm(memberid);
+	}
+	public List<FscommDto> myFsComm(String memberid){
+		return dao.myFsComm(memberid);
+	}
+	public List<PetcommentDto> myPetComm(String memberid){
+		return dao.myPetComm(memberid);
 	}
 	
 }

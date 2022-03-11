@@ -26,10 +26,12 @@ import springboot.project.dto.BoardDto;
 import springboot.project.dto.CommDto;
 import springboot.project.dto.FoodboardDto;
 import springboot.project.dto.FsboardDto;
+import springboot.project.dto.FscommDto;
 import springboot.project.dto.MemberDto;
 import springboot.project.dto.MypageCommDto;
 import springboot.project.dto.MypageDto;
 import springboot.project.dto.PetcareDto;
+import springboot.project.dto.PetcommentDto;
 import springboot.project.dto.RoomCommentDto;
 import springboot.project.dto.RoomDto;
 import springboot.project.dto.RoomFileDto;
@@ -57,6 +59,8 @@ public class MainController {
 	CommService f_service;
 	@Autowired
 	Petcareservice pservice;
+	
+	
 	
 	
 	@ModelAttribute("user")
@@ -290,6 +294,17 @@ public class MainController {
 
 		}
 		m.addAttribute("count3", count3);
+		
+		
+		List<RoomCommentDto> rc = service.myRoomComm(id);
+		List<CommDto> bc = service.myBoardComm(id);
+		List<FscommDto> fc = service.myFsComm(id);
+		List<PetcommentDto> pc = service.myPetComm(id);
+		
+		m.addAttribute("rc", rc);
+		m.addAttribute("bc", bc);
+		m.addAttribute("fc", fc);
+		m.addAttribute("pc", pc);
 		/*
 		ArrayList<MypageDto> list = service.getBoardList(id);
 		if(list != null) {
