@@ -72,6 +72,13 @@ public class MemberService {
 
 	}
 	
+	public int userCount(String memberid, String memberpw) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("memberid", memberid);
+		map.put("memberpw", memberpw);
+		return dao.userCount(map);
+	}
+	
 	public MemberDto login(String memberid,String memberpw) {
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("memberid", memberid);

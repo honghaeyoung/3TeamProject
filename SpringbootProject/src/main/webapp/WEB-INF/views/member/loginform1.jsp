@@ -1,13 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>네이버 로그인</title>
-	<style>
-	:root{
+	<title>로그인</title>
+<style>
+:root{
 	--body-background-color: #f5f6f7;
 	--font-color: #4e4e4e;
 	--border-gray-color : #dadada;
@@ -30,24 +29,27 @@ body{
 	display:flex;
 	flex-direction:column;
 	align-items:center;
-	margin-top: 21px;
+	margin-top: 100px;
 }
 .main-container .main-wrap{
 	width:768px;
-	
 
 }
 .main-container .main-wrap .sel-lang-wrap .lang-select
 {
 	width: 96px;
-	height: 100px;
+	height: 30px;
 	color: var(--font-color);
 	border: solid 1px var(--border-gray-color);
 }
 .main-container .main-wrap .logo-wrap{
 	padding-top:55px;
 }
-
+.main-container .main-wrap .logo-wrap img
+{
+	width: 231px;
+	height: 44px;
+}
 
 .main-container .main-wrap header .sel-lang-wrap{
 	display:flex;
@@ -169,6 +171,15 @@ body{
 	padding-top: 10px;
 
 }
+footer{
+   
+	padding-top: 95px;
+	padding-bottom: 15px;
+
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	width:768px;
 
 
 
@@ -182,24 +193,38 @@ body{
 
 
 }
+footer .copyright-wrap span img{
+	width: 59px;
+	
+	height: 11px;
+}
+footer .copyright-wrap span{
+	font-size: 13px;
+	line-height: 15px;
+}
 ul li {list-style-type: none; float: left; margin-left: 45px;
 }
 .errors{
 text-align:center;
 color: red;
 }
-.logo1{
-text-align: center;
-color: black;
-}
-	</style>
+a:link { color: red; text-decoration: none;}
+a:visited { color: black; text-decoration: none;}
+a:hover { color: black; text-decoration: underline;}
+</style>
 	<script src="https://kit.fontawesome.com/51db22a717.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<c:import url="/WEB-INF/views/include/top.jsp" />
 	<div class="main-container">
 		<div class="main-wrap">
-		<h2 class="logo1">혼사모</h2>
+		<header>
+			<div class="sel-lang-wrap">
+				
+			</div>
+			<div class="logo-wrap">
+				<h1><a target="_blank" href="/">혼사모</a></h1>
+			</div>
+		</header>
 		<form:form action = "login" method ="post" modelAttribute ="user">
 		<section class="login-input-section-wrap">
 			<div class="login-input-wrap">	
@@ -216,15 +241,19 @@ color: black;
 			</div>
 			<div class="login-stay-sign-in">
 				<ul>
-				<li><a target="_blank" href="findidform">아이디찾기</a></li>
+				<li><a target="_blank" href="findidform">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;아이디찾기</a></li>
 				<li><a target="_blank" href="findpwform">비밀번호찾기</a></li>
 				<li><a target="_blank" href="joinform">회원가입</a></li>
 				</ul>
-			</div>
+				</div>
 		</section>
-		
 		</form:form>
+		<footer>
+			<div class="copyright-wrap">
+			<span> Copyright 2022. Team3 all rights reserved.<br>김남준 김동희 안찬우 엄혜선 홍해영 현지은</span>
+			</div>
+		</footer>
 		</div>
 	</div>
-	<c:import url="/WEB-INF/views/include/bottom.jsp" />
 </body>
+</html>

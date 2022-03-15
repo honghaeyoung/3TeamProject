@@ -70,7 +70,7 @@ public class MainController {
 	
 	//메인페이지 
 	@GetMapping("/")
-	public String main(@ModelAttribute("user") MemberDto dto, Model m) {
+	public String main(@ModelAttribute("user") MemberDto dto, Model m,String id, String pw) {
 		m.addAttribute("roomlist", rservice.mainRomm());
 		
 		return "index";
@@ -112,18 +112,23 @@ public class MainController {
 		if(dto.getMemberid() != null) {
 			return "index";
 		}
-		return "member/loginform";		
+		return "member/loginform1";		
 	}
 	//로그인
 	@PostMapping("/login")
-	public String login(@ModelAttribute("user") @Valid MemberDto dto, BindingResult error, Model m) {
+	public String login(@ModelAttribute("user") @Valid MemberDto dto, BindingResult error, Model m,String id ,String pw) {
 		String memberid = dto.getMemberid();
 		String memberpw = dto.getMemberpw();
-		
+		int user = service.userCount(id,pw);
+		if(user == 0) {
+			m.addAttribute("member", 0);
+		}else {
+			m.addAttribute("member", 1);
+		}
 		MemberDto resultDto = service.login(memberid,memberpw);
 		if(resultDto == null) {
 			error.reject("nocode", "로그인 실패: 아이디나 비밀번호가 틀립니다");	
-			return "member/loginform";
+			return "member/loginform1";
 		}else {
 			m.addAttribute("user", resultDto);
 		}
