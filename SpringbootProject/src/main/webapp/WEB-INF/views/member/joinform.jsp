@@ -3,7 +3,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>회원가입 동의 약관</title>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
 <style type="text/css">
 * {
   box-sizing: border-box;
@@ -15,7 +16,7 @@ body {
 }
 
 body {
-  
+  display: flex;
   margin: 0;
   background-color: #f5f6f7;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -34,7 +35,7 @@ ul {
 
 .wrap .logo {
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .wrap .logo h1 {
@@ -83,15 +84,6 @@ label.required::after {
   content: "(필수)";
 }
 
-label.select::after {
-  margin-left: 4px;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 24px;
-  color: #0086ff;
-  content: "(선택)";
-}
-
 .terms__list .terms__content {
   height: 88px;
   overflow: auto;
@@ -134,14 +126,15 @@ label.select::after {
     width: auto;
   }
 }
-    </style>
+a:link { color: red; text-decoration: none;}
+a:visited { color: black; text-decoration: none;}
+a:hover { color: black; text-decoration: underline;}
+</style>
   </head>
 
   <body>
-
-  <c:import url="/WEB-INF/views/include/top.jsp" />
     <div class="wrap">
-      <div class="logo"><h1>혼사모</h1></div>
+      <div class="logo"><h1><a href="/">혼사모</a></h1></div>
       <div class="contents">
         <form action="insertform" method="get" id="form__wrap">
           <div class="terms__check__all">
@@ -166,9 +159,8 @@ label.select::after {
                 >
               </div>
               <div class="terms__content">
-                여러분을 환영합니다. 혼사모 서비스를 이용해
-                주셔서 감사합니다. 
-                
+               여러분을 환영합니다. 혼사모 서비스를 이용해
+                주셔서 감사합니다.
               </div>
             </li>
             <li class="terms__box">
@@ -185,7 +177,7 @@ label.select::after {
                 >
               </div>
               <div class="terms__content">
-                개인정보 
+                개인정보
               </div>
             </li>
             <li class="terms__box">
@@ -196,18 +188,22 @@ label.select::after {
                   id="allowPromotions"
                   value="allowPromotions"
                 />
-                <label for="allowPromotions" class="select">위치 정보이용 동의</label>
+                <label for="allowPromotions">위치 정보이용 동의</label>
               </div>
               <div class="terms__content">
                 위치정보
               </div>
             </li>
           </ul>
-          <button type="submit" class="next-button">확인</button>
+          <button type="submit" class="next-button" disabled>확인</button>
         </form>
       </div>
+      <footer style="text-align: center; padding-top: 30px; ">
+        <div class="copyright-wrap">
+        <span> Copyright 2022. Team3 all rights reserved.<br>김남준 김동희 안찬우 엄혜선 홍해영 현지은</span>
+        </div>
+      </footer>
     </div>
-    <c:import url="/WEB-INF/views/include/bottom.jsp" />
   </body>
   <script src="./checkBox.js"></script>
 </html>

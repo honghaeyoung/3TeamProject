@@ -112,7 +112,7 @@ public class MainController {
 		if(dto.getMemberid() != null) {
 			return "index";
 		}
-		return "member/loginform1";		
+		return "member/loginform";		
 	}
 	//로그인
 	@PostMapping("/login")
@@ -128,7 +128,7 @@ public class MainController {
 		MemberDto resultDto = service.login(memberid,memberpw);
 		if(resultDto == null) {
 			error.reject("nocode", "로그인 실패: 아이디나 비밀번호가 틀립니다");	
-			return "member/loginform1";
+			return "member/loginform";
 		}else {
 			m.addAttribute("user", resultDto);
 		}
