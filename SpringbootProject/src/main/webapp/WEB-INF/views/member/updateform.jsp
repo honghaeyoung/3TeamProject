@@ -6,220 +6,337 @@
 <head>
 <title>회원 정보 수정</title>
 <style>
-@import
-	url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap')
-	;
-</style>
-<style>
-hr {
-	width: 30%;
+body{
+    background-color: #f5f6f7;
 }
-
-h1 {
-	font-family: 'Dongle', sans-serif;
-	text-align: center;
-	margin-bottom: 40px;
+select{
+    width:85px;
+    height:25px;
+    outline: none;
+    background: #f5f6f7;
+    border: 1px solid #999;
 }
-
-.input {
-	width: 10%;
-	height: 15%;
-	font-family: 'Dongle', sans-serif;
-	font-size: 1em;
-	margin: auto;
+a{
+    color: black;
+    text-decoration: none;
 }
-
-.input1 {
-	width: 7%;
-	height: 15%;
-	font-family: 'Dongle', sans-serif;
-	font-size: 1em;
-	margin: auto;
-}
-
-.button_class {
-	margin: auto;
-	text-align: center;
-}
-
-.button_class>button {
-	font-family: 'Dongle', sans-serif;
-	font-size: 1em;
-}
-
-.input_field {
-	margin-top: 20px;
-	text-align: center;
-}
-
-#message {
-	font-family: 'Dongle', sans-serif;
-	font-size: 1em;
-}
-
-#id_msg {
-	font-family: 'Dongle', sans-serif;
-	font-size: 1em;
-}
-
-.radio_obj input[type="radio"] {
-        display: none;
-}
- 
-.radio_obj input[type="radio"] + span {
-    display: inline-block;
-    padding: 5px 5px;
-    border: 1px solid #dfdfdf;
-    background-color: #ffffff;
+.main{
     text-align: center;
+	margin-top: 20px;
+}
+input{
+    cursor: pointer
+}
+
+
+
+/*회원가입 부분*/
+.main-signup{
+    text-align: center;
+    width: 460px;
+    margin: auto;
+}
+h3{
+    margin:19px 0px 8px;
+    text-align: left;
+    font-size: 14px;
+    font-family: Dotum,'돋움',Helvetica,sans-serif;
+}
+.signup-input{
+    display:flex;
+    /* margin: 0px 10px 8px 10px; */
+    padding: 10px;
+    border: solid 1px #dadada;
+    background: #fff;
     cursor: pointer;
 }
- 
-.radio_obj input[type="radio"]:checked + span {
-    background-color: #113a6b;
-    color: #ffffff;
+.signup-input-c{
+    display:flex;
+    /* margin: 0px 10px 8px 10px; */
+    padding: 10px;
+    border: solid 1px #dadada;
+    background: #f5f6f7;
+    cursor: pointer;
+}
+.signup-input-c input{
+    background: #f5f6f7;
+}
+ #signup-pw, #signup-pww{
+    height: 29px;
+    border: none;
+    outline:none;
+    width:100%;
+}
+.signup-at{
+    top: 50%;
+    right: 13px;
+    width: 90px;
+    height: 24px;
+    margin-top: 1px;
+    
+}
+.pw-lock{
+    /* content: ''; */
+    /*display: inline-block;*/ 
+    top: 50%;
+    right: 13px;
+    width: 70px;
+    height: 24px;
+    margin-top: 1px;
+    
+    background-size: 125px 75px;
+    cursor: pointer;
+}
+.pww-lock{
+    /* content: ''; */
+    /* display: inline-block; */
+    top: 50%;
+    right: 13px;
+    width: 70px;
+    height: 24px;
+    margin-top: 1px;
+    
+    background-size: 125px 75px;
+    cursor: pointer;
 }
 
-.bt {
-  background: #120112;
-  background-image: -webkit-linear-gradient(top, #120112, #0a1b26);
-  background-image: -moz-linear-gradient(top, #120112, #0a1b26);
-  background-image: -ms-linear-gradient(top, #120112, #0a1b26);
-  background-image: -o-linear-gradient(top, #120112, #0a1b26);
-  background-image: linear-gradient(to bottom, #120112, #0a1b26);
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 10px;
-  padding: 5px 7px 8px 7px;
-  text-decoration: none;
-  text-align: right;
-  
+.signup-input-birth{
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 51px;
+    border: solid 1px #dadada;
+    padding: 10px;
+    background: #fff;
+    box-sizing: border-box;
 }
-
-.bt:hover {
-  background: #3cb0fd;
-  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-  text-decoration: none;
+#signup-birth-yy, #signup-birth-mm, #signup-birth-dd{
+    width: 113px;
+    height: 29px;
+    border: none;
+    outline:none;
 }
-
-
-
+#signup-name, #signup-gender, #signup-email, #signup-country, #signup-phone, #signup-cnum, #memberid, #address, #email, #ck_num{
+    width:100%;
+    height: 29px;
+    border: none;
+    outline:none;
+}
+#signup-gender{
+    background-color: white;
+}
+#signup-country{
+    background-color: white;
+}
+#signup-birth-mm{
+    background-color: white;
+}
+/*본인 확인 이메일*/
+.choice{
+    display: flex;
+}
+.choice span{
+    margin-top: 20px;
+    color: rgb(150, 150, 150);
+    font-size: 13px;
+    font-family: Dotum,'돋움',Helvetica,sans-serif;
+}
+/*회원가입버튼박스*/
+.signup-btn-wrap{
+    height: 52px;
+    line-height: 55px;
+    margin: 10px 0px 50px 0px;
+    border: solid 1px rgba(0,0,0,.1);
+    background-color: black;
+    color: #fff;
+    cursor: pointer;
+}
+/*회원가입버튼*/
+#signup-btn{
+    width:100px;
+    background-color: black;
+    border: none;
+    color:#fff;
+    font-size: 18px;
+    outline:none;
+    cursor: pointer;
+}
+/*인증번호버튼박스*/
+.cnum-btn-wrap{
+    height: 52px;
+    line-height: 55px;
+    margin: 10px 0px 0px 10px;
+    border: solid 1px rgba(0,0,0,.1);
+    background-color: black;
+    color: #fff;
+    cursor: pointer;
+}
+/*인증번호버튼*/
+#cnum-btn, #addresscheck, #mail_ck, #ck_b{
+    width:115px;
+    background-color: black;
+    border: none;
+    color:#fff;
+    font-size: 15px;
+    outline:none;
+    cursor: pointer;
+}
+#id_check{
+    width:115px;
+    background-color: black;
+    border: none;
+    color:#fff;
+    font-size: 15px;
+    outline:none;
+    cursor: pointer;
+}
+a:link { color: red; text-decoration: none;}
+a:visited { color: black; text-decoration: none;}
+a:hover { color: black; text-decoration: underline;}
 </style>
+<script>
+function birth_keyup(obj){
+	   let birth_len = obj.value.length;
+	   if (event.keyCode==8){
+	       obj.value = obj.value.slice(0,birth_len)
+	       return 0;
+	   }else if(birth_len==4 || birth_len==7){
+	       obj.value += '-';
+	   }
+	}
+</script>
 </head>
 <body>
-<c:import url="/WEB-INF/views/include/top.jsp" />
-<h1>${user.memberid}님의 정보를 수정합니다.</h1>
-<form action="update" method="post" id="updateform" class="updateform">
-	<div class=input_field>
-			<label for="memberid" class="input">아이디</label>&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="text" name="memberid" id="memberid" class="input"
-				placeholder="${user.memberid }" disabled> 
-				
-				
-			<br>
-			<hr>
-		</div>
-		
-		
-		<div class=input_field>
-			<label for="memberpw" class="input">비밀번호</label>&nbsp;&nbsp;&nbsp;
-			<input type="password" name="memberpw" id="memberpw" class="input"
-				placeholder="${user.memberpw }" required><br> <br>
-			<hr>
-			<br> 
-				<label for="password1" class="input">비밀번호확인</label>
-			<input type="password" name="password1" id="password1" class="input"
-				placeholder="${user.memberpw }" required><br> <span id='message'></span><br>
-			<hr>
-		</div>
-		
-		
-		<div class=input_field>
-			<label for="name" class="input">이름 </label>&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="text" name="name" id="name" class="input"
-				placeholder="${user.name }" required><br> 
-			<hr>
-		</div>
-		
-		<div class=input_field>
-			<label for="phone" class="input">전화번호 </label>&nbsp;
-			<input type="tel" name="phone" class="input" oninput="autoHyphen(this)" maxlength="13" placeholder="${user.phone}" required><br>
-			<hr>
-		</div>
-		
-		<div class=input_field>
-		<label for="gender" class="input">성별</label>&nbsp;&nbsp;
-		<label class="radio_obj">
-    <input type="radio" name="gender" value="남자" class="input">
-    <span>남자</span>
-	</label>
- 
-	<label class="radio_obj">
-    <input type="radio" name="gender" value="여자" class="input">
-    <span>여자</span>
-</label>
-	<hr>
+<div class="main-signup">
+        <!--웹페이지 상단-->
+        <header>
+            <!--LOGO-->
+            <div class="logo">
+                <h1><a href="/">혼사모</a></h1><br><h5>정보수정</h5>
+            </div>
+        </header>
+		<form action="update" method="post" id="updateform" class="updateform">
+        <!--회원가입 부분-->
+        <section class="signup-wrap">
+
+            <div>
+                <!--아이디,비번,비번재확인-->
+
+                <h3>아이디</h3>
+                <div style="display: flex;">
+                    <span class="signup-input" style="width:100%; margin: 10px 0px 0px 0px">
+                        <input id="memberid" type="text" name="memberid" required placeholder="${user.memberid }" disabled></input>
+                        <span class="signup-at" id="id_msg"></span>
+                    </span>
+                <span class="cnum-btn-wrap">
+                        <input type="button" id="id_check" value="아이디확인" disabled>
+                    </span>
+                </div>
+
+                <h3>비밀번호</h3>
+                <span class="signup-input">
+                    <input id="signup-pw" type="password" name="memberpw" required></input>
+                    <span class="pw-lock" id="message"></span>
+                </span>
+
+                <h3>비밀번호 재확인</h3>
+                <span class="signup-input">
+                    <input id="signup-pww" type="password" name="password1" required></input>
+                    <span class="pww-lock" id="message1"></span>
+                </span>
+
+            </div>
+
+            <div style="margin-top: 35px;">
+                <!--이름,생년월일,성별,이메일-->
+                <h3>이름</h3>
+                <span class="signup-input">
+                    <input id="signup-name" type="text" name="name" required></input>
+                </span>
+
+                <h3>생년월일</h3>
+                <span class="signup-input">
+                    <input id="signup-name" type="text" name="birthday" placeholder="ex 숫자만작성해주세요"  onkeyup="birth_keyup(this)" maxlength="10" required></input>
+                </span>
+                    
+                <h3>전화번호</h3>
+                <span class="signup-input">
+                    <input id="signup-name" type="text" name="phone" oninput="autoHyphen(this)" maxlength="13" required></input>
+                </span>
+
+                <h3>성별</h3>
+                <span class="signup-input">
+                    <select id="signup-gender" class="selectbox" name="gender" onchange="" required>
+                        <option value="gender">성별</option>
+                        <option value="남자">남자</option>
+                        <option value="여자">여자</option>
+                    </select>
+                </span>
+
+                <span class="choice">
+                    <h3>본인 확인 이메일</h3>
+                </span>
+                <div style="display: flex;">
+                    <span class="signup-input" style="width:100%; margin: 10px 0px 0px 0px">
+                        <input id="email" type="email" name="email" value="${user.email } "disabled></input>
+                    </span>
+                <span class="cnum-btn-wrap">
+                        <input type="button" id="mail_ck" value="메일 인증" disabled>
+                    </span>
 	
-</div>		
-		
-		<div class=input_field>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="address" class="input">주소</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="text" name="address" id="address" placeholder="${user.address }" class="input">
-			<input type="button" value="주소 찾기" class="bt"
-				name="addresscheck" id="addresscheck"> 
-				<br>
-				<label for="address1" class="input">상세주소</label>&nbsp;&nbsp;
-				<input type="text" name="address" id="address1" class="input"
-				placeholder="나머지 주소입력" required> <br>
-			<hr>
-			
-		</div>
-		
-		<div class=input_field>
-			<label for="email" class="input">이메일</label>&nbsp;&nbsp;&nbsp;
-			<input type="email" name="email" id="email" class="input"
-				value="${user.email } "disabled>
-	
-				 
-			<hr>
-		</div>
-		
-		
-		<div class=input_field>
-		<label for="birthday" class="input">생년월일</label>&nbsp;&nbsp;
-			<input type="date" name="birthday" id="birthday" placeholder="생년월일" class="input" required>&nbsp;<br>
-			<br>
-			<hr>
-		</div>
-		
-		<div class=input_field>
-		<label for="pet" class="input" style="text-indent:-30px;">반려동물</label>&nbsp;&nbsp;&nbsp;
-		<label class="radio_obj">
-    <input type="radio" name="pet" value="유" class="input" checked="checked" <c:if test="${user.pet eq '유'}">checked</c:if>>
-    <span>유</span>
-	</label>
- 	&nbsp;
-	<label class="radio_obj">
-    	<input type="radio" name="pet" value="무" class="input" <c:if test="${user.pet eq '무' }">checked</c:if>>
-    	<span>무</span>&nbsp;&nbsp;&nbsp;&nbsp;
-	</label>
-	<hr>
-	<br>
-</div>
-		
-		
-		
-		<div class="button_class">&nbsp;
-			<button type="submit" name="button" class="bt">완료</button>&nbsp;&nbsp;
-			<button type="reset" name="button" class="bt" onclick="history.back()">취소</button>
-		</div>
-		
-		
-	</form>
+            </div>
+				<div style="display: flex;">
+                    <span class="signup-input" style="width:100%; margin: 10px 0px 0px 0px">
+                        <input id="ck_num" type="text" placeholder="인증번호" disabled></input>
+                        <span class="signup-at" id="result"></span>
+                    </span>
+                <span class="cnum-btn-wrap">
+                        <input type="button" id="ck_b" value="인증확인"disabled>
+                    </span>
+                </div>
+            <div style="margin-top: 35px;">
+                <!--주소-->
+                <h3>주소</h3>
+                
+                <div style="display: flex;">
+                    <span class="signup-input" style="width:100%; margin: 10px 0px 0px 0px">
+                        <input id="address" type="text" name="address" placeholder="주소검색" required></input>
+                    </span>
+                    <span class="cnum-btn-wrap">
+                        <input type="button" id="addresscheck" name="addresscheck" value="주소찾기">
+                    </span>
+                </div>
+                
+                <span class="signup-input-c" style="margin-top: 10px;">
+                    <input id="signup-cnum" type="text" name="address" placeholder="상세주소"></input>
+                </span>
+            </div>
+            	<h3>반려동물</h3>
+                <span class="signup-input">
+                    <select id="signup-gender" class="selectbox" name="pet" onchange="" required>
+                        <option value="pet">반려동물</option>
+                        <option value="유"<c:if test="${user.pet eq '유'}">selected</c:if>>유</option>
+                        <option value="무">무</option>
+                    </select>
+                </span>
+
+            <div>
+                <!--가입하기-->
+                <div class="signup-btn-wrap">
+                    <button type="submit" id="signup-btn">가입하기</button>
+                </div>
+            </div>
+        </section>
+</form>
+        <!--저작권 정보-->
+        <footer>
+            <div class="copyright-wrap" style="font-size: 12px;">
+                <span>Copyright 2022. Team3 all rights reserved.<br>김남준 김동희 안찬우 엄혜선 홍해영 현지은</span>
+                
+            </div>
+        </footer>
+
+    </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -232,14 +349,7 @@ function addPost(){
     }).open();
 }    
 
-$(function(){
-	$("#updateform").submit(function(){
-		if(!$("#memberpw").val()){
-			alert("비밀번호를 입력해야 합니다.");
-			return false;
-		}
-	});
-})//ready
+
 
 const autoHyphen = (target) => {
 	 target.value = target.value
@@ -263,6 +373,29 @@ const autoHyphen = (target) => {
 
 	})
 </script>
-<c:import url="/WEB-INF/views/include/bottom.jsp" />
+<script>
+	//패스워드 일치 검사.
+	$(function() {
+		$("#signup-pww").on('blur', function() { //password1탭에 키보드를 치면 function 수행
+			if ($('#signup-pw').val() == $('#signup-pww').val()) {//password값과 password1의 값이 같다면,
+				$("#message").html('일치').css('color', 'black');  
+				$("#message1").html('일치').css('color', 'black'); //일치한다고 나타내기.
+			} else {
+				$("#message").html('불일치').css('color', 'red'); 
+				$("#message1").html('불일치').css('color', 'red'); //그 외의 경우에는 일치하지 않는다고 하며 false값 리턴. 
+				return false;
+			}
+		})//on
+
+	}) //ready
+
+</script>
+<script>
+const autoHyphen = (target) => {//전화번호 입력시 자동 - 
+	 target.value = target.value
+	   .replace(/[^0-9]/, '')
+	   .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+	}
+</script>
 </body>
 </html>

@@ -116,7 +116,7 @@ h3{
     border: none;
     outline:none;
 }
-#signup-name, #signup-gender, #signup-email, #signup-country, #signup-phone, #signup-cnum, #memberid, #address{
+#signup-name, #signup-gender, #signup-email, #signup-country, #signup-phone, #signup-cnum, #memberid, #address, #email, #ck_num{
     width:100%;
     height: 29px;
     border: none;
@@ -172,7 +172,7 @@ h3{
     cursor: pointer;
 }
 /*인증번호버튼*/
-#cnum-btn, #addresscheck{
+#cnum-btn, #addresscheck, #mail_ck, #ck_b{
     width:115px;
     background-color: black;
     border: none;
@@ -262,10 +262,10 @@ $(function(){
 	$("#ck_b").click(function(){
 		let ck_num = $("#ck_num").val();
 		if(ck_num == num){
-			$("#result").html("인증이 확인되었습니다.")
+			$("#result").html("인증완료").css('color','black');
 			$("#result").append("<input type='hidden' id='ck' value='1'>");
 		}else{
-			$("#result").html("인증 실패했습니다. 다시 확인하세요.");
+			$("#result").html("인증실패").css('color','red');;
 		}
 	})//이메일 인증번호 체크
 	$("#id_check").click(function(){
@@ -286,6 +286,15 @@ const autoHyphen = (target) => {//전화번호 입력시 자동 -
 	   .replace(/[^0-9]/, '')
 	   .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
 	}
+function birth_keyup(obj){
+    let birth_len = obj.value.length;
+    if (event.keyCode==8){
+        obj.value = obj.value.slice(0,birth_len)
+        return 0;
+    }else if(birth_len==4 || birth_len==7){
+        obj.value += '-';
+    }
+}
 </script>
 <script>
 	//주소 api
@@ -308,7 +317,7 @@ const autoHyphen = (target) => {//전화번호 입력시 자동 -
     <div class="main-signup">
         <!--웹페이지 상단-->
         <header>
-            <!--NAVER LOGO-->
+            <!--LOGO-->
             <div class="logo">
                 <h1><a href="/">혼사모</a></h1>
             </div>
@@ -323,7 +332,7 @@ const autoHyphen = (target) => {//전화번호 입력시 자동 -
                 <h3>아이디</h3>
                 <div style="display: flex;">
                     <span class="signup-input" style="width:100%; margin: 10px 0px 0px 0px">
-                        <input id="memberid" type="text" name="memberid"></input>
+                        <input id="memberid" type="text" name="memberid" required></input>
                         <span class="signup-at" id="id_msg"></span>
                     </span>
                 <span class="cnum-btn-wrap">
@@ -333,13 +342,13 @@ const autoHyphen = (target) => {//전화번호 입력시 자동 -
 
                 <h3>비밀번호</h3>
                 <span class="signup-input">
-                    <input id="signup-pw" type="password" name="memberpw"></input>
+                    <input id="signup-pw" type="password" name="memberpw" required></input>
                     <span class="pw-lock" id="message"></span>
                 </span>
 
                 <h3>비밀번호 재확인</h3>
                 <span class="signup-input">
-                    <input id="signup-pww" type="password" name="password1"></input>
+                    <input id="signup-pww" type="password" name="password1" required></input>
                     <span class="pww-lock" id="message1"></span>
                 </span>
 
@@ -349,22 +358,22 @@ const autoHyphen = (target) => {//전화번호 입력시 자동 -
                 <!--이름,생년월일,성별,이메일-->
                 <h3>이름</h3>
                 <span class="signup-input">
-                    <input id="signup-name" type="text" name="name"></input>
+                    <input id="signup-name" type="text" name="name" required></input>
                 </span>
 
                 <h3>생년월일</h3>
                 <span class="signup-input">
-                    <input id="signup-name" type="text" name="birthday" placeholder="ex 19990120"></input>
+                    <input id="signup-name" type="text" name="birthday" placeholder="ex 숫자만작성해주세요" required onkeyup="birth_keyup(this)" maxlength="10"></input>
                 </span>
                     
                 <h3>전화번호</h3>
                 <span class="signup-input">
-                    <input id="signup-name" type="text" name="phone" oninput="autoHyphen(this)" maxlength="13"></input>
+                    <input id="signup-name" type="text" name="phone" oninput="autoHyphen(this)" maxlength="13" required></input>
                 </span>
 
                 <h3>성별</h3>
                 <span class="signup-input">
-                    <select id="signup-gender" class="selectbox" name="gender" onchange="">
+                    <select id="signup-gender" class="selectbox" name="gender" onchange="" required>
                         <option value="gender">성별</option>
                         <option value="남자">남자</option>
                         <option value="여자">여자</option>
@@ -376,23 +385,29 @@ const autoHyphen = (target) => {//전화번호 입력시 자동 -
                 </span>
                 <div style="display: flex;">
                     <span class="signup-input" style="width:100%; margin: 10px 0px 0px 0px">
-                        <input id="signup-phone" type="email"></input>
+                        <input id="email" type="email" name="email" required></input>
                     </span>
                 <span class="cnum-btn-wrap">
-                        <button id="cnum-btn">인증번호 받기</button>
+                        <input type="button" id="mail_ck" value="메일 인증">
                     </span>
 	
             </div>
-				<span class="signup-input-c" style="margin-top: 10px;">
-                    <input id="signup-cnum" type="text" placeholder="인증번호 입력하세요"></input>
-                </span>
+				<div style="display: flex;">
+                    <span class="signup-input" style="width:100%; margin: 10px 0px 0px 0px">
+                        <input id="ck_num" type="text" placeholder="인증번호" required></input>
+                        <span class="signup-at" id="result"></span>
+                    </span>
+                <span class="cnum-btn-wrap">
+                        <input type="button" id="ck_b" value="인증확인">
+                    </span>
+                </div>
             <div style="margin-top: 35px;">
                 <!--주소-->
                 <h3>주소</h3>
                 
                 <div style="display: flex;">
                     <span class="signup-input" style="width:100%; margin: 10px 0px 0px 0px">
-                        <input id="address" type="text" name="address" placeholder="주소검색"></input>
+                        <input id="address" type="text" name="address" placeholder="주소검색" required></input>
                     </span>
                     <span class="cnum-btn-wrap">
                         <input type="button" id="addresscheck" name="addresscheck" value="주소찾기">
@@ -405,7 +420,7 @@ const autoHyphen = (target) => {//전화번호 입력시 자동 -
             </div>
             	<h3>반려동물</h3>
                 <span class="signup-input">
-                    <select id="signup-gender" class="selectbox" name="pet" onchange="">
+                    <select id="signup-gender" class="selectbox" name="pet" onchange="" required>
                         <option value="pet">반려동물</option>
                         <option value="유">유</option>
                         <option value="무">무</option>
@@ -415,7 +430,7 @@ const autoHyphen = (target) => {//전화번호 입력시 자동 -
             <div>
                 <!--가입하기-->
                 <div class="signup-btn-wrap">
-                    <button id="signup-btn">가입하기</button>
+                    <button type="submit" id="signup-btn">가입하기</button>
                 </div>
             </div>
         </section>

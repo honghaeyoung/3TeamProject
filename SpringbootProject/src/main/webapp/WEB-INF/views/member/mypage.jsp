@@ -5,49 +5,19 @@
 <html>
 <head>
 <title>title</title>
-<!-- Bootstrap cdn 설정 -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-	crossorigin="anonymous"></script>
-<script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>>
-<style type="text/css">
-.bt1{
-	text-align:center;
-	margin: auto;
-}
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
-.bt {
-  background: #120112;
-  background-image: -webkit-linear-gradient(top, #120112, #0a1b26);
-  background-image: -moz-linear-gradient(top, #120112, #0a1b26);
-  background-image: -ms-linear-gradient(top, #120112, #0a1b26);
-  background-image: -o-linear-gradient(top, #120112, #0a1b26);
-  background-image: linear-gradient(to bottom, #120112, #0a1b26);
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 10px;
-  padding: 5px 7px 8px 7px;
-  text-decoration: none;
-  text-align: center;
-  
-}
-
-.bt:hover {
-  background: #3cb0fd;
-  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-  text-decoration: none;
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<style>
+#tab{
+	
+	padding-left: 380px;
+	padding-right: 380px;
 }
 table.type04 {
   border-collapse: separate;
@@ -72,26 +42,25 @@ width: 350px;
   vertical-align: top;
   border-bottom: 1px solid #ccc;
 }
+
+
+
 </style>
 </head>
 <body>
 <c:import url="/WEB-INF/views/include/top.jsp" />
-<!-- Tab을 구성할 영역 설정-->
-<div style="margin:10px;">
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-  <li class="nav-item active" role="presentation">
-    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">내정보</button>
-  </li>
-  <li class="nav-item active" role="presentation">
-    <button class="nav-link" id="boardlist-tab" data-bs-toggle="tab" data-bs-target="#boardlist" type="button" role="tab" aria-controls="boardlist" aria-selected="false">내가 쓴 게시글</button>
-  </li>
-  <li class="nav-item active" role="presentation">
-    <button class="nav-link" id="commlist-tab" data-bs-toggle="tab" data-bs-target="#commlist" type="button" role="tab" aria-controls="commlist" aria-selected="false">내가 쓴 댓글</button>
-  </li>
+<div id="tab">
+<!-- tabs link -->
+<ul class="nav nav-tabs" id="rowTab">
+    <li class="active"><a href="#info" data-toggle="tab">내정보</a></li>
+    <li><a href="#myBoard" data-toggle="tab">내가 쓴 게시글</a></li>
+    <li><a href="#myComm" data-toggle="tab">내가 쓴 댓글</a></li>
 </ul>
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-  <div class="body">
+<!-- end: tabs link -->
+</div>
+<div class="tab-content" id="tab">
+    <div class="tab-pane active" id="info">
+        <div class="body">
 <table class="type04">
 <tr>
 <th scope="row">아이디</th> <td>${user.memberid}</td></tr>
@@ -116,334 +85,35 @@ width: 350px;
 <button type="button" onclick="location.href='updateform'" class="bt">회원 정보 수정</button>
 <button type="button" onclick="location.href='deleteform'" class="bt">회원 탈퇴</button>
 </div>
+    </div>
 </div>
-  </div>
-  <div class="tab-pane fade" id="boardlist" role="tabpanel" aria-labelledby="boardlist-tab">
- 	<div>
- 	<!--  
- 	<details>
-  <summary>같이 살아요 작성글</summary>
-  <div>
-    같이살아요
- 	<c:if test="${count != 0 }">
-			<table>
-				<tr>
-					<th>글번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					
-				</tr>
-				<c:forEach items="${rList}" var="rooms">
-					<tr>
-						<td>${rooms.roomno}</td>
-						<td><a href ="/room/list/${rooms.roomno}">${rooms.roomtitle}</a></td>
-						<td>${rooms.memberid }</td>
-						<td><fmt:formatDate value="${rooms.roomregdate }" dateStyle="short"/> </td>
-						
-					</tr>
-				</c:forEach>
-			</table>
-			<div id="page">
-				<c:if test="${begin > pageNum }">
-					<a href="mypage?p=${begin-1 }">[이전]</a>
-				</c:if>
-				<c:forEach begin="${begin }" end="${end}" var="i">
-					<a href="mypage?p=${i}">${i}</a>
-				</c:forEach>
-				<c:if test="${end < totalPages }">
-					<a href="mypage?p=${end+1}">[다음]</a>
-				</c:if>
-			</div>
+    <div class="tab-pane" id="myBoard">
+        tab data here...b
+    </div>
 
-		</c:if>
-		<c:if test="${count == 0 }">
-	아직 입력한 글이 없습니다.
-</c:if>
-</div>
+    <div class="tab-pane" id="myComm">
+        tab data here...c
+    </div>
 
-</details>-->
- 	같이살아요
- 	<c:if test="${count != 0 }">
-			<table>
-				<tr>
-					<th>글번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					
-				</tr>
-				<c:forEach items="${rList}" var="rooms">
-				
-					<tr>
-						<td><a href ="/room/list/${rooms.roomno}"style="color: black; text-decoration: none;">${rooms.roomno}</a></td>
-						<td><a href ="/room/list/${rooms.roomno}"style="color: black; text-decoration: none;">${rooms.roomtitle}</a></td>
-						<td><a href ="/room/list/${rooms.roomno}"style="color: black; text-decoration: none;">${rooms.memberid }</a></td>
-						<td><a href ="/room/list/${rooms.roomno}"style="color: black; text-decoration: none;"><fmt:formatDate value="${rooms.roomregdate }" dateStyle="short"/></a> </td>
-						
-					</tr>
-					
-				</c:forEach>
-			</table>
-			<div id="page">
-				<c:if test="${begin > pageNum }">
-					<a href="mypage?p=${begin-1 }">[이전]</a>
-				</c:if>
-				<c:forEach begin="${begin }" end="${end}" var="i">
-					<a href="mypage?p=${i}">${i}</a>
-				</c:forEach>
-				<c:if test="${end < totalPages }">
-					<a href="mypage?p=${end+1}">[다음]</a>
-				</c:if>
-			</div>
-
-		</c:if>
-		<c:if test="${count == 0 }">
-	아직 입력한 글이 없습니다.
-</c:if>
-</div>
-<div>
-자유게시판
-<c:if test="${count1 != 0 }">
-			<table>
-				<tr>
-					<th>글번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					
-				</tr>
-				<c:forEach items="${bList}" var="blist">
-					<tr>
-						<td>${blist.no}</td>
-						<td><a href ="content/${blist.no}"style="color: black; text-decoration: none;">${blist.title}</a></td>
-						<td>${blist.memberid }</td>
-						<td><fmt:formatDate value="${blist.regdate }" dateStyle="short"/> </td>
-						
-					</tr>
-				</c:forEach>
-			</table>
-			<div id="page">
-				<c:if test="${begin > pageNum }">
-					<a href="mypage?p=${begin-1 }">[이전]</a>
-				</c:if>
-				<c:forEach begin="${begin }" end="${end}" var="i">
-					<a href="mypage?p=${i}">${i}</a>
-				</c:forEach>
-				<c:if test="${end < totalPages }">
-					<a href="mypage?p=${end+1}">[다음]</a>
-				</c:if>
-			</div>
-
-		</c:if>
-		<c:if test="${count1 == 0 }">
-	아직 입력한 글이 없습니다.
-</c:if>
-</div>
-
-<div>
-	같이먹어요
-	<c:if test="${count2 != 0 }">
-			<table>
-				<tr>
-					<th>글번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					
-				</tr>
-				<c:forEach items="${fList}" var="flist">
-					<tr>
-						<td>${flist.fsno}</td>
-						<td><a href ="content/${flist.fsno}"style="color: black; text-decoration: none;">${flist.fstitle}</a></td>
-						<td>${flist.memberid }</td>
-						<td><fmt:formatDate value="${flist.regdate }" dateStyle="short"/> </td>
-						
-					</tr>
-				</c:forEach>
-			</table>
-			<div id="page">
-				<c:if test="${begin > pageNum }">
-					<a href="mypage?p=${begin-1 }">[이전]</a>
-				</c:if>
-				<c:forEach begin="${begin }" end="${end}" var="i">
-					<a href="mypage?p=${i}">${i}</a>
-				</c:forEach>
-				<c:if test="${end < totalPages }">
-					<a href="mypage?p==${end+1}">[다음]</a>
-				</c:if>
-			</div>
-
-		</c:if>
-		<c:if test="${count2 == 0 }">
-	아직 입력한 글이 없습니다.
-</c:if>
-</div>
-<div>
-같이키워요
-<c:if test="${count3 != 0 }">
-			<table>
-				<tr>
-					<th>글번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					
-				</tr>
-				<c:forEach items="${P_list}" var="plist">
-					<tr>
-						<td>${plist.pno}</td>
-						<td><a href ="content/${plist.pno}"style="color: black; text-decoration: none;">${plist.ptitle}</a></td>
-						<td>${plist.memberid }</td>
-						<td><fmt:formatDate value="${plist.pregdate }" dateStyle="short"/> </td>
-						
-					</tr>
-				</c:forEach>
-			</table>
-			<div id="page">
-				<c:if test="${begin > pageNum }">
-					<a href="mypage?p=${begin-1 }">[이전]</a>
-				</c:if>
-				<c:forEach begin="${begin }" end="${end}" var="i">
-					<a href="mypage?p=${i}">${i}</a>
-				</c:forEach>
-				<c:if test="${end < totalPages }">
-					<a href="mypage?p=${end+1}">[다음]</a>
-				</c:if>
-			</div>
-
-		</c:if>
-		<c:if test="${count3 == 0 }">
-	아직 입력한 글이 없습니다.
-</c:if>
- 	</div>
- 	<!--  
- 	<c:if test="${check == 0}">
- 	<table>
- 		<thead>
- 			<tr><th>글번호</th><th>제목</th><th>작성일</th></tr>
- 		</thead>
- 		<tbody>
- 		
- 		<c:forEach var="list" items="${list }">
- 			<tr>
- 				<td><a href="/list/${list.no}"><c:out value="${list.no }"/></a></td>
- 				<td><c:out value="${list.title}"/></td>
- 				<td><fmt:formatDate value="${list.regdate }" dateStyle="short"/>
- 				</tr>
- 				</c:forEach>
- 				
- 		</tbody>	
- 	</table>
- 		</c:if>   
- 		-->
- 	
-  </div>
-  <div class="tab-pane fade" id="commlist" role="tabpanel" aria-labelledby="commlist-tab">
-  			같이살아요<table>
- 		<thead>
- 			<tr><th>글번호</th><th>댓글내용</th><th>작성일</th></tr>
- 		</thead>
- 		<tbody>
- 		<c:forEach var="rc" items="${rc }">
- 			<tr>
- 				<td><a href="/room/list/${rc.roomno}">${rc.roomno }</a></td>
-
- 				<td>${rc.rscontent }</td>
- 				<td><fmt:formatDate value="${rc.rsdate }" dateStyle="short"/>
- 				</tr>
- 				</c:forEach>
- 				
- 		</tbody>	
- 	</table>
- 		자유게시판
- 		<table>
- 		<thead>
- 			<tr><th>글번호</th><th>댓글내용</th><th>작성일</th></tr>
- 		</thead>
- 		<tbody>
- 		<c:forEach var="bc" items="${bc }">
- 			<tr>
- 				<td><a href="/content/${bc.no}">${bc.no }</a></td>
-
- 				<td>${bc.content }</td>
- 				<td><fmt:formatDate value="${bc.regdate }" dateStyle="short"/>
- 				</tr>
- 				</c:forEach>
- 				
- 		</tbody>	
- 	</table>
- 		같이 먹어요
- 		<table>
- 		<thead>
- 			<tr><th>글번호</th><th>댓글내용</th><th>작성일</th></tr>
- 		</thead>
- 		<tbody>
- 		<c:forEach var="fc" items="${fc }">
- 			<tr>
- 				<td><a href="/content/${fc.fsno}">${fc.fsno }</a></td>
-
- 				<td>${fc.fsccontent }</td>
- 				<td><fmt:formatDate value="${fc.regdate }" dateStyle="short"/>
- 				</tr>
- 				</c:forEach>
- 				
- 		</tbody>	
- 	</table>
-  			같이 키워요
- 		<table>
- 		<thead>
- 			<tr><th>글번호</th><th>댓글내용</th><th>작성일</th></tr>
- 		</thead>
- 		<tbody>
- 		<c:forEach var="pc" items="${pc }">
- 			<tr>
- 				<td><a href="/content/${pc.pno}">${pc.pno }</a></td>
-
- 				<td>${pc.pccontent }</td>
- 				<td><fmt:formatDate value="${pc.pcregdate }" dateStyle="short"/>
- 				</tr>
- 				</c:forEach>
- 				
- 		</tbody>	
- 	</table>
-  			<!--  
-  			<table>
- 		<thead>
- 			<tr><th>글번호</th><th>내용</th><th>작성일</th></tr>
- 		</thead>
- 		<tbody>
- 		<c:forEach var="comm" items="${comm }">
- 			<tr>
- 				<td><a href=""><c:out value="${comm.no }"/></a></td>
- 				<td><c:out value="${comm.ccontent}"/></td>
- 				<td><fmt:formatDate value="${comm.regdate }" dateStyle="short"/>
- 				</tr>
- 				</c:forEach>
- 				
- 		</tbody>	
- 	</table>
- 	-->
-  </div>
-</div>
-
-
-
+   
 </div>
 
 <c:import url="/WEB-INF/views/include/bottom.jsp" />
 </body>
 <script>
+$('a[data-toggle="tab"]').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+});
 
-var firstTabEl = document.querySelector('#myTab li:last-child button')
-var firstTab = new bootstrap.Tab(firstTabEl)
+$('a[data-toggle="tab"]').on("shown.bs.tab", function (e) {
+    var id = $(e.target).attr("href");
+    localStorage.setItem('selectedTab', id)
+});
 
-firstTab.show()
-
- var someTabTriggerEl = document.querySelector('#someTabTrigger')
-  var tab = new bootstrap.Tab(someTabTriggerEl)
-
-  tab.show()
+var selectedTab = localStorage.getItem('selectedTab');
+if (selectedTab != null) {
+    $('a[data-toggle="tab"][href="' + selectedTab + '"]').tab('show');
+}
 </script>
-
 </html>
