@@ -35,14 +35,22 @@ public interface MemberDao {
 		ArrayList<MypageDto> myBoard(String memberid);
 		ArrayList<MypageCommDto> myComm(String memberid);
 		
+		int roomCount(String memberid);
 		List<RoomDto> myRoomList(Map<String, Object> map);
+		int boardCount(String memberid);
 		List<BoardDto> myBoardList(Map<String, Object> map);
+		int fsCount(String memberid);
 		List<FoodboardDto> myFsboardList(Map<String, Object> map);
+		int petCount(String memberid);
 		List<PetcareDto> myPetList(Map<String, Object> map);
 		
-		List<RoomCommentDto> myRoomComm(String memberid);
-		List<CommDto> myBoardComm(String memberid);
-		List<FscommDto> myFsComm(String memberid);
-		List<PetcommentDto> myPetComm(String memberid);
+		int roomCommCount(String memberid);
+		List<RoomCommentDto> myRoomComm(Map<String, Object> map);
+		int boardCommCount(String memberid);
+		List<CommDto> myBoardComm(Map<String, Object> map);
+		int fsCommCount(String memberid);
+		List<FscommDto> myFsComm(Map<String, Object> map);
+		int petCommCount(String memberid);
+		List<PetcommentDto> myPetComm(Map<String, Object> map);
 		
 }

@@ -56,10 +56,18 @@ PUBLIC "-//mybatis.org//DTD Mapper3.0//EN"
     		) order by regdate desc
 	</select>
 	
+	<select id="roomCount" parameterType="String" resultType="int">
+		select count(*) from roomshare where memberid=#{memberid}
+	</select>
+	
 	<select id="myRoomList" parameterType="map" resultType="springboot.project.dto.RoomDto">
 		<![CDATA[
 		select * from (select roomno, memberid, roomtitle, roomaddress, roomcontent, roomregdate, roomperiod, roomphone, roomdate, roomcno, roomstate,rownum r from (select * from roomshare where memberid = #{memberid} order by roomregdate desc) order by roomregdate desc) where r >= #{start} AND r <= #{end}
 		]]>
+	</select>
+	
+	<select id="boardCount" parameterType="String" resultType="int">
+		select count(*) from communityboard where memberid=#{memberid}
 	</select>
 	
 	<select id="myBoardList" parameterType="map" resultType="springboot.project.dto.BoardDto">
@@ -71,6 +79,10 @@ PUBLIC "-//mybatis.org//DTD Mapper3.0//EN"
  		]]>
 	</select>
 	
+	<select id="petCount" parameterType="String" resultType="int">
+		select count(*) from petcareboard where memberid=#{memberid}
+	</select>
+	
 	<select id="myPetList" parameterType="map" resultType="springboot.project.dto.PetcareDto">
 		<![CDATA[
 		select * from
@@ -78,6 +90,10 @@ PUBLIC "-//mybatis.org//DTD Mapper3.0//EN"
 		 from (select * from petcareboard where memberid = #{memberid} order by pno desc)
 		 order by pno desc)where r >= #{start} AND r <= #{end}
 		]]>
+	</select>
+	
+	<select id="fsCount" parameterType="String" resultType="int">
+		select count(*) from fsboard where memberid=#{memberid}
 	</select>
 	
 	<select id="myFsboardList" parameterType="map" resultType="springboot.project.dto.FsboardDto">
@@ -89,20 +105,56 @@ PUBLIC "-//mybatis.org//DTD Mapper3.0//EN"
  		]]>
 	</select>
 	
-	<select id="myRoomComm" parameterType="String" resultType="springboot.project.dto.RoomCommentDto">
-		select * from roomsharecomment  NATURAL JOIN roomshare where memberid = #{memberid}
+	<select id="roomCommCount" parameterType="String" resultType="int">
+		select count(*) from roomsharecomment where memberid=#{memberid}
 	</select>
 	
-	<select id="myBoardComm" parameterType="String" resultType="springboot.project.dto.CommDto">
-		select * from communitycomment NATURAL JOIN communityboard where memberid =#{memberid}
+	<select id="myRoomComm" parameterType="map" resultType="springboot.project.dto.RoomCommentDto">
+		<![CDATA[
+		select * from
+		(select roomno, memberid, rscontent, rsno, rsdate, rersno, rownum r
+		from (select * from roomsharecomment where memberid =#{memberid} order by rsdate desc)
+		order by rsdate desc)where r >= #{start} AND r <= #{end}
+ 		]]>
 	</select>
 	
-	<select id="myFsComm" parameterType="String" resultType="springboot.project.dto.FscommDto">
-		select * from fscomment NATURAL JOIN fsboard where memberid = #{memberid}
+	<select id="boardCommCount" parameterType="String" resultType="int">
+		select count(*) from communitycomment where memberid=#{memberid}
 	</select>
 	
-	<select id="myPetComm" parameterType="String" resultType="springboot.project.dto.PetcommentDto">
-		select * from fscomment NATURAL JOIN fsboard where memberid = #{memberid}
+	<select id="myBoardComm" parameterType="map" resultType="springboot.project.dto.CommDto">
+		<![CDATA[
+		select * from
+		(select no, memberid, ccontent, regdate, cno, crecommend, rownum r
+		from (select * from communitycomment where memberid =#{memberid} order by regdate desc)
+		order by regdate desc)where r >= #{start} AND r <= #{end}
+ 		]]>
+	</select>
+	
+	<select id="fsCommCount" parameterType="String" resultType="int">
+		select count(*) from fscomment where memberid=#{memberid}
+	</select>
+	
+	<select id="myFsComm" parameterType="map" resultType="springboot.project.dto.FscommDto">
+		<![CDATA[
+		select * from
+		(select fscno, memberid, fsccontent, regdate, fsno, rownum r
+		from (select * from fscomment where memberid =#{memberid} order by regdate desc)
+		order by regdate desc)where r >= #{start} AND r <= #{end}
+ 		]]>
+	</select>
+	
+	<select id="petCommCount" parameterType="String" resultType="int">
+		select count(*) from petcarecomment where memberid=#{memberid}
+	</select>
+	
+	<select id="myPetComm" parameterType="map" resultType="springboot.project.dto.PetcommentDto">
+		<![CDATA[
+		select * from
+		(select pno, memberid, pccontent, pcregdate, pcno, rownum r
+		from (select * from petcarecomment where memberid =#{memberid} order by pcregdate desc)
+		order by pcregdate desc)where r >= #{start} AND r <= #{end}
+ 		]]>
 	</select>
 	
 	<update id="updatePw" parameterType="springboot.project.dto.MemberDto">

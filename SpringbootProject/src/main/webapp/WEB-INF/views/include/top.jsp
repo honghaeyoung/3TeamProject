@@ -32,7 +32,8 @@
     <meta property="og:title" content="main page">
     <meta property="og:type" content="website">
   </head>
- <body class="u-body u-xl-mode"><header class="u-black u-clearfix u-header u-sticky u-header" id="sec-e47c"><div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+ <!-- 헤더시작-->
+<body data-home-page="index.html" data-home-page-title="main page" class="u-body u-xl-mode"><header class="u-black u-clearfix u-header u-sticky u-header" id="sec-e47c"><div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
         <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
           <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
             <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#">
@@ -42,47 +43,58 @@
             </a>
           </div>
           <div class="u-custom-menu u-nav-container">
-            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/" style="padding: 10px 6px;">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"  style="padding: 10px 6px;">배달음식</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="/foodstore">오늘 뭐먹지?</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="/fsboard/list">같이먹어요</a>
-</li></ul>
+            <ul class="u-nav u-unstyled u-nav-1">
+            <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/" style="padding: 10px 6px;">Home</a>
+</li>
+<li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"  style="padding: 10px 6px;">배달음식</a>
+<div class="u-nav-popup">
+<ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2">
+<li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="/foodstore">오늘 뭐먹지?</a>
+</li>
+<li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="/fsboard/list">같이먹어요</a>
+</li>
+</ul>
 </div>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/room/list" style="padding: 10px 6px;">룸쉐어</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/petcare" style="padding: 10px 6px;">펫케어</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/board/list" style="padding: 10px 6px;">우리동네 이야기</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="공동구매 링크 넣어주세요" style="padding: 10px 6px;">공동구매</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/groupbuying/list" style="padding: 10px 6px;">공동구매</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/CSBoard/list" style="padding: 10px 6px;">고객센터</a>
-																									
 </li><c:if test="${user.memberid == null && user.memberpw == null }"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/loginform"style="padding: 10px 6px;">로그인</a>
+<div class="u-nav-popup">
+<ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2">
+<li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="/masterloginform">관리자 로그인</a>
+</li>
+</ul>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/joinform" style="padding: 10px 6px;">회원가입</a>
-</li></c:if>	
+</li></c:if>   
 
 <c:if test="${user.memberid != null && user.memberpw != null }"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/mypage"style="padding: 10px 6px;">마이페이지</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/logout" style="padding: 10px 6px;">로그아웃</a>
-</li></c:if></ul>								
+</li></c:if></ul>                        
           </div>
           <div class="u-custom-menu u-nav-container-collapse">
             <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
               <div class="u-inner-container-layout u-sidenav-overflow">
                 <div class="u-menu-close"></div>
                 <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-3"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Home.html" style="padding: 10px 6px;">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="To---Do-List.html" style="padding: 10px 6px;">배달음식</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-4"><li class="u-nav-item"><a class="u-button-style u-nav-link">오늘 뭐먹지?</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="#" style="padding: 10px 6px;">배달음식</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-4"><li class="u-nav-item"><a class="u-button-style u-nav-link">오늘 뭐먹지?</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link">같이먹어요</a>
 </li></ul>
 </div>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Game-with-JS.html" style="padding: 10px 6px;">룸쉐어</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 6px;">펫케어</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 6px;">우리동네 이야기</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 6px;">공동구매</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 6px;">고객센터</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 6px;">로그인/회원가입</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/room/list" style="padding: 10px 6px;">룸쉐어</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/petcare" style="padding: 10px 6px;">펫케어</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/board/list" style="padding: 10px 6px;">우리동네 이야기</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/groupbuying/list" style="padding: 10px 6px;">공동구매</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/CSBoard/list" style="padding: 10px 6px;">고객센터</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/joinform" style="padding: 10px 6px;">로그인/회원가입</a>
 </li></ul>
               </div>
             </div>
             <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
           </div>
         </nav>
-        <h4 class="u-text u-text-default u-text-1"><a href="/">혼사모</a></h4>
+        <h4 class="u-text u-text-default u-text-1">혼사모</h4>
       </div></header>
     </body>
     </html>

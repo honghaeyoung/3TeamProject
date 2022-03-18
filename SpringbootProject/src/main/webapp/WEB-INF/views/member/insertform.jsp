@@ -363,7 +363,7 @@ function birth_keyup(obj){
 
                 <h3>생년월일</h3>
                 <span class="signup-input">
-                    <input id="signup-name" type="text" name="birthday" placeholder="ex 숫자만작성해주세요" required onkeyup="birth_keyup(this)" maxlength="10"></input>
+                    <input id="signup-name" type="text" name="birthday" placeholder="ex 20090102" required onkeyup="birth_keyup(this)" maxlength="10"></input>
                 </span>
                     
                 <h3>전화번호</h3>

@@ -42,9 +42,70 @@ width: 350px;
   vertical-align: top;
   border-bottom: 1px solid #ccc;
 }
-
-
-
+table.type05 {
+  border-collapse: separate;
+  border-spacing: 1px;
+  text-align: center;
+  line-height: 1.5;
+  border-top: 1px solid #ccc;
+  margin : 20px 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 500px;
+  height: 200px;
+  float: left;
+}
+table.type05 th {
+  width: 150px;
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+}
+table.type05 td {
+width: 350px;
+  padding: 10px;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+}
+table.type06 {
+  border-collapse: separate;
+  border-spacing: 1px;
+  text-align: center;
+  line-height: 1.5;
+  border-top: 1px solid #ccc;
+  margin : 20px 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 500px;
+  height: 200px;
+  float: right;
+}
+table.type06 th {
+  width: 150px;
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+}
+table.type06 td {
+width: 350px;
+  padding: 10px;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+}
+.bt{
+ width:115px;
+    background-color: black;
+    border: none;
+    color:#fff;
+    font-size: 15px;
+    outline:none;
+    cursor: pointer;
+}
+a:link { color: black; text-decoration: none;}
+a:visited { color: black; text-decoration: none;}
+a:hover { color: black; text-decoration: underline;}
 </style>
 </head>
 <body>
@@ -81,18 +142,406 @@ width: 350px;
 <tr>
 <th scope="row">반려동물여부</th><td>${user.pet }</td></tr>
 </table>
-<div class="bt1">
+<div class="bt1" style="text-align: center; padding-bottom: 26%;">
 <button type="button" onclick="location.href='updateform'" class="bt">회원 정보 수정</button>
 <button type="button" onclick="location.href='deleteform'" class="bt">회원 탈퇴</button>
 </div>
     </div>
 </div>
     <div class="tab-pane" id="myBoard">
-        tab data here...b
+       
+	<div>
+    <div><h4 style="text-align: center;">같이살아요</h4></div>
+ 	<c:if test="${count != 0 }">
+ 	
+			<table class="table table-hover">
+				<tr id="boardtr">
+					<th id="boardth">글번호</th>
+					<th id="boardth">제목</th>
+					<th id="boardth">작성자</th>
+					<th id="boardth">작성일</th>
+					
+				</tr>
+				<c:forEach items="${rList}" var="rooms">
+					<tr>
+						<td><a href ="/room/list/${rooms.roomno}">${rooms.roomno}</a></td>
+						<td><a href ="/room/list/${rooms.roomno}">${rooms.roomtitle}</a></td>
+						<td><a href ="/room/list/${rooms.roomno}">${rooms.memberid }</a></td>
+						<td><a href ="/room/list/${rooms.roomno}"><fmt:formatDate value="${rooms.roomregdate }" dateStyle="short"/></a> </td>
+						
+					</tr>
+				</c:forEach>
+			</table>
+			<div id="page" style="text-align: center;">
+				<c:if test="${begin > pageNum }">
+					<a href="mypage?p=${begin-1 }">[이전]</a>
+				</c:if>
+				<c:forEach begin="${begin }" end="${end}" var="i">
+					<a href="mypage?p=${i}">${i}</a>
+				</c:forEach>
+				<c:if test="${end < totalPages }">
+					<a href="mypage?p=${end+1}">[다음]</a>
+				</c:if>
+			</div>
+
+		</c:if></div>
+		<c:if test="${count == 0 }">
+	<table class="table table-hover">
+				<tr>
+					<th>글번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					
+				</tr>
+		
+		</table>
+		<div style="text-align: center;"><strong style="text-align: center;">아직 입력한 글이 없습니다.</strong></div><hr>
+</c:if>
+
+
+<div><h4 style="text-align: center;">자유게시판</h4></div>
+<c:if test="${count1 != 0 }">
+			<table class="table table-hover">
+				<tr>
+					<th>글번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					
+				</tr>
+				<c:forEach items="${bList}" var="blist">
+					<tr>
+						<td><a href ="content/${blist.no}">${blist.no}</a></td>
+						<td><a href ="content/${blist.no}">${blist.title}</a></td>
+						<td><a href ="content/${blist.no}">${blist.memberid }</a></td>
+						<td><a href ="content/${blist.no}"><fmt:formatDate value="${blist.regdate }" dateStyle="short"/></a></td>
+						
+					</tr>
+				</c:forEach>
+			</table>
+			<div id="page" style="text-align: center;">
+				<c:if test="${begin > pageNum }">
+					<a href="mypage?p=${begin-1 }">[이전]</a>
+				</c:if>
+				<c:forEach begin="${begin }" end="${end}" var="i">
+					<a href="mypage?p=${i}">${i}</a>
+				</c:forEach>
+				<c:if test="${end < totalPages }">
+					<a href="mypage?p=${end+1}">[다음]</a>
+				</c:if>
+			</div>
+
+		</c:if>
+		<c:if test="${count1 == 0 }">
+		<table class="table table-hover">
+				<tr>
+					<th>글번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					
+				</tr>
+		
+		</table>
+		<div style="text-align: center;"><strong style="text-align: center;">아직 입력한 글이 없습니다.</strong></div><hr>
+</c:if>
+
+		<div>
+	<div><h4 style="text-align: center;">같이먹어요</h4></div>
+	<c:if test="${count2 != 0 }">
+			<table class="table table-hover">
+				<tr>
+					<th>글번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					
+				</tr>
+				<c:forEach items="${fList}" var="flist">
+					<tr>
+						<td><a href ="content/${flist.fsno}">{flist.fsno}</a></td>
+						<td><a href ="content/${flist.fsno}">${flist.fstitle}</a></td>
+						<td><a href ="content/${flist.fsno}">${flist.memberid }</a></td>
+						<td><a href ="content/${flist.fsno}"><fmt:formatDate value="${flist.regdate }" dateStyle="short"/></a> </td>
+						
+					</tr>
+				</c:forEach>
+			</table>
+			<div id="page" style="text-align: center;">
+				<c:if test="${begin > pageNum }">
+					<a href="mypage?p=${begin-1 }">[이전]</a>
+				</c:if>
+				<c:forEach begin="${begin }" end="${end}" var="i">
+					<a href="mypage?p=${i}">${i}</a>
+				</c:forEach>
+				<c:if test="${end < totalPages }">
+					<a href="mypage?p==${end+1}">[다음]</a>
+				</c:if>
+			</div>
+
+		</c:if>
+		<c:if test="${count2 == 0 }">
+	<table class="table table-hover">
+				<tr>
+					<th>글번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					
+				</tr>
+		
+		</table>
+		<div style="text-align: center;"><strong style="text-align: center;">아직 입력한 글이 없습니다.</strong></div><hr>
+</c:if>
+</div>
+
+		<div>
+<div><h4 style="text-align: center;">같이키워요</h4></div>
+<c:if test="${count3 != 0 }">
+			<table class="table table-hover">
+				<tr>
+					<th>글번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					
+				</tr>
+				<c:forEach items="${P_list}" var="plist">
+					<tr>
+						<td><a href ="content/${plist.pno}">${plist.pno}</a></td>
+						<td><a href ="content/${plist.pno}">${plist.ptitle}</a></td>
+						<td><a href ="content/${plist.pno}">${plist.memberid }</a></td>
+						<td><a href ="content/${plist.pno}"><fmt:formatDate value="${plist.pregdate }" dateStyle="short"/></a> </td>
+						
+					</tr>
+				</c:forEach>
+			</table>
+			<div id="page" style="text-align: center;">
+				<c:if test="${begin > pageNum }">
+					<a href="mypage?p=${begin-1 }">[이전]</a>
+				</c:if>
+				<c:forEach begin="${begin }" end="${end}" var="i">
+					<a href="mypage?p=${i}">${i}</a>
+				</c:forEach>
+				<c:if test="${end < totalPages }">
+					<a href="mypage?p=${end+1}">[다음]</a>
+				</c:if>
+			</div>
+
+		</c:if>
+		<c:if test="${count3 == 0 }">
+	<table class="table table-hover">
+				<tr>
+					<th>글번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					
+				</tr>
+		
+		</table>
+		<div style="text-align: center;"><strong style="text-align: center;">아직 입력한 글이 없습니다.</strong></div><hr>
+</c:if>
+ 	</div>
+
+
     </div>
 
+
     <div class="tab-pane" id="myComm">
-        tab data here...c
+     <div>
+    <div><h4 style="text-align: center;">같이살아요</h4></div>
+ 	<c:if test="${commcount != 0 }">
+ 	
+			<table class="table table-hover">
+				<tr id="boardtr">
+					<th id="boardth">댓글번호</th>
+					<th id="boardth">댓글내용</th>
+					<th id="boardth">작성일</th>
+					<th id="boardth">본문보기</th>
+					
+				</tr>
+				<c:forEach items="${rc}" var="rc">
+					<tr>
+						<td>${rc.rsno}</td>
+						<td>${rc.rscontent}</td>
+						<td>${rc.rsdate }</td>
+						<td><button class="bt" onclick="location.href='/room/list/${rc.roomno}'">본문보기</button></td>
+						
+					</tr>
+				</c:forEach>
+			</table>
+			<div id="page" style="text-align: center;">
+				<c:if test="${begin > pageNum }">
+					<a href="mypage?p=${begin-1 }">[이전]</a>
+				</c:if>
+				<c:forEach begin="${begin }" end="${end}" var="i">
+					<a href="mypage?p=${i}">${i}</a>
+				</c:forEach>
+				<c:if test="${end < totalPages }">
+					<a href="mypage?p=${end+1}">[다음]</a>
+				</c:if>
+			</div>
+
+		</c:if></div>
+		<c:if test="${commcount == 0 }">
+	<table class="table table-hover">
+				<tr>
+					<th>댓글번호</th>
+					<th>댓글내용</th>
+					<th>작성일</th>
+					<th>본문보기</th>
+					
+				</tr>
+		
+		</table>
+		<div style="text-align: center;"><strong style="text-align: center;">아직 작성하신 댓글이 없습니다.</strong></div><hr>
+</c:if>  
+       
+       <div><h4 style="text-align: center;">자유게시판</h4></div>
+<c:if test="${commcount1 != 0 }">
+			<table class="table table-hover">
+				<tr>
+					<th>댓글번호</th>
+					<th>댓글내용</th>
+					<th>작성일</th>
+					<th>본문보기</th>
+					
+				</tr>
+				<c:forEach items="${bc}" var="bc">
+					<tr>
+						<td>${bc.cno}</td>
+						<td>${bc.ccontent}</td>
+						<td>${bc.regdate }</td>
+						<td><button class="bt" onclick="location.href='content/${bc.no}'">본문보기</button></td>
+						
+					</tr>
+				</c:forEach>
+			</table>
+			<div id="page" style="text-align: center;">
+				<c:if test="${begin > pageNum }">
+					<a href="mypage?p=${begin-1 }">[이전]</a>
+				</c:if>
+				<c:forEach begin="${begin }" end="${end}" var="i">
+					<a href="mypage?p=${i}">${i}</a>
+				</c:forEach>
+				<c:if test="${end < totalPages }">
+					<a href="mypage?p=${end+1}">[다음]</a>
+				</c:if>
+			</div>
+
+		</c:if>
+		<c:if test="${commcount1 == 0 }">
+		<table class="table table-hover">
+				<tr>
+					<th>댓글번호</th>
+					<th>댓글내용</th>
+					<th>작성일</th>
+					<th>본문보기</th>
+					
+				</tr>
+		
+		</table>
+		<div style="text-align: center;"><strong style="text-align: center;">아직 입력한 글이 없습니다.</strong></div><hr>
+</c:if>
+
+	<div><h4 style="text-align: center;">같이먹어요</h4></div>
+		<c:if test="${commcount2 != 0 }">
+			<table class="table table-hover">
+				<tr>
+					<th>댓글번호</th>
+					<th>댓글내용</th>
+					<th>작성일</th>
+					<th>본문보기</th>
+					
+				</tr>
+				<c:forEach items="${fc}" var="fc">
+					<tr>
+						<td>${fc.fscno}</td>
+						<td>${fc.fsccontent}</td>
+						<td>${fc.regdate }</td>
+						<td><button class="bt" onclick="location.href='content/${fc.no}'">본문보기</button></td>
+						
+					</tr>
+				</c:forEach>
+			</table>
+			<div id="page" style="text-align: center;">
+				<c:if test="${begin > pageNum }">
+					<a href="mypage?p=${begin-1 }">[이전]</a>
+				</c:if>
+				<c:forEach begin="${begin }" end="${end}" var="i">
+					<a href="mypage?p=${i}">${i}</a>
+				</c:forEach>
+				<c:if test="${end < totalPages }">
+					<a href="mypage?p=${end+1}">[다음]</a>
+				</c:if>
+			</div>
+
+		</c:if>
+		<c:if test="${commcount2 == 0 }">
+		<table class="table table-hover">
+				<tr>
+					<th>댓글번호</th>
+					<th>댓글내용</th>
+					<th>작성일</th>
+					<th>본문보기</th>
+					
+				</tr>
+		
+		</table>
+		<div style="text-align: center;"><strong style="text-align: center;">아직 입력한 글이 없습니다.</strong></div><hr>
+</c:if>
+
+		<div><h4 style="text-align: center;">같이키워요</h4></div>
+		<c:if test="${commcount3 != 0 }">
+			<table class="table table-hover">
+				<tr>
+					<th>댓글번호</th>
+					<th>댓글내용</th>
+					<th>작성일</th>
+					<th>본문보기</th>
+					
+				</tr>
+				<c:forEach items="${pc}" var="pc">
+					<tr>
+						<td>${pc.pcno}</td>
+						<td>${pc.pccontent}</td>
+						<td>${pc.pcregdate }</td>
+						<td><button class="bt" onclick="location.href='content/${pc.pno}'">본문보기</button></td>
+					
+					</tr>
+				</c:forEach>
+			</table>
+			<div id="page" style="text-align: center;">
+				<c:if test="${begin > pageNum }">
+					<a href="mypage?p=${begin-1 }">[이전]</a>
+				</c:if>
+				<c:forEach begin="${begin }" end="${end}" var="i">
+					<a href="mypage?p=${i}">${i}</a>
+				</c:forEach>
+				<c:if test="${end < totalPages }">
+					<a href="mypage?p=${end+1}">[다음]</a>
+				</c:if>
+			</div>
+
+		</c:if>
+		<c:if test="${commcount3 == 0 }">
+		<table class="table table-hover">
+				<tr>
+					<th>댓글번호</th>
+					<th>댓글내용</th>
+					<th>작성일</th>
+					<th>본문보기</th>
+					
+				</tr>
+		
+		</table>
+		<div style="text-align: center;"><strong style="text-align: center;">아직 입력한 글이 없습니다.</strong></div><hr>
+</c:if>
+		
+
+
     </div>
 
    

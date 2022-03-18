@@ -119,12 +119,19 @@ public class MemberService {
 		return dao.myComm(memberid);
 	}
 	
+	public int roomCount(String memberid) {
+		return dao.roomCount(memberid);
+	}
 	public List<RoomDto> myRoomList(String memberid ,int start, int end ){
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("memberid", memberid);
 		map.put("start", start);
 		map.put("end", end);
 		return dao.myRoomList(map);
+	}
+	
+	public int boardCount(String memberid) {
+		return dao.boardCount(memberid);
 	}
 	public List<BoardDto> myBoardList(String memberid ,int start, int end){
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -133,12 +140,20 @@ public class MemberService {
 		map.put("end", end);
 		return dao.myBoardList(map);
 	}
+	
+	public int fsCount(String memberid) {
+		return dao.fsCount(memberid);
+	}
 	public List<FoodboardDto> myFsboardList(String memberid ,int start, int end){
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("memberid", memberid);
 		map.put("start", start);
 		map.put("end", end);
 		return dao.myFsboardList(map);
+	}
+	
+	public int petCount(String memberid) {
+		return dao.petCount(memberid);
 	}
 	public List<PetcareDto> myPetList(String memberid ,int start, int end){
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -148,17 +163,48 @@ public class MemberService {
 		return dao.myPetList(map);
 	}
 	
-	public List<RoomCommentDto> myRoomComm(String memberid){
-		return dao.myRoomComm(memberid);
+	public int roomCommCount(String memberid) {
+		return dao.roomCommCount(memberid);
 	}
-	public List<CommDto> myBoardComm(String memberid){
-		return dao.myBoardComm(memberid);
+	public List<RoomCommentDto> myRoomComm(String memberid, int start, int end){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("memberid", memberid);
+		map.put("start", start);
+		map.put("end", end);
+		return dao.myRoomComm(map);
 	}
-	public List<FscommDto> myFsComm(String memberid){
-		return dao.myFsComm(memberid);
+	
+	public int boardCommCount(String memberid) {
+		return dao.boardCommCount(memberid);
 	}
-	public List<PetcommentDto> myPetComm(String memberid){
-		return dao.myPetComm(memberid);
+	public List<CommDto> myBoardComm(String memberid, int start, int end){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("memberid", memberid);
+		map.put("start", start);
+		map.put("end", end);
+		return dao.myBoardComm(map);
+	}
+	
+	public int fsCommCount(String memberid) {
+		return dao.fsCommCount(memberid);
+	}
+	public List<FscommDto> myFsComm(String memberid, int start, int end){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("memberid", memberid);
+		map.put("start", start);
+		map.put("end", end);
+		return dao.myFsComm(map);
+	}
+	
+	public int petCommCount(String memberid) {
+		return dao.petCommCount(memberid);
+	}
+	public List<PetcommentDto> myPetComm(String memberid, int start, int end){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("memberid", memberid);
+		map.put("start", start);
+		map.put("end", end);
+		return dao.myPetComm(map);
 	}
 	
 }

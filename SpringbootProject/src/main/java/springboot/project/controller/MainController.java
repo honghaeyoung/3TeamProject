@@ -196,7 +196,7 @@ public class MainController {
 	public String myPage(@ModelAttribute("user") MemberDto dto, Model m,HttpSession session, @RequestParam(name="p",defaultValue ="1") int page) {
 		String id = dto.getMemberid();
 		
-		int count = rservice.roomcount();
+		int count = service.roomCount(id);
 		if(count > 0) {
 			int perPage = 5; //한 페이지에 보일 글의 갯수
 			int startRow = (page-1) * perPage +1;
@@ -222,7 +222,7 @@ public class MainController {
 		
 		m.addAttribute("count", count);
 		
-		int count1 = cservice.count();
+		int count1 = service.boardCount(id);
 		if(count1 > 0) {
 		
 		int perPage = 5; // 占쎈립 占쎈읂占쎌뵠筌욑옙占쎈퓠 癰귣똻�뵬 疫뀐옙占쎌벥 揶쏉옙占쎈땾
@@ -248,7 +248,7 @@ public class MainController {
 		}
 		m.addAttribute("count1", count1);
 		
-		int count2 = fservice.count();
+		int count2 = service.fsCount(id);
 		if(count2 > 0) {
 		
 		int perPage = 5; // 占쎈립 占쎈읂占쎌뵠筌욑옙占쎈퓠 癰귣똻�뵬 疫뀐옙占쎌벥 揶쏉옙占쎈땾
@@ -274,7 +274,7 @@ public class MainController {
 		}
 		m.addAttribute("count2", count2);
 		
-		int count3 = pservice.count();
+		int count3 = service.petCount(id);
 		if (count3 > 0) { // 寃뚯떆臾쇱씠 �엳�떎硫�
 
 			int perPage = 5; // �븳 �럹�씠吏��뿉 蹂댁씪 湲��쓽 媛��닔
@@ -300,16 +300,111 @@ public class MainController {
 		}
 		m.addAttribute("count3", count3);
 		
+		int commcount = service.roomCommCount(id);
+		if(commcount > 0) {
+			int perPage = 5; //한 페이지에 보일 글의 갯수
+			int startRow = (page-1) * perPage +1;
+			int endRow = page * perPage;
+	
+			List<RoomCommentDto> roomComm = service.myRoomComm(id,startRow, endRow);
+			
+			m.addAttribute("rc",roomComm);
 		
-		List<RoomCommentDto> rc = service.myRoomComm(id);
-		List<CommDto> bc = service.myBoardComm(id);
-		List<FscommDto> fc = service.myFsComm(id);
-		List<PetcommentDto> pc = service.myPetComm(id);
+			int pageNum = 5; //한번에 보일 페이지 수
+			int totalPages = count/perPage + (count%perPage > 0 ? 1:0); //전체 페이지 수
+			
+			int begin = (page -1) / pageNum * pageNum +1;
+			int end = begin + pageNum -1;
+			if(end > totalPages) {
+				end = totalPages;
+			}
+			m.addAttribute("begin", begin);
+			m.addAttribute("end", end);	
+			m.addAttribute("pageNum", pageNum);
+			m.addAttribute("totalPages", totalPages);
+		}
 		
-		m.addAttribute("rc", rc);
-		m.addAttribute("bc", bc);
-		m.addAttribute("fc", fc);
-		m.addAttribute("pc", pc);
+		m.addAttribute("commcount", commcount);
+		
+		int commcount1 = service.boardCommCount(id);
+		if(commcount1 > 0) {
+			int perPage = 5; //한 페이지에 보일 글의 갯수
+			int startRow = (page-1) * perPage +1;
+			int endRow = page * perPage;
+	
+			List<CommDto> boardcomm = service.myBoardComm(id,startRow, endRow);
+			
+			m.addAttribute("bc",boardcomm);
+		
+			int pageNum = 5; //한번에 보일 페이지 수
+			int totalPages = count/perPage + (count%perPage > 0 ? 1:0); //전체 페이지 수
+			
+			int begin = (page -1) / pageNum * pageNum +1;
+			int end = begin + pageNum -1;
+			if(end > totalPages) {
+				end = totalPages;
+			}
+			m.addAttribute("begin", begin);
+			m.addAttribute("end", end);	
+			m.addAttribute("pageNum", pageNum);
+			m.addAttribute("totalPages", totalPages);
+		}
+		
+		m.addAttribute("commcount1", commcount1);
+		
+		int commcount2 = service.fsCommCount(id);
+		if(commcount2 > 0) {
+			int perPage = 5; //한 페이지에 보일 글의 갯수
+			int startRow = (page-1) * perPage +1;
+			int endRow = page * perPage;
+	
+			List<FscommDto> fscomm = service.myFsComm(id,startRow, endRow);
+			
+			m.addAttribute("fc",fscomm);
+		
+			int pageNum = 5; //한번에 보일 페이지 수
+			int totalPages = count/perPage + (count%perPage > 0 ? 1:0); //전체 페이지 수
+			
+			int begin = (page -1) / pageNum * pageNum +1;
+			int end = begin + pageNum -1;
+			if(end > totalPages) {
+				end = totalPages;
+			}
+			m.addAttribute("begin", begin);
+			m.addAttribute("end", end);	
+			m.addAttribute("pageNum", pageNum);
+			m.addAttribute("totalPages", totalPages);
+		}
+		
+		m.addAttribute("commcount2", commcount2);
+		
+		int commcount3 = service.petCommCount(id);
+		if(commcount3 > 0) {
+			int perPage = 5; //한 페이지에 보일 글의 갯수
+			int startRow = (page-1) * perPage +1;
+			int endRow = page * perPage;
+	
+			List<PetcommentDto> petcomm = service.myPetComm(id,startRow, endRow);
+			
+			m.addAttribute("pc",petcomm);
+		
+			int pageNum = 5; //한번에 보일 페이지 수
+			int totalPages = count/perPage + (count%perPage > 0 ? 1:0); //전체 페이지 수
+			
+			int begin = (page -1) / pageNum * pageNum +1;
+			int end = begin + pageNum -1;
+			if(end > totalPages) {
+				end = totalPages;
+			}
+			m.addAttribute("begin", begin);
+			m.addAttribute("end", end);	
+			m.addAttribute("pageNum", pageNum);
+			m.addAttribute("totalPages", totalPages);
+		}
+		
+		m.addAttribute("commcount3", commcount3);
+		
+		
 		/*
 		ArrayList<MypageDto> list = service.getBoardList(id);
 		if(list != null) {

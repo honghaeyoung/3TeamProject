@@ -237,9 +237,7 @@ a:hover { color: black; text-decoration: underline;}
 			<div class="login-input-wrap">	
 				<input placeholder="비밀번호" type="password" name="memberpw"></input>
 			</div>
-			<div class="login-input-wrap password-wrap">	
-				<input placeholder="'회원탈퇴' 작성해주세요" type="text" name="deletecheck"></input>
-			</div>
+			
 			<br><div class="errors">
         <form:errors element="div"/>
         </div>
@@ -256,20 +254,7 @@ a:hover { color: black; text-decoration: underline;}
 		</footer>
 		</div>
 	</div>
-<script type="text/javascript">
-		function deleteMember(){
-			if(document.deleteform.memberpw.value==""){
-				alert("비밀번호를 입력해주세요.");
-				document.deleteform.memberpw.focus();
-			} else if(document.deleteform.deletecheck.value != "회원탈퇴"){
-				alert("회원탈퇴 항목이 틀립니다.");
-				document.deleteform.deletecheck.focus();
-				return false;
-			} else {
-				return
-			}
-		}
-	</script>
+
 	
 </body>
 </html>
