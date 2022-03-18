@@ -116,7 +116,7 @@
                   <div class="u-container-layout u-container-layout-2">
                     <h4 class="u-custom-font u-font-playfair-display u-text u-text-1">함께 사면 최대 50%</h4>
                     <p class="u-text u-text-2">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat</p>
-                    <a href="공동구매 링크 넣어주세요" class="u-border-none u-btn u-button-style u-palette-4-base u-btn-1">이동</a>
+                    <a href="/groupbuying/list" class="u-border-none u-btn u-button-style u-palette-4-base u-btn-1">이동</a>
                   </div>
                 </div>
               </div>
